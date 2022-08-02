@@ -45,4 +45,5 @@ render(() =>{
     </>;
 }, document.body);
 
+// Must run this when the user's basic info are aquired from the server and fully loaded!
 setTimeout(() => document.documentElement.dataset.showContent = true, 1500);
