@@ -1,0 +1,47 @@
+/**
+ *
+ *  Manage the style of the local content element
+ *
+**/
+
+.localcontent {
+    background-color: #fafafa;
+    flex-grow: 1;
+    overflow-x: hidden;
+    box-shadow: 0px 0px 4px #cacaca;
+    border-radius: 12px;
+    max-width: 80%;
+    margin: 0px 10%;
+}
+
+@media (pointer:none),
+(pointer:coarse) {
+    .localcontent {
+        max-width: 100%;
+        margin: 0px;
+    }
+}
+
+[data-show-content=false] .localcontent {
+    flex-grow: 0;
+}
+
+.localcontent {
+    transition: flex 0.4s;
+}
+
+[data-show-content=true] .localcontent {
+    flex-grow: 0;
+    animation: slideInContent 2s cubic-bezier(0.87, 0.02, 0.01, 1) forwards;
+}
+
+@keyframes slideInContent {
+    0%,
+    25%,
+    50% {
+        flex-grow: 0;
+    }
+    100% {
+        flex-grow: 1;
+    }
+}

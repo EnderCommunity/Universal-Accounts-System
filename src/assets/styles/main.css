@@ -1,0 +1,46 @@
+/**
+ *
+ *  Manage the style of the main elements
+ *
+**/
+
+html {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    background-color: var(--main-background);
+}
+
+body {
+    --globalbar--height: 120px;
+    --globalfooter--height: 38px;
+    --page-margin: 60px;
+    margin: 0px;
+    padding: var(--page-margin) calc(var(--page-margin) * 2);
+    min-height: calc(100% - 2 * var(--page-margin));
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    opacity: 0;
+    animation: fadeInBody 0.2s ease-in-out forwards;
+    /**/
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+@media (pointer:none),
+(pointer:coarse) {
+    body {
+        --page-margin: 20px;
+    }
+}
+
+@keyframes fadeInBody {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

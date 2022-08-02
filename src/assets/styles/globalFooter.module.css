@@ -1,0 +1,13 @@
+/**
+ *
+ * The style of the global footer and its elements
+ *
+**/
+
+.globalbar {
+    height: var(--globalfooter--height);
+    text-align: center;
+    line-height: var(--globalfooter--height);
+    font-size: 12px;
+    opacity: 0.4;
+}

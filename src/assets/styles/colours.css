@@ -1,0 +1,15 @@
+/**
+ *
+ * All the colour scheme and theme of the website
+ *
+**/
+
+:root[data-color-scheme=dark] {
+    --main-background: black;
+    --accent-color: #292929;
+}
+
+:root[data-color-scheme=light] {
+    --main-background: white;
+    --accent-color: #292929;
+}
