@@ -6,9 +6,9 @@
 
 import styles from './../styles/loading.module.css';
 
-function LoadingSpinner(){
+function LoadingSpinner(props){
     return (
-        <div class={styles["lds-ring"]}><div></div><div></div><div></div><div></div></div>
+        <div style={props.style} class={styles["lds-ring"]}><div></div><div></div><div></div><div></div></div>
     );
 }
  

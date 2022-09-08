@@ -19,18 +19,21 @@
     .localcontent {
         max-width: 100%;
         margin: 0px;
+        background-color: unset;
+        box-shadow: unset;
     }
 }
 
-[data-show-content=false] .localcontent {
+.localcontent[data-show-content=false] {
     flex-grow: 0;
 }
 
 .localcontent {
-    transition: flex 0.4s;
+    max-height: 0px;
+    overflow: hidden;
 }
 
-[data-show-content=true] .localcontent {
+.localcontent[data-show-content=true] {
     flex-grow: 0;
     animation: slideInContent 2s cubic-bezier(0.87, 0.02, 0.01, 1) forwards;
 }
@@ -40,8 +43,10 @@
     25%,
     50% {
         flex-grow: 0;
+        max-height: 0px;
     }
     100% {
         flex-grow: 1;
+        max-height: unset;
     }
 }
