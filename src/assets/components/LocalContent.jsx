@@ -23,7 +23,7 @@ function LocalContent(props){
 
     // Check the landing request
     landingCheck(useLocation, useNavigate, props.isSignedIn);
-    console.log(props.userData);
+    //console.log(props.userData);
 
     // props.userData;
 
