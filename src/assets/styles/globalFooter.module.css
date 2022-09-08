@@ -4,7 +4,7 @@
  *
 **/
 
-.globalbar {
+.globalfooter {
     height: var(--globalfooter--height);
     text-align: center;
     line-height: var(--globalfooter--height);
@@ -12,7 +12,7 @@
     opacity: 0;
 }
 
-.globalbar[data-show-content=true] {
+.globalfooter[data-show-content=true] {
     animation: opacityIn 0.2s ease-in forwards;
     animation-delay: 1.8s;
 }
