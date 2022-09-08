@@ -9,5 +9,19 @@
     text-align: center;
     line-height: var(--globalfooter--height);
     font-size: 12px;
-    opacity: 0.4;
+    opacity: 0;
+}
+
+.globalbar[data-show-content=true] {
+    animation: opacityIn 0.2s ease-in forwards;
+    animation-delay: 1.8s;
+}
+
+@keyframes opacityIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0.4;
+    }
 }

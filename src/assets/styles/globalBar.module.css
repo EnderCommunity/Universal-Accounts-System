@@ -15,11 +15,11 @@
     justify-content: center;
 }
 
-[data-show-content=false] .globalbar {
+.globalbar[data-show-content=false] {
     animation: fadeInMain 3s ease forwards;
 }
 
-[data-show-content=true] .globalbar {
+.globalbar[data-show-content=true] {
     animation: fadeInMainFull 2s cubic-bezier(0.87, 0.02, 0.01, 1) forwards;
 }
 
@@ -61,4 +61,25 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
+}
+
+.userProfileImage {
+    border-radius: 100%;
+}
+
+.globalbar[data-show-content=false] .userProfileImage {
+    animation: opacityInOut 2s ease-in-out infinite forwards;
+}
+
+@keyframes opacityInOut {
+    0% {
+        opacity: 0.64;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.64;
+    }
 }
