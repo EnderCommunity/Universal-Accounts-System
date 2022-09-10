@@ -1,0 +1,45 @@
+/**
+ *
+ * The style of general components
+ *
+**/
+
+.button {
+    font-size: 16px;
+    padding: 14px 16px;
+    margin: 4px;
+    border: solid 0px transparent;
+    border-radius: 4px;
+    background-color: transparent;
+    width: fit-content;
+    transition: box-shadow 0.12s, background-color 0.06s;
+    color: var(--accent-color);
+    /* Make buttons unselectable*/
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    cursor: pointer;
+}
+
+.primarybutton {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.button:hover {
+    box-shadow: 0px 2px 8px var(--accent-color);
+    border-color: var(--accent-color);
+    background-color: var(--accent-color-lighter);
+}
+
+.primarybutton:hover {
+    background-color: var(--accent-color);
+}
+
+.button:active {
+    opacity: 0.75;
+}
