@@ -38,15 +38,56 @@ This is a project that aims to provide developers with an easy-to-use third-part
 - [ ] Force the user to set up security questions (3 minimum)
 - [ ] Always require the user to do device authentication on new devices or when the user attempts to change important settings. (https://try-webauthn.appspot.com/)
 
+> The sign up process:
+>
+> 1. User must fill in the personal first and last names
+> 2. User must choose a username
+> 3. User must choose a password
+> 4. User must enter their date of birth and gender
+> 5. User must choose their security quesitons
+> 6. User will be prompted with the option to attach an email address to their account
+> 7. User will be promted to authenticate their device (system fingerprint/face-ID/password prompt) for quick verification when the settings are changed
+> 8. User must choose their prefered quick settings
+> 9. User will be promted to read the privacy policy and terms of service, and agree to them
+> 10. User will be promted to set up two-factor authentication, or go to the home page
+>
+> The sign in process (trusted device):
+>
+> 1. User must enter username
+> 2. User must enter password
+> 3. User must complete the two factor authentication process (if it's set up, and the device is not on the trusted list)
+>
+> The sign in process (new/untrusted device):
+>
+> 1. User must enter username
+> 2. User must enter password
+> 3. User must complete the two factor authentication process (if it's set up)
+> 4. User will be promted to authenticate the device for settings modification as a trusted device (If the user doesn't choose to mark the device as trusted, they will be unable to change their settings on that device without password confirmation)
+>
+> New service access/signup prompt (trusted devices):
+>
+> 1. User will be asked to authenticate their device
+> 2. User will be prompted with the list of permissions that the service requested (button must say "Allow access as {PP}{username}")
+>
+> New service access/signup prompt (untrusted devices):
+>
+> 1. User will be asked to type in their password
+> 2. User will be prompted with the list of permissions that the service requested (button must say "Allow access as {PP}{username}")
+>
+> Service login prompt (trusted/untrusted device):
+>
+> 1. User will be promted to continue to the website (button must say "Continue as {PP}{username}"), or sign out and sign in with another account
+>
 > The password reset process:
 >
-> 1. The user must use their email to verify ownership (in case the user chose to not attach an email address to their account, they can use a device that they previously used to sign in to verify ownership)
+> 1. The user must use their email to verify ownership (in case the user chose to not attach an email address to their account, they can use a trusted device to verify ownership)
 > 2. The user must answer the security questions correctly
 >
 > Account recovry process: (In case the user can't access their email)
 >
-> 1. Must file the request through a device that was used to access this service before.
-> 2. Must answer all the security questions correctly
+> 1. Must file the request through a trusted device
+> 2. Must enter their date of birth and gender
+> 3. Must answer all the security questions correctly
 
 ## Available Scripts
 
