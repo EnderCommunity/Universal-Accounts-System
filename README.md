@@ -47,7 +47,7 @@ This is a project that aims to provide developers with an easy-to-use third-part
 > 5. User must choose their security quesitons
 > 6. User will be prompted with the option to attach an email address to their account
 > 7. User will be promted to authenticate their device (system fingerprint/face-ID/password prompt) for quick verification when the settings are changed
-> 8. User must choose their prefered quick settings
+> 8. User must choose their prefered quick settings (NOTE: check for changes in device auth method)
 > 9. User will be promted to read the privacy policy and terms of service, and agree to them
 > 10. User will be promted to set up two-factor authentication, or go to the home page
 >
@@ -55,7 +55,6 @@ This is a project that aims to provide developers with an easy-to-use third-part
 >
 > 1. User must enter username
 > 2. User must enter password
-> 3. User must complete the two factor authentication process
 >
 > The sign in process (new/untrusted device):
 >
@@ -96,6 +95,11 @@ This is a project that aims to provide developers with an easy-to-use third-part
 > 1. Must file the request through a trusted device
 > 2. Must enter their date of birth and gender
 > 3. Must answer all the security questions correctly
+
+
+> Note 1: Add option to save auth codes for other services, passwords and emails, and important data (like bank info, hashes, etc)
+
+> Note 2: Disable screenshots
 
 ## Available Scripts
 
