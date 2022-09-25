@@ -1,0 +1,11 @@
+Options +FollowSymLinks -MultiViews
+# Turn mod_rewrite on
+RewriteEngine On
+RewriteBase /
+
+# Redirect all pages to the index.html file
+RewriteCond %{REQUEST_URI} !^/index.html$
+RewriteCond %{REQUEST_URI} !(\.js|\.webmanifest|\.txt)$
+RewriteCond %{REQUEST_URI} !^(/assets)
+RewriteCond %{REQUEST_URI} !^(/images)
+RewriteRule .* /index.html [L,NC]

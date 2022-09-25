@@ -1,6 +1,6 @@
 > still editing!
 
-# What is this project?
+# The Ciel System (Ciel Accounts System)
 
 This is a project that aims to provide developers with an easy-to-use third-party accounts system and provide users with a secure, reliable, and private experiance with full control over their data.
 
