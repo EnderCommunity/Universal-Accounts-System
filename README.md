@@ -55,7 +55,7 @@ This is a project that aims to provide developers with an easy-to-use third-part
 >
 > 1. User must enter username
 > 2. User must enter password
-> 3. User must complete the two factor authentication process (if it's set up, and the device is not on the trusted list)
+> 3. User must complete the two factor authentication process
 >
 > The sign in process (new/untrusted device):
 >
@@ -77,6 +77,14 @@ This is a project that aims to provide developers with an easy-to-use third-part
 > Service login prompt (trusted/untrusted device):
 >
 > 1. User will be promted to continue to the website (button must say "Continue as {PP}{username}"), or sign out and sign in with another account
+>
+> Settings change confirmation prompt (trusted device):
+>
+> 1. User will be asked to authenticate their device
+>
+> Settings change confirmation prompt (untrusted device):
+>
+> 1. User will be asked to enter their password
 >
 > The password reset process:
 >
