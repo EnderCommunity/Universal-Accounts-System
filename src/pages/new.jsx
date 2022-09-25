@@ -16,7 +16,7 @@ export default function New(props){
     props.report();
     return (<>
         <Title>Welcome</Title>
-        <h1>Track your internets,<br/>with <text style={{color: 'var(--accent-color)'}}>one account</text>!</h1>
+        <h1>Track your internets,<br/>with a <text style={{color: 'var(--accent-color)'}}>Ciel account</text>!</h1>
         <br/>
         <h3 class={styles.subtext}>Use one account for all supported websites and services and keep track of all your important activities in one place!</h3>
         <div class={styles.buttonsContainer}>

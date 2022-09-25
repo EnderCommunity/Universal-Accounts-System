@@ -20,10 +20,8 @@
          :root[data-color-scheme=dark] {
             --text-color: #F7F8FA;
             --main-background: #0D0F11;
-            --accent-color: #C90C3B;
-            --accent-color-lighter: #290009;
-            --secondary-color-one: #E6C476;
-            --secondary-color-two: #85041E;
+            --accent-color: #cc2d55;
+            --accent-color-lighter: #31000c;
         }
         
          :root[data-color-scheme=light] {
@@ -31,8 +29,6 @@
             --main-background: #F7F8FA;
             --accent-color: #C90C3B;
             --accent-color-lighter: #ffb4c8;
-            --secondary-color-one: #DCC48E;
-            --secondary-color-two: #890620;
         }
         
         html {
@@ -52,6 +48,7 @@
             display: flex;
             flex-direction: column;
             position: relative;
+            color: var(--text-color);
         }
         
         @media (pointer:none),
