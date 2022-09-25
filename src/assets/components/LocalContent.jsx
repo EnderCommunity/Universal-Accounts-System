@@ -7,18 +7,11 @@
 import styles from './../styles/localContent.module.css';
 import LoadingSpinner from './LoadingSpinner.jsx';
 
-import { Routes, Route, useLocation } from "@solidjs/router" /*Link*/
-import { createSignal, createEffect, lazy } from "solid-js";
+// import { Routes, Route, useLocation } from "@solidjs/router"; /*Link*/
+import { createSignal } from "solid-js";
 
 import { landingCheck, afterURLChange } from './../scripts/traffic.jsx';
-
-// Import all the website's pages
-const Pages = {
-    Home: lazy(() => import("./../../pages/home.jsx")),
-    New: lazy(() => import("./../../pages/new.jsx")),
-    Login: lazy(() => import("./../../pages/user/login.jsx")),
-    Register: lazy(() => import("./../../pages/user/register.jsx"))
-};
+import { WebRoutes } from './../scripts/routes.jsx';
 
 function LocalContent(props){
 
@@ -38,19 +31,37 @@ function LocalContent(props){
     afterURLChange(function(){
         if(container.childNodes.length == 0){
             setLoadPing(tmpPing = (-Math.abs(tmpPing) - 1));
+            /*
+            // Solution #1:
+            // Check if the user is offline
+            if(!navigator.onLine){
+                // Wait for a bit and check if the loading state changed
+                setTimeout(function(){
+                    if(tmpPing < 0){
+                        // It is clear that this page is not cached, and the user is offline
+                        // Therefore, you must prompt the user to reconnect to the internet
+                        alert("You are offline!");
+                    }
+                }, 500);
+            }
+
+            // Solution #2:
+            // Add an event listener to keep track of the user's connection status
+            // Should the user go off-line, the website will enter "Offline Mode", where only few
+            // essential sections will be avaliable for use.
+            // Should the user be using a page that requires connection to the internet, prompt the
+            // user to go back to the home page, or reconnect to the internet!
+
+            // As of now, I'm convinced that solution #2 would be best. But there is the possibility
+            // that the user might lose connect while loading a page, so solution #1 will be part of
+            // this solution! In addition, I should take into account the possibility that the server
+            // might go offline, so there should be a way to check if this ever happens!
+            */
         }
     });
 
     let container = (<div class={styles.container} onEmptied={function(){alert(0);}}>
-        <Routes>
-            {/* Pages that require the user to be signed in, and can be used when signed in */}
-            <Route path={"/"} element={<Pages.Home report={updateLoadPing}></Pages.Home>} />
-
-            {/* Pages that DON'T require the user to be signed in, and the user can't use while signed in */}
-            <Route path={"/new"} element={<Pages.New report={updateLoadPing}></Pages.New>} />
-            <Route path={"/user/login"} element={<Pages.Login report={updateLoadPing}></Pages.Login>} />
-            <Route path={"/user/register"} element={<Pages.Register report={updateLoadPing}></Pages.Register>} />
-        </Routes>
+        <WebRoutes ping={updateLoadPing} />
     </div>
     );
 

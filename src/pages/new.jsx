@@ -8,20 +8,21 @@ import styles from './../assets/styles/pages/new.module.css';
 import generalStyles from './../assets/styles/general.module.css';
 
 // Enable dynamic page navigation
-import { useNavigate } from "@solidjs/router";
+import { Link } from "@solidjs/router";
+
+import { Title } from './../assets/components/Title.jsx';
 
 export default function New(props){
-    let navigate = useNavigate();
-
     props.report();
     return (<>
+        <Title>Welcome</Title>
         <h1>Track your internets,<br/>with <text style={{color: 'var(--accent-color)'}}>one account</text>!</h1>
         <br/>
         <h3 class={styles.subtext}>Use one account for all supported websites and services and keep track of all your important activities in one place!</h3>
         <div class={styles.buttonsContainer}>
-            <button onClick={function(){ navigate("/user/login", { replace: false }); }} class={`${generalStyles.button} ${generalStyles.primarybutton}`}>Sign In to your Account</button>
+            <Link href={"/user/login"} class={`${generalStyles.button} ${generalStyles.primarybutton}`}>Sign In to your Account</Link>
             <br/>
-            <button onClick={function(){ navigate("/user/register", { replace: false }); }} class={generalStyles.button}>Create a new account</button>
+            <Link href={"/user/register"} class={generalStyles.button}>Create a new account</Link>
         </div>
     </>);
 }
