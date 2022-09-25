@@ -33,8 +33,15 @@ This is a project that aims to provide developers with an easy-to-use third-part
     - [ ] Support external authenticators (Like Google/Microsoft Authenticator)
     - [ ] Support security keys
     - [ ] Add mandatory back-up codes
-    > Do NOT allow email or SMS two-steps verification
+    - [ ] Support two-steps verification using an email address
+    > Do NOT allow SMS two-steps verification
+- [ ] Force the user to set up security questions (3 minimum)
 - [ ] Always require the user to do device authentication on new devices or when the user attempts to change important settings. (https://try-webauthn.appspot.com/)
+
+> The password reset process:
+>
+> 1. The user must use their email to verify ownership (in case the user chose to not use )
+> 2. The user must then answer the security questions correctly
 
 ## Available Scripts
 
