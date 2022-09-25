@@ -40,8 +40,13 @@ This is a project that aims to provide developers with an easy-to-use third-part
 
 > The password reset process:
 >
-> 1. The user must use their email to verify ownership (in case the user chose to not use )
-> 2. The user must then answer the security questions correctly
+> 1. The user must use their email to verify ownership (in case the user chose to not attach an email address to their account, they can use a device that they previously used to sign in to verify ownership)
+> 2. The user must answer the security questions correctly
+>
+> Account recovry process: (In case the user can't access their email)
+>
+> 1. Must file the request through a device that was used to access this service before.
+> 2. Must answer all the security questions correctly
 
 ## Available Scripts
 
