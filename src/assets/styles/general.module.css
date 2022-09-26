@@ -4,6 +4,19 @@
  *
 **/
 
+:root[data-color-scheme=dark] {
+    --background-blend: #202529;
+    --background-bold: #828b94;
+}
+
+ :root[data-color-scheme=light] {
+    --background-blend: #e8ebf0;
+    --background-bold: #b8bcc2;
+}
+
+
+/* Buttons */
+
 .button {
     font-size: 16px;
     padding: 14px 16px;
@@ -32,16 +45,94 @@
     color: white;
 }
 
-.button:hover {
+.button:hover,
+.button:focus {
     box-shadow: 0px 2px 8px var(--accent-color-lighter);
     border-color: var(--accent-color);
     background-color: var(--accent-color-lighter);
+    outline: none;
 }
 
-.primarybutton:hover {
+.primarybutton:hover,
+.primarybutton:focus {
     background-color: var(--accent-color);
 }
 
 .button:active {
     opacity: 0.75;
+}
+
+
+/* Text input fields */
+
+.inputFieldContainer {
+    width: fit-content;
+    height: fit-content;
+    margin: 16px 4px;
+    padding: 0px;
+    position: relative;
+}
+
+.inputFieldContainer .inputFieldLabel {
+    color: var(--background-bold);
+    position: absolute;
+    font-size: 16px;
+    margin-top: 10px;
+    margin-left: 12px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    pointer-events: none;
+    padding: 6px;
+    transition: margin 0.1s;
+    left: 0px;
+    font-weight: 500;
+}
+
+.inputFieldContainer:focus-within .inputFieldLabel,
+.inputField:not(:placeholder-shown):not(:focus)+.inputFieldLabel {
+    color: var(--accent-color);
+    margin-top: -16px;
+    background-color: var(--main-background);
+}
+
+.inputField:not(:placeholder-shown):not(:focus)+.inputFieldLabel {
+    color: var(--background-bold);
+}
+
+.inputField {
+    font-size: 16px;
+    padding: 14px 16px;
+    border: solid 2px transparent;
+    background-color: var(--background-blend);
+    border-bottom: solid 2px var(--background-bold);
+    border-radius: 4px 4px 0px 0px;
+    color: var(--text-color);
+}
+
+
+/*.inputField::placeholder {
+    color: var(--background-bold);
+    opacity: 1;
+}
+
+.inputField:focus::placeholder {
+    color: var(--accent-color-lighter);
+}*/
+
+.inputField:focus,
+.inputField:not(:placeholder-shown) {
+    border: solid 0px transparent;
+    background-color: var(--main-background);
+    border: solid 2px var(--accent-color);
+    border-radius: 4px;
+    outline: none;
+}
+
+.inputField:not(:placeholder-shown):not(:focus) {
+    border-color: var(--background-bold);
 }
