@@ -4,7 +4,12 @@
  * 
  **/
 
+import { Title } from './../assets/components/Title.jsx';
+
 export default function Home(props){
     props.report();
-    return <>"/"!</>;
+    return <>
+        <Title>Home</Title>
+        "/"!
+    </>;
 }

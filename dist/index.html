@@ -2,15 +2,125 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <!--<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; child-src 'none';">-->
     <meta name="theme-color" content="#000000" />
     <!-- NOTE: use this website to generate the favicon once an icon has been selected: https://favicon.io/favicon-converter/ -->
-    <link rel="shortcut icon" type="image/ico" href="/images/favicon.ico" />
+    <link rel="shortcut icon" type="image/ico" href="/images/favicon.ico">
     <title>MyApp</title>
-  <script type="module" crossorigin src="/assets/index.c158c0d7.js"></script>
-  <link rel="stylesheet" href="/assets/index.d602b1f6.css">
-</head>
+
+    <!-- PWA minimal data -->
+    <meta name="description" content="MyApp is an app!">
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" sizes="180x180">
+    <meta name="theme-color" content="var(--accent-color)">
+
+    <style type="text/css">
+         :root[data-color-scheme=dark] {
+            --text-color: #F7F8FA;
+            --main-background: #0D0F11;
+            --accent-color: #df3e66;
+            --accent-color-active: #a83954;
+            --accent-color-lighter: #5c2938;
+            --accent-color-faint: #2b181e;
+            --background-blend: #202529;
+            --background-bold: #96a4af;
+        }
+        
+         :root[data-color-scheme=light] {
+            --text-color: #0D0F11;
+            --main-background: #F7F8FA;
+            --accent-color: #C90C3B;
+            --accent-color-active: #e03a64;
+            --accent-color-lighter: #ffa6be;
+            --accent-color-faint: #ffdae4;
+            --background-blend: #e8ebf0;
+            --background-bold: #6b737a;
+        }
+        
+        html {
+            width: 100%;
+            height: 100%;
+            margin: 0px;
+            background-color: var(--main-background);
+        }
+        
+        body {
+            --globalbar--height: 120px;
+            --globalfooter--height: 38px;
+            --page-margin: 60px;
+            margin: 0px;
+            padding: var(--page-margin) calc(var(--page-margin) * 2);
+            min-height: calc(100% - 2 * var(--page-margin));
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            color: var(--text-color);
+        }
+        
+        @media (pointer:none),
+        (pointer:coarse) {
+            body {
+                --page-margin: 20px;
+            }
+        }
+        
+        text,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        a,
+        .text {
+            color: var(--text-color);
+        }
+        
+        text,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        a,
+        .text,
+        input,
+        label,
+        textarea,
+        button,
+        select {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        [unselectable] {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            -o-user-select: none;
+            user-select: none;
+        }
+        
+        input,
+        textarea,
+        button,
+        select,
+        a {
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        }
+        
+         ::selection {
+            background: var(--accent-color-lighter);
+        }
+    </style>
+  <script type="module" crossorigin src="/assets/index.3110842e.js"></script>
+  <link rel="stylesheet" href="/assets/index.b675437e.css">
+<link rel="manifest" href="/manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="/registerSW.js"></script></head>
 
 <body>
     <noscript>You must enable JavaScript In order to use this service.</noscript>

@@ -5,9 +5,19 @@
  **/
 
 import { createEffect } from 'solid-js';
+import { useLocation, useNavigate } from "@solidjs/router";
+
+export function afterURLChange(callback){
+    let location = useLocation();
+
+    createEffect(() => {
+        location.pathname;
+        callback();
+    });
+}
 
 // Check if the current page landing request is valid
-export function landingCheck(useLocation, useNavigate, signedIn){
+export function landingCheck(signedIn){
 
     const location = useLocation(),
           navigate = useNavigate();

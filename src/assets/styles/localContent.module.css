@@ -5,13 +5,17 @@
 **/
 
 .localcontent {
-    background-color: #fafafa;
+    /*background-color: #fafafa;*/
     flex-grow: 1;
     overflow-x: hidden;
-    box-shadow: 0px 0px 4px #cacaca;
-    border-radius: 12px;
-    max-width: 80%;
+    overflow-y: scroll;
+    /*box-shadow: 0px 0px 4px #cacaca;
+    border-radius: 12px;*/
+    max-width: 86%;
     margin: 0px 10%;
+    position: relative;
+    display: flex;
+    align-items: stretch
 }
 
 @media (pointer:none),
@@ -19,8 +23,8 @@
     .localcontent {
         max-width: 100%;
         margin: 0px;
-        background-color: unset;
-        box-shadow: unset;
+        /*background-color: unset;
+        box-shadow: unset;*/
     }
 }
 
@@ -49,4 +53,23 @@
         flex-grow: 1;
         max-height: unset;
     }
+}
+
+.container,
+.loadingContainer {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: stretch;
+    width: 100%;
+}
+
+.container:empty {
+    display: none;
+}
+
+.loadingContainer {
+    justify-content: center;
+    align-items: center;
 }

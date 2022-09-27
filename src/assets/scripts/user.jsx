@@ -9,7 +9,7 @@ import { createSignal } from "solid-js";
 // user data module
 let userDataModule = {
     visual: {
-        preferredColorScheme: 1, // 0 - system, 1 - light, 2 - dark
+        preferredColorScheme: 0, // 0 - system, 1 - light, 2 - dark
     },
     personal: {
         profilePicture: "/images/icons/default_user.svg", // <String> - URL to profile picture
