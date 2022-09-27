@@ -25,7 +25,7 @@ export default function Password(props){
                     />} style={{width: "100%"}}/>
             <FlexContainer space={"between"} horozontal no-grow>
                 <Button type={"link"} href={"/user/recovery/password"}>Forgot password?</Button>
-                <Button primary>Next</Button>
+                <Button type={"link"} href={"/user/challenge"} primary>Next</Button>
             </FlexContainer>
         </FlexContainer>
     </>;
