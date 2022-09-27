@@ -53,14 +53,14 @@ This is a project that aims to provide developers with an easy-to-use third-part
 >
 > The sign in process (trusted device):
 >
-> 1. User must enter username
-> 2. User must enter password
+> 1. User must enter username (/user/login)
+> 2. User must enter password (/user/login/password)
 >
 > The sign in process (new/untrusted device):
 >
-> 1. User must enter username
-> 2. User must enter password
-> 3. User must complete the two factor authentication process (if it's set up)
+> 1. User must enter username (/user/login)
+> 2. User must enter password (/user/login/password)
+> 3. User must complete the two factor authentication process (if it's set up) (/user/challenge)
 > 4. User will be promted to authenticate the device for settings modification as a trusted device (If the user doesn't choose to mark the device as trusted, they will be unable to change their settings on that device without password confirmation)
 >
 > New service access/signup prompt (trusted devices):

@@ -12,6 +12,8 @@ const Pages = {
     Home: lazy(() => import("./../../pages/home.jsx")),
     New: lazy(() => import("./../../pages/new.jsx")),
     Login: lazy(() => import("./../../pages/user/login.jsx")),
+    LoginPassword: lazy(() => import("./../../pages/user/login/password.jsx")),
+    LoginChallenge: lazy(() => import("./../../pages/user/challenge.jsx")),
     Register: lazy(() => import("./../../pages/user/register.jsx"))
 }, Error = {
     NotFound: lazy(() => import("./../../pages/error/404.jsx"))
@@ -29,6 +31,8 @@ export function WebRoutes(props){
         {/* Pages that DON'T require the user to be signed in, and the user can't use while signed in */}
         <Route path={"/new"} element={<Pages.New report={props.ping}></Pages.New>} />
         <Route path={"/user/login"} element={<Pages.Login report={props.ping}></Pages.Login>} />
+        <Route path={"/user/login/password"} element={<Pages.LoginPassword report={props.ping}></Pages.LoginPassword>} />
+        <Route path={"/user/challenge"} element={<Pages.LoginChallenge report={props.ping}></Pages.LoginChallenge>} />
         <Route path={"/user/register"} element={<Pages.Register report={props.ping}></Pages.Register>} />
     </Routes>
     );

@@ -3,12 +3,3 @@
  * The style of the "new" page
  *
 **/
-
-.buttonsContainer {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 24px;
-}

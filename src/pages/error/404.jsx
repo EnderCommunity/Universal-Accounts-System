@@ -6,7 +6,7 @@
 
 import { Title } from './../../assets/components/Title.jsx';
 
-export default function Login(props){
+export default function Error(props){
     props.report();
     return <>
         <Title>Not Found</Title>

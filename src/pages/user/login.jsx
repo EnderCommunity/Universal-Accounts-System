@@ -5,15 +5,23 @@
  **/
 
 import { Title } from './../../assets/components/Title.jsx';
-import { Input, Button } from './../../assets/components/interactive.jsx';
+import { Input, Button, Notice, Mark, FlexContainer, Link } from '../../assets/components/CustomElements.jsx';
 
 export default function Login(props){
     props.report();
     return <>
         <Title>Sign In</Title>
-        "/user/login"!
-        <Input id={"textInputField"} type={"text"} label={"Label"}/>
-        <Button primary>a button!</Button>
-        <Button>a button!</Button>
+        <h1>Sign in</h1>
+        <br/>
+        <h3>Use your <Mark>Ciel account</Mark> securely!</h3>
+        <FlexContainer space={"around"} style={{width: "460px"}}>
+            <Input id={"username"} type={"text"} label={"Username"} autocomplete={"username"}
+                    hint={<Link href={"/login/recovery/username"}>Forgot username?</Link>} style={{width: "100%"}}/>
+            <Notice>Not using your own device? Use Guest mode or Incognito mode to sign in privately.</Notice>
+            <FlexContainer space={"between"} horozontal no-grow>
+                <Button type={"link"} href={"/user/register"}>Create account</Button>
+                <Button primary>Next</Button>
+            </FlexContainer>
+        </FlexContainer>
     </>;
 }
