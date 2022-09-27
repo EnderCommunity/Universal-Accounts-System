@@ -77,7 +77,6 @@ function LocalContent(props){
             <Link href={"/user/register"}>/new/register</Link>
             <br/>*/}
             <div class={styles.loadingContainer} style={{display: (loadPing() < 0) ? null : 'none'}}>
-                {console.log(container.childNodes.length == 0)}
                 <LoadingSpinner/>
             </div>
             {container}
