@@ -11,7 +11,7 @@ import { Mark, Button, FlexContainer, Link } from './../../assets/components/Cus
 
 function ChallengeOption(props){
     return (
-        <Button class={style.challengeOptionButton}>
+        <Button light class={style.challengeOptionButton}>
             {props.children}
         </Button>
     );
@@ -25,8 +25,11 @@ export default function Challenge(props){
         <br/>
         <h3>For your safety please <Mark>verify your identity</Mark> further using one of the following methods:</h3>
         <FlexContainer style={{width: "450px"}}>
-            <ChallengeOption>Text!</ChallengeOption>
-            <ChallengeOption>Text!</ChallengeOption>
+            <ChallengeOption>Use your security key</ChallengeOption>
+            <ChallengeOption>Tap <strong>Yes</strong> on your mobile device</ChallengeOption>
+            <ChallengeOption>Use a security code from your mobile device</ChallengeOption>
+            <ChallengeOption>Enter one of your <strong>emergency</strong> backup codes</ChallengeOption>
+            <ChallengeOption>Get a verification code from <strong>[App_Name]</strong></ChallengeOption>
         </FlexContainer>
         <div class={style.suggestion}>
             <hr class={style.divider}/>

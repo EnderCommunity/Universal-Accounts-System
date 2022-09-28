@@ -11,7 +11,15 @@ import { Link } from "@solidjs/router";
 // <Button type="action" function={<function>}></Button>
 // <Button ... primary></Button>
 export function Button(props){
-    let style = `${((props.primary) ? `${generalStyles.button} ${generalStyles.primarybutton}` : generalStyles.button)}${props.class ? " " + props.class : ""}`;
+    let style = `${((props.primary) ?
+                    `${generalStyles.button} ${generalStyles.primarybutton}` :
+                    generalStyles.button)}${
+                (props.light) ?
+                    " " + generalStyles.lightButton :
+                    ""}${
+                (props.class) ?
+                    " " + props.class :
+                    ""}`;
     if(props.type == "link"){
         return (<Link href={props.href} class={style}>{props.children}</Link>);
     }else if(props.type == "action"){

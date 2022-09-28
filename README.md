@@ -33,8 +33,7 @@ This is a project that aims to provide developers with an easy-to-use third-part
     - [ ] Support external authenticators (Like Google/Microsoft Authenticator)
     - [ ] Support security keys
     - [ ] Add mandatory back-up codes
-    - [ ] Support two-steps verification using an email address
-    > Do NOT allow SMS two-steps verification
+    > Do NOT allow SMS or email two-steps verification
 - [ ] Force the user to set up security questions (3 minimum)
 - [ ] Always require the user to do device authentication on new devices or when the user attempts to change important settings. (https://try-webauthn.appspot.com/)
 
@@ -100,6 +99,8 @@ This is a project that aims to provide developers with an easy-to-use third-part
 > Note 1: Add option to save auth codes for other services, passwords and emails, and important data (like bank info, hashes, etc)
 
 > Note 2: Disable screenshots
+
+> Note 2: Add page transitions
 
 ## Available Scripts
 
