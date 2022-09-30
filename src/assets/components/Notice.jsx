@@ -5,11 +5,13 @@
  **/
 
 import generalStyles from './../styles/general.module.css';
- 
+
+import { processProps } from './_custom.jsx';
+
 export function Notice(props){
-    let style = (props.style) ? props.style : {};
+    let basicProps = processProps(props, generalStyles.notice);
     return (
-        <div class={generalStyles.notice} style={style}>
+        <div class={basicProps.class} style={basicProps.style}>
             <text>{props.children}</text>
         </div>
    );

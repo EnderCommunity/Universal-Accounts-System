@@ -10,11 +10,17 @@
     line-height: var(--globalfooter--height);
     font-size: 12px;
     opacity: 0;
+    font-weight: 400;
+}
+
+.globalfooter,
+.globalfooter text {
+    color: var(--background-bold);
 }
 
 .globalfooter[data-show-content=true] {
     animation: opacityIn 0.2s ease-in forwards;
-    animation-delay: 1.8s;
+    animation-delay: 1.2s;
 }
 
 @keyframes opacityIn {
@@ -22,6 +28,6 @@
         opacity: 0;
     }
     100% {
-        opacity: 0.4;
+        opacity: unset;
     }
 }

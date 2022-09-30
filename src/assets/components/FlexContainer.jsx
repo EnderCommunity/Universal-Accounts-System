@@ -5,14 +5,17 @@
  **/
 
 import generalStyles from './../styles/general.module.css';
- 
+
+import { processProps } from './_custom.jsx';
+
 export function FlexContainer(props){
-    let style = (props.style) ? props.style : {},
-        className = `${((props.space == "around" || props.space == "between") ? `${generalStyles.flexContainer} ${(
-            (props.space == "around") ? generalStyles.spaceAround : generalStyles.spaceBetween
-        )}` : generalStyles.flexContainer)}${props.class ? " " + props.class : ""}`;
+    let basicProps = processProps(props, generalStyles.flexContainer,
+                                    (props.space == "around") ? generalStyles.spaceAround : undefined,
+                                    (props.space == "between") ? generalStyles.spaceBetween : undefined,
+                                    (props.horozontal) ? generalStyles.horozontal : undefined,
+                                    (props["no-grow"]) ? generalStyles.noFlexGrow : undefined);
     return (
-        <div class={`${className}${(props.horozontal) ? " " + generalStyles.horozontal : ""}${props["no-grow"] ? " " + generalStyles.noFlexGrow : ""}`} style={style}>{props.children}</div>
+        <div class={basicProps.class} style={basicProps.style}>{props.children}</div>
     );
 }
  

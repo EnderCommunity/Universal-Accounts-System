@@ -9,6 +9,7 @@
 
 .button {
     font-size: 16px;
+    line-height: 1.5em;
     padding: 12px 24px;
     margin: 4px;
     border: solid 1px transparent;
@@ -29,14 +30,15 @@
     /* Remove underline from links! */
     text-decoration: none;
     font-weight: 500;
+    text-align: left;
 }
 
-.primarybutton {
+.button.primarybutton {
     background-color: var(--accent-color);
     color: white;
 }
 
-.lightButton {
+.button.lightButton {
     background-color: transparent;
 }
 
@@ -47,8 +49,8 @@
     outline: none;
 }
 
-.lightButton:hover,
-.lightButton:focus {
+.button.lightButton:hover,
+.button.lightButton:focus {
     box-shadow: none;
     border-color: transparent;
     background-color: var(--accent-color-faint);
@@ -59,13 +61,53 @@
     background-color: var(--accent-color-lighter);
 }
 
-.primarybutton:active {
+.button.primarybutton:active {
     background-color: var(--accent-color-active);
 }
 
-.lightButton:active {
+.button.lightButton:active {
     background-color: var(--accent-color-lighter);
     box-shadow: -2px 2px 5px var(--accent-color-faint), 2px 2px 5px var(--accent-color-faint);
+}
+
+.button.iconButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button.iconButton .buttonIcon {
+    display: inline-block;
+    overflow: hidden;
+    margin: -6px;
+    margin-right: 0px;
+    height: 28px;
+    width: 28px;
+    min-width: 28px;
+    min-height: 28px;
+}
+
+.button.iconButton .buttonIcon img,
+.button.iconButton .buttonIcon svg {
+    height: inherit;
+    width: inherit;
+    border-style: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+.button.iconButton .buttonIcon svg {
+    --svg-color: var(--accent-color);
+}
+
+.button.primarybutton .buttonIcon svg {
+    --svg-color: white;
+}
+
+.button.iconButton .iconButtonText {
+    display: inline-block;
+    margin-right: auto;
+    margin-left: 12px;
 }
 
 
@@ -112,6 +154,11 @@
 
 .inputField::-moz-placeholder {
     user-select: none;
+}
+
+.inputField::-ms-clear,
+.inputField::-ms-reveal {
+    display: none;
 }
 
 .inputFieldContainer .inputFieldHint {
@@ -268,15 +315,16 @@
 }
 
 .checkBoxContainer .checkBox:focus {
-    outline: none;
+    outline: 3px solid var(--background-blend);
 }
 
 .checkBoxContainer .checkBox:active {
+    transition: border 0.2s;
     border-color: var(--accent-color);
 }
 
 .checkBoxContainer .checkBox:checked {
-    transition: background-color 0.2s;
+    transition: background-color 0.2s, border 0.26s;
     background-color: var(--accent-color);
     border-color: var(--accent-color);
 }

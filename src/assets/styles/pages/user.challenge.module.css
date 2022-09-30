@@ -16,6 +16,7 @@
     border: none;
     border-bottom: solid 2px var(--background-bold);
     margin: 18px 0px;
+    opacity: 0.4;
 }
 
 .suggestion {

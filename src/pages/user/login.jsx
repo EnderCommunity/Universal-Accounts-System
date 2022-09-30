@@ -14,9 +14,10 @@ export default function Login(props){
         <h1>Sign in</h1>
         <br/>
         <h3>Use your <Mark>Ciel account</Mark> securely!</h3>
-        <FlexContainer space={"around"} style={{width: "460px"}}>
+        <FlexContainer space={"around"} style={{width: "400px"}}>
             <Input id={"username"} type={"text"} label={"Username"} autocomplete={"username"}
-                    hint={<Link href={"/login/recovery/username"}>Forgot username?</Link>} style={{width: "100%"}}/>
+                    hint={<Link href={"/user/recovery/username"}>Forgot username?</Link>}
+                    style={{width: "100%"}}/>
             <Notice>Not using your own device? Use Guest mode or Incognito mode to sign in privately.</Notice>
             <FlexContainer space={"between"} horozontal no-grow>
                 <Button type={"link"} href={"/user/register"}>Create account</Button>

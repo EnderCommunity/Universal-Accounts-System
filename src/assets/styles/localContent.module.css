@@ -28,29 +28,33 @@
     }
 }
 
-.localcontent[data-show-content=false] {
-    flex-grow: 0;
-}
+.localcontent[data-show-content=false] {}
 
 .localcontent {
-    max-height: 0px;
     overflow: hidden;
+    max-height: 0px;
+    flex-grow: 0;
 }
 
 .localcontent[data-show-content=true] {
-    flex-grow: 0;
-    animation: slideInContent 2s cubic-bezier(0.87, 0.02, 0.01, 1) forwards;
+    flex-grow: 1;
+    animation-name: showContent;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+    animation-delay: 0.8s;
 }
 
-@keyframes slideInContent {
-    0%,
-    25%,
-    50% {
-        flex-grow: 0;
+@keyframes showContent {
+    0% {
         max-height: 0px;
+        opacity: 0;
+    }
+    99% {
+        max-height: calc(100vh - var(--page-margin) - var(--globalbar--height));
+        opacity: 1;
     }
     100% {
-        flex-grow: 1;
         max-height: unset;
     }
 }

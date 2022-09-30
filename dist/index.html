@@ -5,7 +5,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <!--<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; child-src 'none';">-->
-    <meta name="theme-color" content="#000000" />
     <!-- NOTE: use this website to generate the favicon once an icon has been selected: https://favicon.io/favicon-converter/ -->
     <link rel="shortcut icon" type="image/ico" href="/images/favicon.ico">
     <title>MyApp</title>
@@ -13,7 +12,8 @@
     <!-- PWA minimal data -->
     <meta name="description" content="MyApp is an app!">
     <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" sizes="180x180">
-    <meta name="theme-color" content="var(--accent-color)">
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#F7F8FA">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0D0F11">
 
     <style type="text/css">
          :root[data-color-scheme=dark] {
@@ -113,9 +113,31 @@
          ::selection {
             background: var(--accent-color-lighter);
         }
+        
+         ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+         ::-webkit-scrollbar-track {
+            background: var(--background-blend);
+        }
+        /* Handle */
+        
+         ::-webkit-scrollbar-thumb {
+            background: var(--background-bold);
+        }
+        /* Handle on hover */
+        
+         ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-color);
+        }
+        
+         ::-webkit-scrollbar-thumb:active {
+            background: var(--accent-color-lighter);
+        }
     </style>
-  <script type="module" crossorigin src="/assets/index.9a3a3ffa.js"></script>
-  <link rel="stylesheet" href="/assets/index.b675437e.css">
+  <script type="module" crossorigin src="/assets/index.39844bcf.js"></script>
+  <link rel="stylesheet" href="/assets/index.ccd1bb6e.css">
 <link rel="manifest" href="/manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="/registerSW.js"></script></head>
 
 <body>

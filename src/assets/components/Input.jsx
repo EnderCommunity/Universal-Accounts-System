@@ -6,12 +6,14 @@
 
 import generalStyles from './../styles/general.module.css';
 
+import { processProps } from './_custom.jsx';
+
 // Check "https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input" if you wish to support
 // a new input type!
 // Notice: you can refer to "https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete"
 // for info on the diffrent types of autocomplete
 export function Input(props){
-    let style = (props.style != undefined) ? props.style : {},
+    let basicProps = processProps(props, generalStyles.inputFieldContainer),
         hint = (props.hint != undefined) ? (
             <div class={`${generalStyles.inputFieldHint} text`}>{props.hint}</div>
         ) : "";
@@ -22,7 +24,7 @@ export function Input(props){
     }else if(props.type == "text" || props.type == "url" || props.type == "tel" ||
         props.type == "password" || props.type == "number"){
         return (
-            <div class={generalStyles.inputFieldContainer} style={style}>
+            <div class={basicProps.class} style={basicProps.style}>
                 <div class={generalStyles.inputFieldDataContainer}>
                     <input id={props.id} type={props.type} placeholder={" "}
                         autocomplete={(props.autocomplete) ? props.autocomplete : "off"}
