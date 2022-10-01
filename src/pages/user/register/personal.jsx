@@ -6,6 +6,7 @@
 
 import { Title } from './../../../assets/components/Title.jsx';
 import { Input, Select, Button, Notice, Mark, FlexContainer } from './../../../assets/components/CustomElements.jsx';
+import { InputFieldsContainer } from './../register.jsx';
 
 export default function RegisterPersonalInfo(props){
     props.report();
@@ -15,12 +16,17 @@ export default function RegisterPersonalInfo(props){
         <br/>
         <h3>Enter your <Mark>personal details</Mark>!</h3>
         <FlexContainer space={"around"} style={{width: "400px"}}>
-            <Select id={"birthday_month"} label={"Month"}></Select>
-            <Select id={"birthday_month2"} label={"Month"} style={{width: "calc(100% - 8px)"}}></Select>
-            <Input id={"birthday_day"} type={"number"} label={"Day"} autocomplete={"bday-day"}
-                    style={{width: "calc(100% - 8px)"}}/>
-            <Input id={"birthday_year"} type={"number"} label={"Year"} autocomplete={"bday-year"}
-                    style={{width: "calc(100% - 8px)"}}/>
+            <InputFieldsContainer>
+            <FlexContainer horozontal style={{margin: 0, height: "58px"}}>
+                    <Select id={"birthday_month"} label={"Month"}
+                            style={{"min-width": "40%"}}></Select>
+                    <Input id={"birthday_day"} type={"number"} label={"Day"} autocomplete={"bday-day"}
+                            style={{}}/>
+                    <Input id={"birthday_year"} type={"number"} label={"Year"} autocomplete={"bday-year"}
+                            style={{}}/>
+                </FlexContainer>
+                <Select id={"gender"} label={"Gender"} style={{width: "calc(100% - 8px)"}}></Select>
+            </InputFieldsContainer>
             {/*<Input id={"birthday_month"} type={"month"} label={"Month"} autocomplete={"bday-month"}
                     style={{width: "calc(100% - 8px)"}}/>
             <Input id={"birthday_day"} type={"day"} label={"Day"} autocomplete={"bday-day"}
