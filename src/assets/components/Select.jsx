@@ -9,7 +9,10 @@ import generalStyles from './../styles/general.module.css';
 import { processProps } from './_custom.jsx';
 
 export function Select(props){
-    let basicProps = processProps(props, generalStyles.selectContainer);
+    let basicProps = processProps(props, generalStyles.selectContainer),
+        hint = (props.hint != undefined) ? (
+                    <div class={`${generalStyles.selectHint} text`}>{props.hint}</div>
+                ) : "";
     if(typeof props.id != "string"){
         throw new Error("<Select> element must always have an ID!");
     }else if(typeof props.label != "string"){
@@ -29,6 +32,7 @@ export function Select(props){
                 </select>
                 <label class={generalStyles.selectLabel} for={props.id}>{props.label}</label>
             </div>
+            {hint}
         </div>
     );
 }

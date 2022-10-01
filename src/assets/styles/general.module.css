@@ -163,6 +163,7 @@
     display: none;
 }
 
+.selectContainer .selectHint,
 .inputFieldContainer .inputFieldHint {
     max-width: 100%;
     height: fit-content;
@@ -248,6 +249,12 @@
     font-size: 16px;
     padding: 4px;
     opacity: 0.5;
+}
+
+.notice.smallerNotice {
+    font-size: 14px;
+    padding: 8px;
+    opacity: 0.8;
 }
 
 

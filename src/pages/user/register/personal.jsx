@@ -17,14 +17,15 @@ export default function RegisterPersonalInfo(props){
         <h3>Enter your <Mark>personal details</Mark>!</h3>
         <FlexContainer space={"around"} style={{width: "400px"}}>
             <InputFieldsContainer>
-            <FlexContainer horozontal style={{margin: 0, height: "58px"}}>
+            <FlexContainer horozontal style={{margin: 0}}>
                     <Select id={"birthday_month"} label={"Month"}
-                            style={{"min-width": "40%"}}></Select>
+                            style={{"min-width": "40%", "margin-bottom": "auto"}}></Select>
                     <Input id={"birthday_day"} type={"number"} label={"Day"} autocomplete={"bday-day"}
-                            style={{}}/>
+                            style={{"margin-bottom": "auto"}}/>
                     <Input id={"birthday_year"} type={"number"} label={"Year"} autocomplete={"bday-year"}
-                            style={{}}/>
+                            style={{"margin-bottom": "auto"}}/>
                 </FlexContainer>
+                <Notice smaller>Enter your birthday</Notice>
                 <Select id={"gender"} label={"Gender"} style={{width: "calc(100% - 8px)"}}></Select>
             </InputFieldsContainer>
             {/*<Input id={"birthday_month"} type={"month"} label={"Month"} autocomplete={"bday-month"}
