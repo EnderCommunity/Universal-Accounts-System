@@ -113,17 +113,19 @@
 
 /* Text input fields */
 
-.inputFieldContainer {
+.inputFieldContainer,
+.selectContainer {
     width: fit-content;
     height: fit-content;
     max-width: 100%;
-    margin: 12px 4px;
-    margin-bottom: 4px;
+    margin: 16px 4px;
+    margin-top: 20px;
     padding: 0px;
     position: relative;
 }
 
-.inputFieldContainer .inputFieldLabel {
+.inputFieldContainer .inputFieldLabel,
+.selectContainer .selectLabel {
     color: var(--background-bold);
     position: absolute;
     font-size: 16px;
@@ -178,6 +180,8 @@
     cursor: pointer;
 }*/
 
+.selectContainer .selectDataContainer:focus-within .selectLabel,
+.selectField:valid+.selectLabel,
 .inputFieldContainer .inputFieldDataContainer:focus-within .inputFieldLabel,
 .inputField:not(:placeholder-shown):not(:focus)+.inputFieldLabel {
     color: var(--accent-color);
@@ -185,10 +189,12 @@
     background-color: var(--main-background);
 }
 
+.selectField:valid:not(:focus)+.selectLabel,
 .inputField:not(:placeholder-shown):not(:focus)+.inputFieldLabel {
     color: var(--background-bold);
 }
 
+.selectContainer .selectDataContainer .selectField,
 .inputField {
     font-size: 16px;
     padding: 14px 16px;
@@ -198,6 +204,12 @@
     border-radius: 4px 4px 0px 0px;
     color: var(--text-color);
     width: calc(100% - 4px - 16px - 16px);
+}
+
+.selectContainer .selectDataContainer .selectField {
+    appearance: none;
+    cursor: pointer;
+    width: 100%;
 }
 
 
@@ -210,6 +222,8 @@
     color: var(--accent-color-lighter);
 }*/
 
+.selectContainer .selectDataContainer .selectField:focus,
+.selectContainer .selectDataContainer .selectField:valid,
 .inputField:focus,
 .inputField:not(:placeholder-shown) {
     border: solid 0px transparent;
@@ -219,6 +233,7 @@
     outline: none;
 }
 
+.selectContainer .selectDataContainer .selectField:valid:not(:focus),
 .inputField:not(:placeholder-shown):not(:focus) {
     border-color: var(--background-bold);
 }

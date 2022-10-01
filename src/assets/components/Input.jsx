@@ -18,9 +18,9 @@ export function Input(props){
             <div class={`${generalStyles.inputFieldHint} text`}>{props.hint}</div>
         ) : "";
     if(typeof props.id != "string"){
-        throw new Error("Input must always have an ID!");
+        throw new Error("<Input> element must always have an ID!");
     }else if(typeof props.label != "string"){
-        throw new Error("Input must always have a label!");
+        throw new Error("<Input> element must always have a label!");
     }else if(props.type == "text" || props.type == "url" || props.type == "tel" ||
         props.type == "password" || props.type == "number"){
         return (

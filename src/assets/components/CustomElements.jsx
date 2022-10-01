@@ -7,6 +7,7 @@
 import { Link } from './Link.jsx';
 import { Button } from './Button.jsx';
 import { Input } from './Input.jsx';
+import { Select } from './Select.jsx';
 import { Notice } from './Notice.jsx';
 import { Mark } from './Mark.jsx';
 import { FlexContainer } from './FlexContainer.jsx';
@@ -16,6 +17,7 @@ export {
     Link,
     Button,
     Input,
+    Select,
     Notice,
     Mark,
     FlexContainer,

@@ -5,9 +5,10 @@
 **/
 
 .globalfooter {
-    height: var(--globalfooter--height);
+    min-height: var(--globalfooter--height);
+    height: fit-content;
     text-align: center;
-    line-height: var(--globalfooter--height);
+    line-height: 18px;
     font-size: 12px;
     opacity: 0;
     font-weight: 400;
@@ -19,8 +20,8 @@
 }
 
 .globalfooter[data-show-content=true] {
-    animation: opacityIn 0.2s ease-in forwards;
-    animation-delay: 1.2s;
+    animation: opacityIn 0.1s ease-in-out forwards;
+    animation-delay: 1.65s;
 }
 
 @keyframes opacityIn {
@@ -30,4 +31,9 @@
     100% {
         opacity: unset;
     }
+}
+
+.link {
+    text-decoration: none;
+    color: inherit;
 }

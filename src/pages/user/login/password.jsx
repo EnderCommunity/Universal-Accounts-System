@@ -7,7 +7,7 @@
 import { Title } from './../../../assets/components/Title.jsx';
 import { Input, Button, Mark, FlexContainer, CheckBox } from './../../../assets/components/CustomElements.jsx';
 
-export default function Password(props){
+export default function LoginPassword(props){
     props.report();
     return <>
         <Title>Sign In</Title>
@@ -15,7 +15,7 @@ export default function Password(props){
         <br/>
         <h3>Please enter <Mark>your password</Mark> to verify your identity!</h3>
         <FlexContainer space={"around"} style={{width: "400px"}}>
-            <input type={"username"} style={"display: none;"} value={"TestUsername"}/>
+            <input id={"username-hidden"} type={"username"} style={"display: none;"} value={"TestUsername"}/>
             <Input id={"password"} type={"password"} label={"Password"}
                     autocomplete={"current-password"}
                     hint={<CheckBox id={"showPassword"} label={"Show password"}

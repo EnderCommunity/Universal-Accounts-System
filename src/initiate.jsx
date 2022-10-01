@@ -45,6 +45,7 @@ render(() =>{
             // Must run this when the user's basic info are aquired from the server and fully loaded!
             // setTimeout(() => setShowContent(true), 1500); // TMP
             setShowContent(true);
+            document.body.dataset.loaded = true;
         }
     };
 
