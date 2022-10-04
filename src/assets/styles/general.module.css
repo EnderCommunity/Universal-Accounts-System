@@ -182,7 +182,7 @@
 }*/
 
 .selectContainer .selectDataContainer:focus-within .selectLabel,
-.selectField:valid+.selectLabel,
+.selectField:valid~.selectLabel,
 .inputFieldContainer .inputFieldDataContainer:focus-within .inputFieldLabel,
 .inputField:not(:placeholder-shown):not(:focus)+.inputFieldLabel {
     color: var(--accent-color);
@@ -190,7 +190,7 @@
     background-color: var(--main-background);
 }
 
-.selectField:valid:not(:focus)+.selectLabel,
+.selectField:valid:not(:focus)~.selectLabel,
 .inputField:not(:placeholder-shown):not(:focus)+.inputFieldLabel {
     color: var(--background-bold);
 }
@@ -207,10 +207,39 @@
     width: calc(100% - 4px - 16px - 16px);
 }
 
+.selectContainer .selectDataContainer {
+    position: relative;
+}
+
 .selectContainer .selectDataContainer .selectField {
     appearance: none;
     cursor: pointer;
     width: 100%;
+}
+
+.selectContainer .selectDataContainer .selectFieldArrow {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    right: 10px;
+    top: calc((100% - 25px) / 2);
+    --svg-color: var(--background-bold);
+    pointer-events: none;
+    background-color: var(--background-blend);
+}
+
+.selectContainer .selectDataContainer:focus-within .selectFieldArrow {
+    --svg-color: var(--accent-color);
+    background-color: var(--main-background);
+}
+
+.selectField:valid+.selectFieldArrow {
+    background-color: var(--main-background);
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
 }
 
 

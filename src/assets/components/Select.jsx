@@ -8,6 +8,8 @@ import generalStyles from './../styles/general.module.css';
 
 import { processProps } from './_custom.jsx';
 
+import ArrowDownIcon from './../icons/arrow_down.svg';
+
 export function Select(props){
     let basicProps = processProps(props, generalStyles.selectContainer),
         hint = (props.hint != undefined) ? (
@@ -21,15 +23,13 @@ export function Select(props){
     return (
         <div class={basicProps.class} style={basicProps.style}>
             <div class={generalStyles.selectDataContainer}>
-                <select id={props.id} placeholder={" "}
+                <select id={props.id} placeholder={" "} onChange={props.onChange}
                         autocomplete={(props.autocomplete) ? props.autocomplete : "off"}
                         class={generalStyles.selectField} required>
                     <option value="" disabled selected></option>
-                    <option value="volvo">Volvo XC90</option>
-                    <option value="saab">Saab 95</option>
-                    <option value="mercedes">Mercedes SLK</option>
-                    <option value="audi">Audi TT</option>
+                    {props.children}
                 </select>
+                <ArrowDownIcon class={generalStyles.selectFieldArrow}/>
                 <label class={generalStyles.selectLabel} for={props.id}>{props.label}</label>
             </div>
             {hint}

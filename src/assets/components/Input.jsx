@@ -28,7 +28,7 @@ export function Input(props){
                 <div class={generalStyles.inputFieldDataContainer}>
                     <input id={props.id} type={props.type} placeholder={" "}
                         autocomplete={(props.autocomplete) ? props.autocomplete : "off"}
-                        class={generalStyles.inputField} />
+                        class={generalStyles.inputField}/>
                     <label class={generalStyles.inputFieldLabel} for={props.id}>{props.label}</label>
                 </div>
                 {hint}
