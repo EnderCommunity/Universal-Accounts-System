@@ -6,13 +6,21 @@
 
 import { Title } from './../../../assets/components/Title.jsx';
 import { Input, Button, Notice, Mark, FlexContainer } from './../../../assets/components/CustomElements.jsx';
-import { InputFieldsContainer, dataStatusCallback } from './../register.jsx';
+import { InputFieldsContainer } from './../register.jsx';
 import { onMount } from "solid-js";
 
 export default function RegisterUsername(props){
     let nextButton = (<Button type={"link"} href={"/user/register/password"} primary>Next</Button>);
     onMount(() => {
-        dataStatusCallback(nextButton(), "username");
+        let usernameInput = document.getElementById("username"), check = () => {
+            if(usernameInput.value.length < 3 || usernameInput.value.length > 32){
+                nextButton().setAttribute("disabled", "");
+            }else{
+                nextButton().removeAttribute("disabled");
+            }
+        };
+        check();
+        usernameInput.oninput = check;
     });
     props.report();
     return <>
@@ -23,7 +31,7 @@ export default function RegisterUsername(props){
         <FlexContainer space={"around"} style={{width: "400px"}}>
             <InputFieldsContainer>
                 <Input id={"username"} type={"text"} label={"Username"} autocomplete={"off"}
-                        style={{width: "calc(100% - 8px)"}}/>
+                        style={{width: "calc(100% - 8px)"}} maxlength={32}/>
             </InputFieldsContainer>
             <Notice>Your username is public, make sure it does not contain any sensitive or personal information!</Notice>
             <FlexContainer space={"between"} horozontal no-grow>

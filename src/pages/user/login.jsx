@@ -12,7 +12,7 @@ export default function Login(props){
     let nextButton = (<Button type={"link"} href={"/user/login/password"} primary disabled>Next</Button>);
     onMount(() => {
         let usernameInput = document.getElementById("username"), check = () => {
-            if(usernameInput.value.length < 3){
+            if(usernameInput.value.length < 3 || usernameInput.value.length > 32){
                 nextButton().setAttribute("disabled", "");
             }else{
                 nextButton().removeAttribute("disabled");
