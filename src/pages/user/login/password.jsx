@@ -7,6 +7,7 @@
 import { Title } from './../../../assets/components/Title.jsx';
 import { Input, Button, Mark, FlexContainer, CheckBox } from './../../../assets/components/CustomElements.jsx';
 import { onMount } from 'solid-js';
+import { InputFieldsContainer } from './../login.jsx';
 
 export default function LoginPassword(props){
     let nextButton = (<Button type={"link"} href={"/user/challenge"} primary>Next</Button>);
