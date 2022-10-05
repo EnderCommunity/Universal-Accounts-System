@@ -8,6 +8,10 @@ import { Title } from './../../assets/components/Title.jsx';
 import { Input, Button, Notice, Mark, FlexContainer, Link } from '../../assets/components/CustomElements.jsx';
 import { onMount } from 'solid-js';
 
+export function InputFieldsContainer(props){
+    return (<div style={{width: "100%", position: "relative", overflow: "hidden"}}>{props.children}</div>);
+}
+
 export default function Login(props){
     let nextButton = (<Button type={"link"} href={"/user/login/password"} primary disabled>Next</Button>);
     onMount(() => {
@@ -28,9 +32,11 @@ export default function Login(props){
         <br/>
         <h3>Use your <Mark>Ciel account</Mark> securely!</h3>
         <FlexContainer space={"around"} style={{width: "400px"}}>
-            <Input id={"username"} type={"text"} label={"Username"} autocomplete={"username"}
-                    hint={<Link href={"/user/recovery/username"}>Forgot username?</Link>}
-                    style={{width: "100%"}} maxlength={32}/>
+            <InputFieldsContainer>
+                <Input id={"username"} type={"text"} label={"Username"} autocomplete={"username"}
+                        hint={<Link href={"/user/recovery/username"}>Forgot username?</Link>}
+                        style={{width: "calc(100% - 8px)"}} maxlength={32}/>
+            </InputFieldsContainer>
             <Notice>Not using your own device? Use Guest mode or Incognito mode to sign in privately.</Notice>
             <FlexContainer space={"between"} horozontal no-grow>
                 <Button type={"link"} href={"/user/register"}>Create account</Button>
