@@ -42,6 +42,18 @@
     background-color: transparent;
 }
 
+.button.primarybutton[disabled] {
+    transition: background-color 0.08s, color 0.08s;
+    background-color: var(--background-blend);
+    color: var(--background-bold);
+}
+
+.button[disabled] {
+    transition: background-color 0.08s, color 0.08s;
+    background-color: transparent;
+    color: var(--background-bold);
+}
+
 .button:hover,
 .button:focus {
     box-shadow: -2px 2px 5px var(--accent-color-lighter), 2px 2px 5px var(--accent-color-lighter);

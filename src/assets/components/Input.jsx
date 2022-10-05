@@ -16,7 +16,13 @@ export function Input(props){
     let basicProps = processProps(props, generalStyles.inputFieldContainer),
         hint = (props.hint != undefined) ? (
             <div class={`${generalStyles.inputFieldHint} text`}>{props.hint}</div>
-        ) : "";
+        ) : "",
+        input = (<input id={props.id} type={props.type} placeholder={" "}
+                        autocomplete={(props.autocomplete) ? props.autocomplete : "off"}
+                        class={generalStyles.inputField} maxlength={props.maxlength}/>);
+    if(props.value){
+        input.value = props.value;
+    }
     if(typeof props.id != "string"){
         throw new Error("<Input> element must always have an ID!");
     }else if(typeof props.label != "string"){
@@ -26,9 +32,7 @@ export function Input(props){
         return (
             <div class={basicProps.class} style={basicProps.style}>
                 <div class={generalStyles.inputFieldDataContainer}>
-                    <input id={props.id} type={props.type} placeholder={" "}
-                        autocomplete={(props.autocomplete) ? props.autocomplete : "off"}
-                        class={generalStyles.inputField}/>
+                    {input}
                     <label class={generalStyles.inputFieldLabel} for={props.id}>{props.label}</label>
                 </div>
                 {hint}

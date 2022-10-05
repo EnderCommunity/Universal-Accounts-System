@@ -18,7 +18,8 @@ const Pages = {
     RegisterUsername: lazy(() => import("./../../pages/user/register/username.jsx")),
     RegisterPassword: lazy(() => import("./../../pages/user/register/password.jsx")),
     RegisterPersonalInfo: lazy(() => import("./../../pages/user/register/personal.jsx")),
-    RegisterSecurityQuestions: lazy(() => import("./../../pages/user/register/security-questions.jsx"))
+    RegisterSecurityQuestions: lazy(() => import("./../../pages/user/register/security-questions.jsx")),
+    RegisterEmail: lazy(() => import("./../../pages/user/register/email.jsx"))
 }, Error = {
     NotFound: lazy(() => import("./../../pages/error/404.jsx"))
 };
@@ -44,6 +45,7 @@ export function WebRoutes(props){
         <Route path={"/user/register/password"} element={<Pages.RegisterPassword report={props.ping}></Pages.RegisterPassword>} />
         <Route path={"/user/register/personal"} element={<Pages.RegisterPersonalInfo report={props.ping}></Pages.RegisterPersonalInfo>} />
         <Route path={"/user/register/security-questions"} element={<Pages.RegisterSecurityQuestions report={props.ping}></Pages.RegisterSecurityQuestions>} />
+        <Route path={"/user/register/email"} element={<Pages.RegisterEmail report={props.ping}></Pages.RegisterEmail>} />
     </Routes>
     );
 }

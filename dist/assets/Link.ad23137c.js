@@ -1,0 +1,1 @@
+import{g as t}from"./FlexContainer.b4bbc9b9.js";import{p as n,c as s,L as a}from"./index.ef15a9a7.js";function i(e){let r=n(e,t.link);return s(a,{get href(){return e.href},get class(){return r.class},get style(){return r.style},get children(){return e.children}})}export{i as L};

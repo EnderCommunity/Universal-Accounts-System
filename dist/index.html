@@ -96,7 +96,8 @@
             -moz-osx-font-smoothing: grayscale;
         }
         
-        [unselectable] {
+        [unselectable],
+        [disabled] {
             -webkit-touch-callout: none;
             -webkit-user-select: none;
             -khtml-user-select: none;
@@ -104,6 +105,11 @@
             -ms-user-select: none;
             -o-user-select: none;
             user-select: none;
+        }
+        
+        [disabled] {
+            opacity: 0.6;
+            pointer-events: none !important;
         }
         
         * {
@@ -136,7 +142,7 @@
             background: var(--accent-color-lighter);
         }
     </style>
-  <script type="module" crossorigin src="/assets/index.19546f6b.js"></script>
+  <script type="module" crossorigin src="/assets/index.ef15a9a7.js"></script>
   <link rel="stylesheet" href="/assets/index.62eb401f.css">
 <link rel="manifest" href="/manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="/registerSW.js"></script></head>
 

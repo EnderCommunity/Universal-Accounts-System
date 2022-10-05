@@ -6,8 +6,21 @@
 
 import { Title } from './../../../assets/components/Title.jsx';
 import { Input, Button, Mark, FlexContainer, CheckBox } from './../../../assets/components/CustomElements.jsx';
+import { onMount } from 'solid-js';
 
 export default function LoginPassword(props){
+    let nextButton = (<Button type={"link"} href={"/user/challenge"} primary>Next</Button>);
+    onMount(() => {
+        let passwordInput = document.getElementById("password"), check = () => {
+            if(passwordInput.value.length < 8 || passwordInput.value.length > 96){
+                nextButton().setAttribute("disabled", "");
+            }else{
+                nextButton().removeAttribute("disabled");
+            }
+        };
+        check();
+        passwordInput.oninput = check;
+    });
     props.report();
     return <>
         <Title>Sign In</Title>
@@ -31,7 +44,7 @@ export default function LoginPassword(props){
                     style={{width: "100%"}}/>
             <FlexContainer space={"between"} horozontal no-grow>
                 <Button type={"link"} href={"/user/recovery/password"}>Forgot password?</Button>
-                <Button type={"link"} href={"/user/challenge"} primary>Next</Button>
+                {nextButton}
             </FlexContainer>
         </FlexContainer>
     </>;

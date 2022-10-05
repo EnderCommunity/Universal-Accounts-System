@@ -6,19 +6,25 @@
 
 import { Title } from './../../../assets/components/Title.jsx';
 import { Input, Select, Button, Notice, Mark, FlexContainer } from './../../../assets/components/CustomElements.jsx';
-import { InputFieldsContainer } from './../register.jsx';
+import { InputFieldsContainer, dataStatusCallback } from './../register.jsx';
+import { onMount } from "solid-js";
 
 export default function RegisterPersonalInfo(props){
     let customGenderName =
         (<Input id={"custom-gender-name"} type={"text"} label={"Gender name"}
-                style={{width: "calc(100% - 8px)", display: "none"}}/>),
+                style={{width: "calc(100% - 8px)", display: "none"}} value={"FILL"}/>),
         customGenderPronouns =
             (<Select id={"custom-gender-pronouns"} label={"Prefered pronouns"}
-                    style={{width: "calc(100% - 8px)", display: "none"}}>
+                    style={{width: "calc(100% - 8px)", display: "none"}} selectedIndex={1}>
                         <option value={"he"}>he/him</option>
                         <option value={"she"}>she/her</option>
                         <option value={"they"}>they/them</option>
-            </Select>);
+            </Select>),
+        nextButton = (<Button type={"link"} href={"/user/register/security-questions"} primary>Next</Button>);
+    onMount(() => {
+        dataStatusCallback(nextButton(), "birthday_month", "birthday_day", "birthday_year",
+                            "gender", "custom-gender-name", "custom-gender-pronouns");
+    });
     props.report();
     return <>
         <Title>Sign Up</Title>
@@ -56,6 +62,8 @@ export default function RegisterPersonalInfo(props){
                                 if(customGenderPronouns().style.display != "none"){
                                     customGenderPronouns().style.display = "none";
                                     customGenderName().style.display = "none";
+                                    document.getElementById("custom-gender-pronouns").selectedIndex  = 1;
+                                    document.getElementById("custom-gender-name").value = "FILL";
                                 }
                             }else{
                                 document.getElementById("custom-gender-pronouns").selectedIndex  = 0;
@@ -75,7 +83,7 @@ export default function RegisterPersonalInfo(props){
             <Notice>Make sure to use your real date of birth. You can create a Ciel account as long as you are 13+ years old! (access to external services will be limited depending on your age)</Notice>
             <FlexContainer space={"between"} horozontal no-grow>
                 <Button type={"action"} function={function(){history.back()}}>Go back</Button>
-                <Button type={"link"} href={"/user/register/security-questions"} primary>Next</Button>
+                {nextButton}
             </FlexContainer>
         </FlexContainer>
     </>;

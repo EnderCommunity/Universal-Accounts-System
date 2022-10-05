@@ -67,7 +67,7 @@ function LocalContent(props){
 
     // Check https://github.com/solidjs/solid-router for more info on how the navigation system works
     return (
-        <div class={styles.localcontent} data-show-content={props.showContent}>
+        <div id={"local-content"} class={styles.localcontent} data-show-content={props.showContent}>
             {/*<Link href={"/"}>/</Link>
             <br/>
             <Link href={"/new"}>/new/</Link>

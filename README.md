@@ -45,22 +45,22 @@ This is a project that aims to provide developers with an easy-to-use third-part
 > 4. User must enter their date of birth and gender
 > 5. User must choose their security quesitons
 > 6. User will be prompted with the option to attach an email address to their account
-> 7. User will be prompted to authenticate their device (system fingerprint/face-ID/password prompt) for quick verification when the settings are changed
-> 8. User must choose their prefered quick settings (NOTE: check for changes in device auth method)
-> 9. User will be prompted to read the privacy policy and terms of service, and agree to them
-> 10. User will be prompted to set up two-factor authentication, or go to the home page
+> 7. User must choose their prefered privacy settings
+> 8. User will be prompted to read the privacy policy and terms of service, and agree to them
+> 9. User will be promted to review their account creation settings (this data can be exported)
+> 10. User will be prompted to set up two-factor authentication, or go to the home page!
 >
-> The sign in process (trusted device):
+> The sign in process (trusted device - with device auth):
 >
 > 1. User must enter username (/user/login)
-> 2. User must enter password (/user/login/password)
+> 2. User must do the local device auth challenge
 >
 > The sign in process (new/untrusted device):
 >
 > 1. User must enter username (/user/login)
 > 2. User must enter password (/user/login/password)
 > 3. User must complete the two factor authentication process (if it's set up) (/user/challenge)
-> 4. User will be prompted to authenticate the device for settings modification as a trusted device (If the user doesn't choose to mark the device as trusted, they will be unable to change their settings on that device without password confirmation)
+> 4. User will be prompted to authenticate the device as a trusted device (If the user doesn't choose to mark the device as trusted, they will be unable to change their settings on that device without password confirmation)
 >
 > New service access/signup prompt (trusted devices):
 >

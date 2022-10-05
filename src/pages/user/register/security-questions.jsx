@@ -6,7 +6,8 @@
 
 import { Title } from './../../../assets/components/Title.jsx';
 import { Input, Select, Button, Notice, Mark, FlexContainer } from './../../../assets/components/CustomElements.jsx';
-import { InputFieldsContainer } from './../register.jsx';
+import { InputFieldsContainer, dataStatusCallback } from './../register.jsx';
+import { onMount } from "solid-js";
 
 function checkQuestionStatus(number, answerElm){
     let question = document.getElementById("security-q" + number),
@@ -23,7 +24,12 @@ function checkQuestionStatus(number, answerElm){
 export default function RegisterSecurityQuestions(props){
     let ansElm1 = (<Input id={"security-a1"} type={"text"} label={"Answer 1"} style={{width: "calc(100% - 8px)", display: "none"}}/>),
         ansElm2 = (<Input id={"security-a2"} type={"text"} label={"Answer 2"} style={{width: "calc(100% - 8px)", display: "none"}}/>),
-        ansElm3 = (<Input id={"security-a3"} type={"text"} label={"Answer 3"} style={{width: "calc(100% - 8px)", display: "none"}}/>);
+        ansElm3 = (<Input id={"security-a3"} type={"text"} label={"Answer 3"} style={{width: "calc(100% - 8px)", display: "none"}}/>),
+        nextButton = (<Button type={"link"} href={"/user/register/email"} primary>Next</Button>);
+    onMount(() => {
+        dataStatusCallback(nextButton(), "security-q1", "security-q2", "security-q3",
+                            "security-a1", "security-a2", "security-a3");
+    });
     props.report();
     return <>
         <Title>Sign Up</Title>
@@ -76,7 +82,7 @@ export default function RegisterSecurityQuestions(props){
             <Notice>Security questions are important. They can help you regain access to your account when you get locked out - so don't share them with anyone!</Notice>
             <FlexContainer space={"between"} horozontal no-grow>
                 <Button type={"action"} function={function(){history.back()}}>Go back</Button>
-                <Button type={"link"} href={"/user/register/email"} primary>Next</Button>
+                {nextButton}
             </FlexContainer>
         </FlexContainer>
     </>;
