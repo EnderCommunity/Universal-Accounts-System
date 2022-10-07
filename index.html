@@ -15,7 +15,20 @@
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="#F7F8FA">
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0D0F11">
 
+    <script type="text/javascript">
+        function updateVHUnit() {
+            let vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vhu', `${vh}px`);
+        }
+        window.onresize = updateVHUnit;
+        updateVHUnit();
+    </script>
+
     <style type="text/css">
+         :root {
+            --vh: var(--vhu, 1vh);
+        }
+        
          :root[data-color-scheme=dark] {
             --text-color: #F7F8FA;
             --main-background: #0D0F11;
@@ -51,10 +64,7 @@
             --page-margin: 60px;
             margin: 0px;
             padding: var(--page-margin);
-            min-height: calc(100% - 2 * var(--page-margin));
-            min-height: -moz-available;
-            min-height: -webkit-fill-available;
-            min-height: fill-available;
+            min-height: calc(100 * var(--vh) - 2 * var(--page-margin));
             display: flex;
             flex-direction: column;
             position: relative;

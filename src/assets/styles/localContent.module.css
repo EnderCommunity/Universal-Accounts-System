@@ -54,7 +54,7 @@
         max-height: 0px;
     }
     99% {
-        max-height: calc(100vh - var(--page-margin) - var(--globalbar--height));
+        max-height: calc(100 * var(--vh) - var(--page-margin) - var(--globalbar--height));
     }
     100% {
         max-height: unset;
