@@ -32,6 +32,7 @@ updateColorScheme(userData().visual.preferredColorScheme);
 import GlobalBar from './assets/components/GlobalBar.jsx';
 import GlobalFooter from './assets/components/GlobalFooter.jsx';
 import LocalContent from './assets/components/LocalContent.jsx';
+import Scrollbar from './assets/components/ScrollBar.jsx';
 
 render(() =>{
 
@@ -40,19 +41,20 @@ render(() =>{
 
     let contentLoadData = {GlobalBar: false, LocalContent: false},
         contentLoadReport = (context) => { // context - "GlobalBar", "LocalContent"
-        contentLoadData[context] = true;
-        if(contentLoadData.GlobalBar && contentLoadData.LocalContent){
-            // Must run this when the user's basic info are aquired from the server and fully loaded!
-            // setTimeout(() => setShowContent(true), 1500); // TMP
-            setShowContent(true);
-            document.body.dataset.loaded = true;
-        }
-    };
+            contentLoadData[context] = true;
+            if(contentLoadData.GlobalBar && contentLoadData.LocalContent){
+                // Must run this when the user's basic info are aquired from the server and fully loaded!
+                // setTimeout(() => setShowContent(true), 1500); // TMP
+                setShowContent(true);
+                document.body.dataset.loaded = true;
+            }
+        };
 
     // Return the global page content
     return <Router>
         <GlobalBar userProfile={userData().personal.profilePicture} showContent={showContent()} report={() => { contentLoadReport("GlobalBar"); }}/>
         <LocalContent userData={userData()} isSignedIn={isSignedIn()} showContent={showContent()} report={() => { contentLoadReport("LocalContent"); }}/>
         <GlobalFooter showContent={showContent()}/>
+        <Scrollbar/>
     </Router>;
 }, document.body);

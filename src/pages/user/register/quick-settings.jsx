@@ -9,7 +9,6 @@ import style from './../../../assets/styles/pages/user.quick-settings.module.css
 import { Title } from './../../../assets/components/Title.jsx';
 import { Button, Notice, Mark, FlexContainer, Radio, Divider } from './../../../assets/components/CustomElements.jsx';
 import { InputFieldsContainer } from './../register.jsx';
-import { onMount } from "solid-js";
 
 function QuickOption(props){
     return <Radio {...props}>{props.children}</Radio>
@@ -24,9 +23,6 @@ function QuickSetting(props){
 }
 
 export default function RegisterQuickSettings(props){
-    onMount(() => {
-        //
-    });
     props.report();
     return <>
         <Title>Sign Up</Title>
