@@ -50,8 +50,11 @@
             --globalfooter--height: 38px;
             --page-margin: 60px;
             margin: 0px;
-            padding: var(--page-margin) calc(var(--page-margin));
+            padding: var(--page-margin);
             min-height: calc(100% - 2 * var(--page-margin));
+            min-height: -moz-available;
+            min-height: -webkit-fill-available;
+            min-height: fill-available;
             display: flex;
             flex-direction: column;
             position: relative;
