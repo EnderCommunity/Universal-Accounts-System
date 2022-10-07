@@ -13,13 +13,13 @@ export function InputFieldsContainer(props){
 }
 
 export default function Login(props){
-    let nextButton = (<Button type={"link"} href={"/user/login/password"} primary disabled>Next</Button>);
+    let nextButton;
     onMount(() => {
         let usernameInput = document.getElementById("username"), check = () => {
             if(usernameInput.value.length < 3 || usernameInput.value.length > 32){
-                nextButton().setAttribute("disabled", "");
+                nextButton.setAttribute("disabled", "");
             }else{
-                nextButton().removeAttribute("disabled");
+                nextButton.removeAttribute("disabled");
             }
         };
         check();
@@ -40,7 +40,7 @@ export default function Login(props){
             <Notice>Not using your own device? Use Guest mode or Incognito mode to sign in privately.</Notice>
             <FlexContainer space={"between"} horozontal no-grow>
                 <Button type={"link"} href={"/user/register"}>Create account</Button>
-                {nextButton}
+                <Button ref={nextButton} type={"link"} href={"/user/login/password"} primary>Next</Button>
             </FlexContainer>
         </FlexContainer>
     </>;

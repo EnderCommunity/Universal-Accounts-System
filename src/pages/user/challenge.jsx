@@ -7,7 +7,7 @@
 import style from './../../assets/styles/pages/user.challenge.module.css';
 
 import { Title } from './../../assets/components/Title.jsx';
-import { Mark, Button, FlexContainer, Link } from './../../assets/components/CustomElements.jsx';
+import { Mark, Button, FlexContainer, Link, Divider } from './../../assets/components/CustomElements.jsx';
 
 // Import SVG icons
 import SecurityKeyIcon from './../../assets/icons/security_key.svg';
@@ -64,7 +64,7 @@ export default function Challenge(props){
             <AuthApp name={"[App_Name_10]"}/>*/}
         </FlexContainer>
         <div class={style.suggestion}>
-            <hr class={style.divider}/>
+            <Divider/>
             <text>Can't do any of these? Try to <Link href={"/user/recovery/two-factor"}>recover your account</Link>!</text>
         </div>
     </>;

@@ -34,7 +34,7 @@ export default function RegisterSecurityQuestions(props){
             <Notice>This step is optional! Your 'recovery' email address is going to help you recover your username when you forget it. You can NOT use your email to recover a locked-out account, so be careful!</Notice>
             <FlexContainer space={"between"} horozontal no-grow>
                 <Button type={"action"} function={function(){history.back()}}>Go back</Button>
-                <Button type={"link"} href={"/user/register/email"} primary>{nextText()}</Button>
+                <Button type={"link"} href={"/user/register/quick-settings"} primary>{nextText()}</Button>
             </FlexContainer>
         </FlexContainer>
     </>;

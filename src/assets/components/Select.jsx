@@ -30,7 +30,7 @@ export function Select(props){
         throw new Error("<Select> element must always have a label!");
     }
     return (
-        <div class={basicProps.class} style={basicProps.style}>
+        <div ref={props.ref} class={basicProps.class} style={basicProps.style}>
             <div class={generalStyles.selectDataContainer}>
                 {select}
                 <ArrowDownIcon class={generalStyles.selectFieldArrow}/>

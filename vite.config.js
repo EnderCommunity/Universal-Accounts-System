@@ -35,6 +35,7 @@ export default defineConfig({
         port: 4000,
     },
     build: {
+        minify: true,
         target: 'esnext',
     },
 });

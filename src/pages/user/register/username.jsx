@@ -10,13 +10,13 @@ import { InputFieldsContainer } from './../register.jsx';
 import { onMount } from "solid-js";
 
 export default function RegisterUsername(props){
-    let nextButton = (<Button type={"link"} href={"/user/register/password"} primary>Next</Button>);
+    let nextButton;
     onMount(() => {
         let usernameInput = document.getElementById("username"), check = () => {
             if(usernameInput.value.length < 3 || usernameInput.value.length > 32){
-                nextButton().setAttribute("disabled", "");
+                nextButton.setAttribute("disabled", "");
             }else{
-                nextButton().removeAttribute("disabled");
+                nextButton.removeAttribute("disabled");
             }
         };
         check();
@@ -36,7 +36,7 @@ export default function RegisterUsername(props){
             <Notice>Your username is public, make sure it does not contain any sensitive or personal information!</Notice>
             <FlexContainer space={"between"} horozontal no-grow>
                 <Button type={"action"} function={function(){history.back()}}>Go back</Button>
-                {nextButton}
+                <Button ref={nextButton} type={"link"} href={"/user/register/password"} primary>Next</Button>
             </FlexContainer>
         </FlexContainer>
     </>;

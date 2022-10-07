@@ -10,19 +10,11 @@ import { InputFieldsContainer, dataStatusCallback } from './../register.jsx';
 import { onMount } from "solid-js";
 
 export default function RegisterPersonalInfo(props){
-    let customGenderName =
-        (<Input id={"custom-gender-name"} type={"text"} label={"Gender name"}
-                style={{width: "calc(100% - 8px)", display: "none"}} value={"FILL"}/>),
-        customGenderPronouns =
-            (<Select id={"custom-gender-pronouns"} label={"Prefered pronouns"}
-                    style={{width: "calc(100% - 8px)", display: "none"}} selectedIndex={1}>
-                        <option value={"he"}>he/him</option>
-                        <option value={"she"}>she/her</option>
-                        <option value={"they"}>they/them</option>
-            </Select>),
-        nextButton = (<Button type={"link"} href={"/user/register/security-questions"} primary>Next</Button>);
+    let customGenderName,
+        customGenderPronouns,
+        nextButton;
     onMount(() => {
-        dataStatusCallback(nextButton(), "birthday_month", "birthday_day", "birthday_year",
+        dataStatusCallback(nextButton, "birthday_month", "birthday_day", "birthday_year",
                             "gender", "custom-gender-name", "custom-gender-pronouns");
     });
     props.report();
@@ -59,17 +51,17 @@ export default function RegisterPersonalInfo(props){
                         onChange={function(){
                             let value = document.getElementById("gender").value;
                             if(value != "custom"){
-                                if(customGenderPronouns().style.display != "none"){
-                                    customGenderPronouns().style.display = "none";
-                                    customGenderName().style.display = "none";
+                                if(customGenderPronouns.style.display != "none"){
+                                    customGenderPronouns.style.display = "none";
+                                    customGenderName.style.display = "none";
                                     document.getElementById("custom-gender-pronouns").selectedIndex  = 1;
                                     document.getElementById("custom-gender-name").value = "FILL";
                                 }
                             }else{
                                 document.getElementById("custom-gender-pronouns").selectedIndex  = 0;
                                 document.getElementById("custom-gender-name").value = "";
-                                customGenderPronouns().style.display = null;
-                                customGenderName().style.display = null;
+                                customGenderPronouns.style.display = null;
+                                customGenderName.style.display = null;
                             }
                         }}>
                     <option value={"male"}>Male</option>
@@ -77,13 +69,21 @@ export default function RegisterPersonalInfo(props){
                     <option value={"unknown"}>Prefer not to say</option>
                     <option value={"custom"}>Custom</option>
                 </Select>
-                {customGenderName}
-                {customGenderPronouns}
+                <Input ref={customGenderName} id={"custom-gender-name"} type={"text"}
+                        label={"Gender name"} style={{width: "calc(100% - 8px)", display: "none"}}
+                        value={"FILL"}/>
+                <Select ref={customGenderPronouns} id={"custom-gender-pronouns"}
+                        label={"Prefered pronouns"}
+                        style={{width: "calc(100% - 8px)", display: "none"}} selectedIndex={1}>
+                            <option value={"he"}>he/him</option>
+                            <option value={"she"}>she/her</option>
+                            <option value={"they"}>they/them</option>
+                </Select>
             </InputFieldsContainer>
             <Notice>Make sure to use your real date of birth. You can create a Ciel account as long as you are 13+ years old! (access to external services will be limited depending on your age)</Notice>
             <FlexContainer space={"between"} horozontal no-grow>
                 <Button type={"action"} function={function(){history.back()}}>Go back</Button>
-                {nextButton}
+                <Button ref={nextButton} type={"link"} href={"/user/register/security-questions"} primary>Next</Button>
             </FlexContainer>
         </FlexContainer>
     </>;

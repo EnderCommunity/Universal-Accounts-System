@@ -10,9 +10,9 @@ import { InputFieldsContainer, dataStatusCallback } from './../register.jsx';
 import { onMount } from "solid-js";
 
 export default function RegisterPassword(props){
-    let nextButton = (<Button type={"link"} href={"/user/register/personal"} primary>Next</Button>);
+    let nextButton;
     onMount(() => {
-        dataStatusCallback(nextButton(), "password", "password_confirm");
+        dataStatusCallback(nextButton, "password", "password_confirm");
     });
     props.report();
     return <>
@@ -43,7 +43,7 @@ export default function RegisterPassword(props){
             <Notice>The password must be at least 10 characters long, with a mix of letters and numbers!</Notice>
             <FlexContainer space={"between"} horozontal no-grow>
                 <Button type={"action"} function={function(){history.back()}}>Go back</Button>
-                {nextButton}
+                <Button ref={nextButton} type={"link"} href={"/user/register/personal"} primary>Next</Button>
             </FlexContainer>
         </FlexContainer>
     </>;

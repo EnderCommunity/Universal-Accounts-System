@@ -10,13 +10,13 @@ import { onMount } from 'solid-js';
 import { InputFieldsContainer } from './../login.jsx';
 
 export default function LoginPassword(props){
-    let nextButton = (<Button type={"link"} href={"/user/challenge"} primary>Next</Button>);
+    let nextButton;
     onMount(() => {
         let passwordInput = document.getElementById("password"), check = () => {
             if(passwordInput.value.length < 8 || passwordInput.value.length > 96){
-                nextButton().setAttribute("disabled", "");
+                nextButton.setAttribute("disabled", "");
             }else{
-                nextButton().removeAttribute("disabled");
+                nextButton.removeAttribute("disabled");
             }
         };
         check();
@@ -47,7 +47,7 @@ export default function LoginPassword(props){
             </InputFieldsContainer>
             <FlexContainer space={"between"} horozontal no-grow>
                 <Button type={"link"} href={"/user/recovery/password"}>Forgot password?</Button>
-                {nextButton}
+                <Button ref={nextButton} type={"link"} href={"/user/challenge"} primary>Next</Button>
             </FlexContainer>
         </FlexContainer>
     </>;

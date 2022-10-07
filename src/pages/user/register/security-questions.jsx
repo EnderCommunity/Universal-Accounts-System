@@ -14,20 +14,22 @@ function checkQuestionStatus(number, answerElm){
         answer = document.getElementById("security-a" + number);
     if(question.selectedIndex > 0){
         answer.value = "";
-        if(answerElm().style.display == "none")
-            answerElm().style.display = null;
+        if(answerElm.style.display == "none"){
+            answerElm.style.display = null;
+            answerElm.children[0].children[0].focus();
+        }
     }else{
-        answerElm().style.display = "none";
+        answerElm.style.display = "none";
     }
 }
 
 export default function RegisterSecurityQuestions(props){
-    let ansElm1 = (<Input id={"security-a1"} type={"text"} label={"Answer 1"} style={{width: "calc(100% - 8px)", display: "none"}}/>),
-        ansElm2 = (<Input id={"security-a2"} type={"text"} label={"Answer 2"} style={{width: "calc(100% - 8px)", display: "none"}}/>),
-        ansElm3 = (<Input id={"security-a3"} type={"text"} label={"Answer 3"} style={{width: "calc(100% - 8px)", display: "none"}}/>),
-        nextButton = (<Button type={"link"} href={"/user/register/email"} primary>Next</Button>);
+    let ansElm1,
+        ansElm2,
+        ansElm3,
+        nextButton;
     onMount(() => {
-        dataStatusCallback(nextButton(), "security-q1", "security-q2", "security-q3",
+        dataStatusCallback(nextButton, "security-q1", "security-q2", "security-q3",
                             "security-a1", "security-a2", "security-a3");
     });
     props.report();
@@ -49,7 +51,8 @@ export default function RegisterSecurityQuestions(props){
                     <option value={5}>What street did you live on in third grade?</option>
                     <option value={6}>What was the last name of your third-grade teacher?</option>
                 </Select>
-                {ansElm1}
+                <Input ref={ansElm1} id={"security-a1"} type={"text"} label={"Answer 1"}
+                        style={{width: "calc(100% - 8px)", display: "none"}}/>
                 </InputFieldsContainer>
                 <InputFieldsContainer>
                 <Select id={"security-q2"} label={"Question 2"} style={{width: "calc(100% - 8px)"}}
@@ -63,7 +66,8 @@ export default function RegisterSecurityQuestions(props){
                     <option value={5}>What is the name of the place your wedding reception was held?</option>
                     <option value={6}>What is your maternal grandmother's maiden name?</option>
                 </Select>
-                {ansElm2}
+                <Input ref={ansElm2} id={"security-a2"} type={"text"} label={"Answer 2"}
+                        style={{width: "calc(100% - 8px)", display: "none"}}/>
                 </InputFieldsContainer>
                 <InputFieldsContainer>
                 <Select id={"security-q3"} label={"Question 3"} style={{width: "calc(100% - 8px)"}}
@@ -77,12 +81,13 @@ export default function RegisterSecurityQuestions(props){
                     <option value={5}>What is the name of your favourite teacher?</option>
                     <option value={6}>What was the name of your elementary/primary school?</option>
                 </Select>
-                {ansElm3}
+                <Input ref={ansElm3} id={"security-a3"} type={"text"} label={"Answer 3"}
+                        style={{width: "calc(100% - 8px)", display: "none"}}/>
             </InputFieldsContainer>
             <Notice>Security questions are important. They can help you regain access to your account when you get locked out - so don't share them with anyone!</Notice>
             <FlexContainer space={"between"} horozontal no-grow>
                 <Button type={"action"} function={function(){history.back()}}>Go back</Button>
-                {nextButton}
+                <Button ref={nextButton} type={"link"} href={"/user/register/email"} primary>Next</Button>
             </FlexContainer>
         </FlexContainer>
     </>;

@@ -315,8 +315,15 @@ input[type=number]::-webkit-outer-spin-button {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 24px;
+    margin: 18px;
     max-width: 100%;
+}
+
+@media (pointer:none),
+(pointer:coarse) {
+    .flexContainer {
+        margin: 18px 0px;
+    }
 }
 
 .flexContainer.spaceBetween {
@@ -378,7 +385,8 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .checkBoxContainer .checkBox:focus {
-    outline: 3px solid var(--background-blend);
+    outline: 5px solid var(--background-blend);
+    outline-offset: 0px;
 }
 
 .checkBoxContainer .checkBox:active {
@@ -437,4 +445,75 @@ input[type=number]::-webkit-outer-spin-button {
     cursor: pointer;
     line-height: 1em;
     padding-left: 0.5em;
+}
+
+
+/* <Radio> */
+
+.radioContainer {
+    font-size: inherit;
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: inherit;
+    margin: 10px 6px;
+}
+
+.radioContainer .radio {
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 100%;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--background-bold);
+    position: relative;
+    transition: border 0.1s;
+    background-color: transparent;
+    margin-right: 8px;
+}
+
+.radioContainer .radio:before {
+    content: "";
+    display: block;
+    width: 4px;
+    height: 4px;
+    margin: 6px;
+    border-radius: 100%;
+    background-color: var(--accent-color);
+    opacity: 0;
+}
+
+.radioContainer .radio:focus {
+    outline: 5px solid var(--background-blend);
+    outline-offset: 0px;
+}
+
+.radioContainer .radio:checked {
+    border-color: var(--accent-color);
+}
+
+.radioContainer .radio:checked:before {
+    transition: all 0.12s, opacity 0s linear;
+    width: 8px;
+    height: 8px;
+    margin: 4px;
+    opacity: 1;
+}
+
+.radioContainer .radioLabel {
+    font-size: inherit;
+}
+
+
+/* <Divider> */
+
+.divider {
+    width: 100%;
+    height: 0px;
+    border: none;
+    border-bottom: solid 2px var(--background-bold);
+    margin: 18px 0px;
+    opacity: 0.3;
 }

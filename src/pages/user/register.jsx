@@ -48,9 +48,9 @@ export function dataStatusCallback(buttonElm, ...elmIDs){
 }
 
 export default function Register(props){
-    let nextButton = (<Button type={"link"} href={"/user/register/username"} primary>Next</Button>);
+    let nextButton;
     onMount(() => {
-        dataStatusCallback(nextButton(), "first_name", "last_name");
+        dataStatusCallback(nextButton, "first_name", "last_name");
     });
     props.report();
     return <>
@@ -68,7 +68,7 @@ export default function Register(props){
             <Notice>It's recommended to use a device that you own and use frequently to create your Ciel account!</Notice>
             <FlexContainer space={"between"} horozontal no-grow>
                 <Button type={"link"} href={"/user/login"}>Sign in instead</Button>
-                {nextButton}
+                <Button ref={nextButton} type={"link"} href={"/user/register/username"} primary>Next</Button>
             </FlexContainer>
         </FlexContainer>
     </>;

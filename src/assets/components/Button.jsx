@@ -24,18 +24,18 @@ export function Button(props){
         setContent((props.icon) ? (<div class={generalStyles.iconButtonText}>{props.children}</div>) : props.children);
     });
     if(props.type == "link"){
-        return (<Link href={props.href} class={basicProps.class} id={props.id} style={basicProps.style}>{icon}{content()}</Link>);
+        return (<Link ref={props.ref} href={props.href} class={basicProps.class} id={props.id} style={basicProps.style}>{icon}{content()}</Link>);
     }else if(props.type == "action"){
         if(typeof props.function != "function")
             throw new Error("Invalid <Button> action!");
-        return (<button onClick={props.function} class={basicProps.class} id={props.id} style={basicProps.style}>{icon}{content()}</button>);
+        return (<button ref={props.ref} onClick={props.function} class={basicProps.class} id={props.id} style={basicProps.style}>{icon}{content()}</button>);
     }else if(props.type != undefined){
         throw new Error("Invalid <Button> type!");
     }else{
         // return "action-less" button
         // Replace this with an error later...
         console.warn("It's always better to attach an action to a button!");
-        return (<button class={basicProps.class} id={props.id} style={basicProps.style}>{icon}{content()}</button>);
+        return (<button ref={props.ref} class={basicProps.class} id={props.id} style={basicProps.style}>{icon}{content()}</button>);
     }
 }
 

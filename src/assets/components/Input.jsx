@@ -30,7 +30,7 @@ export function Input(props){
     }else if(props.type == "text" || props.type == "url" || props.type == "tel" ||
         props.type == "password" || props.type == "number"){
         return (
-            <div class={basicProps.class} style={basicProps.style}>
+            <div ref={props.ref} class={basicProps.class} style={basicProps.style}>
                 <div class={generalStyles.inputFieldDataContainer}>
                     {input}
                     <label class={generalStyles.inputFieldLabel} for={props.id}>{props.label}</label>
