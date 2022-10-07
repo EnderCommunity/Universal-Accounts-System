@@ -54,9 +54,17 @@
     color: var(--background-bold);
 }
 
+.button.primarybutton:hover,
+.button.primarybutton:focus,
+.button.lightButton:hover,
+.button.lightButton:focus {
+    box-shadow: -2px 2px 5px var(--accent-color-lighter), 2px 2px 5px var(--accent-color-lighter);
+    transition: border 0s linear;
+}
+
 .button:hover,
 .button:focus {
-    box-shadow: -2px 2px 5px var(--accent-color-lighter), 2px 2px 5px var(--accent-color-lighter);
+    transition: border 0.1s;
     border-color: var(--accent-color);
     outline: none;
 }
@@ -86,16 +94,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
 .button.iconButton .buttonIcon {
     display: inline-block;
     overflow: hidden;
-    margin: -6px;
-    margin-right: 0px;
+    margin-left: 6px;
     height: 28px;
     width: 28px;
     min-width: 28px;
+    max-width: 28px;
     min-height: 28px;
 }
 
@@ -105,7 +114,7 @@
     width: inherit;
     border-style: none;
     padding: 0px;
-    margin: 0px;
+    margin: 0px auto;
 }
 
 .button.iconButton .buttonIcon svg {
