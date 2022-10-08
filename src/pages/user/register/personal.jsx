@@ -5,14 +5,14 @@
  **/
 
 import { Title } from './../../../assets/components/Title.jsx';
-import { Input, Select, Button, Notice, Mark, FlexContainer } from './../../../assets/components/CustomElements.jsx';
-import { InputFieldsContainer, clientDataCheck } from './../register.jsx';
+import { Input, Select, Button, Notice, Mark, FlexContainer, setInputState } from './../../../assets/components/CustomElements.jsx';
+import { InputFieldsContainer, clientDataCheck, nextCheck } from './../register.jsx';
 import { onMount } from "solid-js";
+import { useNavigate } from '@solidjs/router';
 
 export default function RegisterPersonalInfo(props){
-    let customGenderName,
-        customGenderPronouns,
-        nextButton;
+    let navigate = useNavigate(),
+        nextButton, customGenderName, customGenderPronouns;
     onMount(() => {
         clientDataCheck(nextButton, "birthday_month", "birthday_day", "birthday_year",
                             "gender", "custom-gender-name", "custom-gender-pronouns");
@@ -83,7 +83,13 @@ export default function RegisterPersonalInfo(props){
             <Notice>Make sure to use your real date of birth. You can create a Ciel account as long as you are 13+ years old! (access to external services will be limited depending on your age)</Notice>
             <FlexContainer space={"between"} horozontal no-grow>
                 <Button type={"action"} function={function(){history.back()}}>Go back</Button>
-                <Button ref={nextButton} type={"link"} href={"/user/register/security-questions"} primary>Next</Button>
+                <Button ref={nextButton} type={"action"} function={function(){
+                    nextCheck(nextButton, function(setError, isDone){
+                        //
+                    }, function(){
+                        navigate("/user/register/security-questions");
+                    });
+                }} primary>Next</Button>
             </FlexContainer>
         </FlexContainer>
     </>;

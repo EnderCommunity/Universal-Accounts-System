@@ -13,7 +13,7 @@ export default function LoginPassword(props){
     let nextButton;
     onMount(() => {
         let passwordInput = document.getElementById("password"), check = () => {
-            if(passwordInput.value.length < 8 || passwordInput.value.length > 96){
+            if(passwordInput.value.length < 10 || passwordInput.value.length > 128){
                 nextButton.setAttribute("disabled", "");
             }else{
                 nextButton.removeAttribute("disabled");

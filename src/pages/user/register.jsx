@@ -46,6 +46,7 @@ export function clientDataCheck(buttonElm, ...elmIDs){
             throw new Error("Unexpected element!");
         }
     });
+    return updateButton;
 }
 
 let localContent = document.getElementById("local-content");
