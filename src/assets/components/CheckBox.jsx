@@ -5,17 +5,19 @@
  **/
 
 import generalStyles from './../styles/general.module.css';
+
+import { processProps } from './_custom.jsx';
  
 export function CheckBox(props){
-    let style = (props.style != undefined) ? props.style : {},
-        checkbox = (<input type="checkbox" id={props.id} class={generalStyles.checkBox} />);
+    let basicProps = processProps(props, generalStyles.checkBoxContainer);
+    let checkbox;
     if(typeof props.id != "string"){
         throw new Error("<CheckBox> must always have an ID!");
     }else if(typeof props.onInactive != "function" || typeof props.onActive != "function"){
         throw new Error("<CheckBox> must have 'active' and 'inactive' functions!");
     }
-    let rtr = (<div class={generalStyles.checkBoxContainer} style={style}>
-        {checkbox}
+    let rtr = (<div ref={props.ref} class={basicProps.class} style={basicProps.style}>
+        <input ref={checkbox} type="checkbox" id={props.id} class={generalStyles.checkBox} checked={props.checked} />
         <label for={props.id}>{props.label}</label>
     </div>);
     // Check if the checkbox is checked

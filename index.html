@@ -5,7 +5,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <!--<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; child-src 'none';">-->
-    <meta name="theme-color" content="#000000" />
     <!-- NOTE: use this website to generate the favicon once an icon has been selected: https://favicon.io/favicon-converter/ -->
     <link rel="shortcut icon" type="image/ico" href="/images/favicon.ico">
     <title>MyApp</title>
@@ -13,18 +12,33 @@
     <!-- PWA minimal data -->
     <meta name="description" content="MyApp is an app!">
     <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" sizes="180x180">
-    <meta name="theme-color" content="var(--accent-color)">
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#F7F8FA">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0D0F11">
+
+    <script type="text/javascript">
+        function updateVHUnit() {
+            let vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vhu', `${vh}px`);
+        }
+        window.onresize = updateVHUnit;
+        updateVHUnit();
+    </script>
 
     <style type="text/css">
+         :root {
+            --vh: var(--vhu, 1vh);
+        }
+        
          :root[data-color-scheme=dark] {
             --text-color: #F7F8FA;
             --main-background: #0D0F11;
-            --accent-color: #df3e66;
-            --accent-color-active: #a83954;
-            --accent-color-lighter: #5c2938;
-            --accent-color-faint: #2b181e;
+            --accent-color: #ec3f6b;
+            --accent-color-active: #c23b5d;
+            --accent-color-lighter: #5a2e3b;
+            --accent-color-faint: #301c22;
             --background-blend: #202529;
             --background-bold: #96a4af;
+            --error-color: #e9564e;
         }
         
          :root[data-color-scheme=light] {
@@ -36,6 +50,7 @@
             --accent-color-faint: #ffdae4;
             --background-blend: #e8ebf0;
             --background-bold: #6b737a;
+            --error-color: #B3261E;
         }
         
         html {
@@ -50,8 +65,8 @@
             --globalfooter--height: 38px;
             --page-margin: 60px;
             margin: 0px;
-            padding: var(--page-margin) calc(var(--page-margin) * 2);
-            min-height: calc(100% - 2 * var(--page-margin));
+            padding: var(--page-margin);
+            min-height: calc(100 * var(--vh) - 2 * var(--page-margin));
             display: flex;
             flex-direction: column;
             position: relative;
@@ -61,7 +76,7 @@
         @media (pointer:none),
         (pointer:coarse) {
             body {
-                --page-margin: 20px;
+                --page-margin: 24px;
             }
         }
         
@@ -96,7 +111,8 @@
             -moz-osx-font-smoothing: grayscale;
         }
         
-        [unselectable] {
+        [unselectable],
+        [disabled] {
             -webkit-touch-callout: none;
             -webkit-user-select: none;
             -khtml-user-select: none;
@@ -106,15 +122,38 @@
             user-select: none;
         }
         
-        input,
-        textarea,
-        button,
-        select,
-        a {
-            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        [disabled] {
+            opacity: 0.6;
+            pointer-events: none !important;
+        }
+        
+        * {
+            -webkit-tap-highlight-color: transparent;
         }
         
          ::selection {
+            background: var(--accent-color-lighter);
+        }
+        
+         ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+         ::-webkit-scrollbar-track {
+            background: var(--background-blend);
+        }
+        /* Handle */
+        
+         ::-webkit-scrollbar-thumb {
+            background: var(--background-bold);
+        }
+        /* Handle on hover */
+        
+         ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-color);
+        }
+        
+         ::-webkit-scrollbar-thumb:active {
             background: var(--accent-color-lighter);
         }
     </style>

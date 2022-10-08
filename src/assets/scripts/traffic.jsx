@@ -30,7 +30,7 @@ export function landingCheck(signedIn){
             if(!signedIn){
                 navigate("/new", { replace: true });
             }
-        }else if(location.pathname.substring(4) == "/new" || location.pathname.substring(5) == "/user"){
+        }else if(location.pathname.substring(0, 4) == "/new" || location.pathname.substring(0, 5) == "/user"){
             // Do not allow the user to view pages that fall under
             // the "/new" or "/user" directory when signed in!
             if(signedIn){

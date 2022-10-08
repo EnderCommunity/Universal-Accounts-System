@@ -1,10 +1,12 @@
 import { defineConfig } from 'vite';
 import solidPlugin from 'vite-plugin-solid';
-import { VitePWA } from 'vite-plugin-pwa'
+import solidSvg from "vite-plugin-solid-svg";
+import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
     plugins: [
         solidPlugin(),
+        solidSvg(),
         VitePWA({
             registerType: 'autoUpdate',
             devOptions: {
@@ -30,7 +32,7 @@ export default defineConfig({
         })
     ],
     server: {
-        port: 4000,
+        port: 80,
     },
     build: {
         target: 'esnext',

@@ -15,7 +15,8 @@
 }
 
 .globalbar[data-show-content=true] {
-    animation: fadeInMainFull 2s cubic-bezier(0.87, 0.02, 0.01, 1) forwards;
+    /*animation: fadeInMainFull 2s cubic-bezier(0.87, 0.02, 0.01, 1) forwards;*/
+    animation: fadeInMainFull 1.5s cubic-bezier(0.8, 0.05, 0, 1) forwards;
 }
 
 @keyframes fadeInMainFull {
@@ -62,13 +63,13 @@
 
 @keyframes opacityInOut {
     0% {
-        opacity: 0.64;
+        opacity: 0.52;
     }
     50% {
         opacity: 1;
     }
     100% {
-        opacity: 0.64;
+        opacity: 0.52;
     }
 }
 

@@ -61,13 +61,13 @@ function LocalContent(props){
     });
 
     let container = (<div class={styles.container} onEmptied={function(){alert(0);}}>
-        <WebRoutes ping={updateLoadPing} />
+        <WebRoutes ping={updateLoadPing}/>
     </div>
     );
 
     // Check https://github.com/solidjs/solid-router for more info on how the navigation system works
     return (
-        <div class={styles.localcontent} data-show-content={props.showContent}>
+        <div id={"local-content"} class={styles.localcontent} data-show-content={props.showContent} data-processing={false}>
             {/*<Link href={"/"}>/</Link>
             <br/>
             <Link href={"/new"}>/new/</Link>
@@ -76,7 +76,7 @@ function LocalContent(props){
             <br/>
             <Link href={"/user/register"}>/new/register</Link>
             <br/>*/}
-            <div class={styles.loadingContainer} style={{display: (loadPing() < 0) ? null : 'none'}}>
+            <div class={styles.loadingContainer} data-show={(loadPing() < 0)}>
                 <LoadingSpinner/>
             </div>
             {container}

@@ -9,6 +9,7 @@
 
 .button {
     font-size: 16px;
+    line-height: 1.5em;
     padding: 12px 24px;
     margin: 4px;
     border: solid 1px transparent;
@@ -29,17 +30,55 @@
     /* Remove underline from links! */
     text-decoration: none;
     font-weight: 500;
+    text-align: left;
 }
 
-.primarybutton {
+.button.primarybutton {
     background-color: var(--accent-color);
     color: white;
 }
 
+.button.lightButton {
+    background-color: transparent;
+}
+
+.button.primarybutton[disabled],
+.button[disabled] {
+    transition: all 0.0s linear!important;
+    color: var(--background-bold) !important;
+    box-shadow: none !important;
+    border-color: transparent !important;
+    pointer-events: none;
+}
+
+.button.primarybutton[disabled] {
+    background-color: var(--background-blend) !important;
+}
+
+.button[disabled] {
+    background-color: transparent !important;
+}
+
+.button.primarybutton:hover,
+.button.primarybutton:focus,
+.button.lightButton:hover,
+.button.lightButton:focus {
+    box-shadow: -2px 2px 5px var(--accent-color-lighter), 2px 2px 5px var(--accent-color-lighter);
+    transition: border 0s linear;
+}
+
 .button:hover,
 .button:focus {
-    box-shadow: -2px 2px 5px var(--accent-color-lighter), 2px 2px 5px var(--accent-color-lighter);
+    transition: border 0.1s;
     border-color: var(--accent-color);
+    outline: none;
+}
+
+.button.lightButton:hover,
+.button.lightButton:focus {
+    box-shadow: none;
+    border-color: transparent;
+    background-color: var(--accent-color-faint);
     outline: none;
 }
 
@@ -47,24 +86,72 @@
     background-color: var(--accent-color-lighter);
 }
 
-.primarybutton:active {
+.button.primarybutton:active {
     background-color: var(--accent-color-active);
+}
+
+.button.lightButton:active {
+    background-color: var(--accent-color-lighter);
+    box-shadow: -2px 2px 5px var(--accent-color-faint), 2px 2px 5px var(--accent-color-faint);
+}
+
+.button.iconButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.button.iconButton .buttonIcon {
+    display: inline-block;
+    overflow: hidden;
+    margin-left: 6px;
+    height: 28px;
+    width: 28px;
+    min-width: 28px;
+    max-width: 28px;
+    min-height: 28px;
+}
+
+.button.iconButton .buttonIcon img,
+.button.iconButton .buttonIcon svg {
+    height: inherit;
+    width: inherit;
+    border-style: none;
+    padding: 0px;
+    margin: 0px auto;
+}
+
+.button.iconButton .buttonIcon svg {
+    --svg-color: var(--accent-color);
+}
+
+.button.primarybutton .buttonIcon svg {
+    --svg-color: white;
+}
+
+.button.iconButton .iconButtonText {
+    display: inline-block;
+    margin-right: auto;
+    margin-left: 12px;
 }
 
 
 /* Text input fields */
 
-.inputFieldContainer {
+.inputFieldContainer,
+.selectContainer {
     width: fit-content;
     height: fit-content;
     max-width: 100%;
-    margin: 12px 4px;
-    margin-bottom: 4px;
+    margin: 16px 4px;
+    margin-top: 20px;
     padding: 0px;
     position: relative;
 }
 
-.inputFieldContainer .inputFieldLabel {
+.inputFieldContainer .inputFieldLabel,
+.selectContainer .selectLabel {
     color: var(--background-bold);
     position: absolute;
     font-size: 16px;
@@ -97,6 +184,12 @@
     user-select: none;
 }
 
+.inputField::-ms-clear,
+.inputField::-ms-reveal {
+    display: none;
+}
+
+.selectContainer .selectHint,
 .inputFieldContainer .inputFieldHint {
     max-width: 100%;
     height: fit-content;
@@ -107,13 +200,8 @@
     opacity: 0.8;
 }
 
-
-/*.inputFieldContainer .inputFieldHint.hintAction text {
-    font-weight: bold;
-    color: var(--accent-color);
-    cursor: pointer;
-}*/
-
+.selectContainer .selectDataContainer:focus-within .selectLabel,
+.selectField:valid~.selectLabel,
 .inputFieldContainer .inputFieldDataContainer:focus-within .inputFieldLabel,
 .inputField:not(:placeholder-shown):not(:focus)+.inputFieldLabel {
     color: var(--accent-color);
@@ -121,10 +209,12 @@
     background-color: var(--main-background);
 }
 
+.selectField:valid:not(:focus)~.selectLabel,
 .inputField:not(:placeholder-shown):not(:focus)+.inputFieldLabel {
     color: var(--background-bold);
 }
 
+.selectContainer .selectDataContainer .selectField,
 .inputField {
     font-size: 16px;
     padding: 14px 16px;
@@ -136,16 +226,44 @@
     width: calc(100% - 4px - 16px - 16px);
 }
 
-
-/*.inputField::placeholder {
-    color: var(--background-bold);
-    opacity: 1;
+.inputFieldContainer .inputFieldDataContainer,
+.selectContainer .selectDataContainer {
+    position: relative;
 }
 
-.inputField:focus::placeholder {
-    color: var(--accent-color-lighter);
-}*/
+.selectContainer .selectDataContainer .selectField {
+    appearance: none;
+    cursor: pointer;
+    width: 100%;
+}
 
+.selectContainer .selectDataContainer .selectFieldArrow {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    right: 10px;
+    top: calc((100% - 25px) / 2);
+    --svg-color: var(--background-bold);
+    pointer-events: none;
+    background-color: var(--background-blend);
+}
+
+.selectContainer .selectDataContainer:focus-within .selectFieldArrow {
+    --svg-color: var(--accent-color);
+    background-color: var(--main-background);
+}
+
+.selectField:valid+.selectFieldArrow {
+    background-color: var(--main-background);
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+
+.selectContainer .selectDataContainer .selectField:focus,
+.selectContainer .selectDataContainer .selectField:valid,
 .inputField:focus,
 .inputField:not(:placeholder-shown) {
     border: solid 0px transparent;
@@ -155,8 +273,45 @@
     outline: none;
 }
 
+.selectContainer .selectDataContainer .selectField:valid:not(:focus),
 .inputField:not(:placeholder-shown):not(:focus) {
     border-color: var(--background-bold);
+}
+
+.inputFieldContainer .inputFieldDataContainer .inputErrorIcon {
+    width: 22px;
+    height: 22px;
+    --svg-color: var(--error-color);
+    position: absolute;
+    right: 16px;
+    top: calc((53px - 22px) / 2);
+    display: none;
+}
+
+.inputFieldContainer.invalidData .inputFieldDataContainer .inputErrorIcon {
+    display: block;
+}
+
+.invalidData .inputFieldDataContainer:not(:focus-within) .inputField {
+    border-bottom: solid 2px var(--error-color);
+}
+
+.invalidData .inputFieldLabel {
+    color: var(--error-color);
+}
+
+.invalidData .inputField:not(:placeholder-shown):not(:focus) {
+    border-color: var(--error-color);
+}
+
+.invalidData .inputField:not(:placeholder-shown):not(:focus)+.inputFieldLabel {
+    color: var(--error-color);
+}
+
+.inputFieldContainer.invalidData .inputFieldHint {
+    color: var(--error-color);
+    font-weight: 600;
+    opacity: 1;
 }
 
 
@@ -169,6 +324,12 @@
     font-size: 16px;
     padding: 4px;
     opacity: 0.5;
+}
+
+.notice.smallerNotice {
+    font-size: 14px;
+    padding: 8px;
+    opacity: 0.8;
 }
 
 
@@ -188,8 +349,15 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 24px;
+    margin: 18px;
     max-width: 100%;
+}
+
+@media (pointer:none),
+(pointer:coarse) {
+    .flexContainer {
+        margin: 18px 0px;
+    }
 }
 
 .flexContainer.spaceBetween {
@@ -217,7 +385,9 @@
 .link {
     font-weight: bold;
     color: var(--accent-color);
-    text-decoration: none;
+    text-decoration: underline;
+    text-decoration-thickness: 0.1em;
+    text-decoration-style: dashed;
 }
 
 
@@ -249,20 +419,23 @@
 }
 
 .checkBoxContainer .checkBox:focus {
-    outline: none;
+    outline: 5px solid var(--background-blend);
+    outline-offset: 0px;
 }
 
 .checkBoxContainer .checkBox:active {
+    transition: border 0.2s;
     border-color: var(--accent-color);
 }
 
 .checkBoxContainer .checkBox:checked {
-    transition: background-color 0.2s;
+    transition: background-color 0.2s, border 0.26s;
     background-color: var(--accent-color);
     border-color: var(--accent-color);
 }
 
-.checkBoxContainer .checkBox::before {
+
+/*.checkBoxContainer .checkBox::before {
     content: "";
     display: block;
     width: 11px;
@@ -278,6 +451,25 @@
     transition: background-color 0.1s, opacity 0.05s;
     opacity: 1;
     background-color: white;
+}*/
+
+.checkBoxContainer .checkBox::before {
+    content: "";
+    display: block;
+    transform: rotate(45deg);
+    height: 8px;
+    width: 4px;
+    margin: 1px 4px;
+    border-bottom: 3px solid var(--accent-color);
+    border-right: 3px solid var(--accent-color);
+    opacity: 0;
+}
+
+.checkBoxContainer .checkBox:checked::before {
+    transition: border 0.16s;
+    opacity: 1;
+    border-bottom: 3px solid white;
+    border-right: 3px solid white;
 }
 
 .checkBoxContainer label {
@@ -287,4 +479,75 @@
     cursor: pointer;
     line-height: 1em;
     padding-left: 0.5em;
+}
+
+
+/* <Radio> */
+
+.radioContainer {
+    font-size: inherit;
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: inherit;
+    margin: 10px 6px;
+}
+
+.radioContainer .radio {
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 100%;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--background-bold);
+    position: relative;
+    transition: border 0.1s;
+    background-color: transparent;
+    margin-right: 8px;
+}
+
+.radioContainer .radio:before {
+    content: "";
+    display: block;
+    width: 4px;
+    height: 4px;
+    margin: 6px;
+    border-radius: 100%;
+    background-color: var(--accent-color);
+    opacity: 0;
+}
+
+.radioContainer .radio:focus {
+    outline: 5px solid var(--background-blend);
+    outline-offset: 0px;
+}
+
+.radioContainer .radio:checked {
+    border-color: var(--accent-color);
+}
+
+.radioContainer .radio:checked:before {
+    transition: all 0.12s, opacity 0s linear;
+    width: 8px;
+    height: 8px;
+    margin: 4px;
+    opacity: 1;
+}
+
+.radioContainer .radioLabel {
+    font-size: inherit;
+}
+
+
+/* <Divider> */
+
+.divider {
+    width: 100%;
+    height: 0px;
+    border: none;
+    border-bottom: solid 2px var(--background-bold);
+    margin: 18px 0px;
+    opacity: 0.3;
 }
