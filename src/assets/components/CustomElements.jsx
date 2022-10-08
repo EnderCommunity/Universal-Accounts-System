@@ -8,7 +8,7 @@ import generalStyles from './../styles/general.module.css';
 
 import { Link } from './Link.jsx';
 import { Button } from './Button.jsx';
-import { Input } from './Input.jsx';
+import { Input, setInputState } from './Input.jsx';
 import { Select } from './Select.jsx';
 import { Notice } from './Notice.jsx';
 import { Mark } from './Mark.jsx';
@@ -23,7 +23,10 @@ export function Divider(){
 export {
     Link,
     Button,
+
     Input,
+    setInputState,
+
     Select,
     Notice,
     Mark,

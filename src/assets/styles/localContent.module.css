@@ -49,6 +49,21 @@
     opacity: 1;
 }
 
+.localcontent[data-processing=true] .container {
+    transition: opacity 0.08s ease-in-out, filter 0.08s ease-in-out;
+    transition-delay: 0s;
+    opacity: 0.3;
+    filter: grayscale(60%);
+    pointer-events: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
 @keyframes showContent {
     0% {
         max-height: 0px;
@@ -75,9 +90,40 @@
     display: none;
 }
 
-.loadingContainer {
+.localcontent .loadingContainer[data-show=false],
+.localcontent[data-processing=false] .loadingContainer {
+    display: none;
+}
+
+.localcontent .loadingContainer[data-show=true],
+.localcontent[data-processing=true] .loadingContainer {
+    display: flex;
+}
+
+.localcontent .loadingContainer {
     justify-content: center;
     align-items: center;
+    height: 100%;
+    position: absolute;
+    pointer-events: none;
+    z-index: 2;
+    animation-name: loadingIn;
+    opacity: 0;
+    animation-duration: 0.1s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+    animation-delay: 0.1s;
+}
+
+@keyframes loadingIn {
+    from {
+        opacity: 0;
+        transform: scale(0.6);
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
 body[data-loaded=true] {

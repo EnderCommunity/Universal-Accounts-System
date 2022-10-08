@@ -6,13 +6,13 @@
 
 import { Title } from './../../../assets/components/Title.jsx';
 import { Input, Button, Notice, Mark, FlexContainer, CheckBox, Link } from './../../../assets/components/CustomElements.jsx';
-import { InputFieldsContainer, dataStatusCallback } from './../register.jsx';
+import { InputFieldsContainer, clientDataCheck } from './../register.jsx';
 import { onMount } from "solid-js";
 
 export default function RegisterPassword(props){
     let nextButton;
     onMount(() => {
-        dataStatusCallback(nextButton, "password", "password_confirm");
+        clientDataCheck(nextButton, "password", "password_confirm");
     });
     props.report();
     return <>

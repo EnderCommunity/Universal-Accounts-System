@@ -6,7 +6,7 @@
 
 import { Title } from './../../../assets/components/Title.jsx';
 import { Input, Select, Button, Notice, Mark, FlexContainer } from './../../../assets/components/CustomElements.jsx';
-import { InputFieldsContainer, dataStatusCallback } from './../register.jsx';
+import { InputFieldsContainer, clientDataCheck } from './../register.jsx';
 import { onMount } from "solid-js";
 
 function checkQuestionStatus(number, answerElm){
@@ -29,7 +29,7 @@ export default function RegisterSecurityQuestions(props){
         ansElm3,
         nextButton;
     onMount(() => {
-        dataStatusCallback(nextButton, "security-q1", "security-q2", "security-q3",
+        clientDataCheck(nextButton, "security-q1", "security-q2", "security-q3",
                             "security-a1", "security-a2", "security-a3");
     });
     props.report();

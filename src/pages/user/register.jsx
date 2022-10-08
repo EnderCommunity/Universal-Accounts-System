@@ -5,14 +5,15 @@
  **/
 
 import { Title } from './../../assets/components/Title.jsx';
-import { Input, Button, Notice, Mark, FlexContainer } from './../../assets/components/CustomElements.jsx';
+import { Input, setInputState, Button, Notice, Mark, FlexContainer } from './../../assets/components/CustomElements.jsx';
 import { onMount } from "solid-js";
+import { useNavigate } from '@solidjs/router';
 
 export function InputFieldsContainer(props){
     return (<div style={{width: "100%", position: "relative", overflow: "hidden"}}>{props.children}</div>);
 }
 
-export function dataStatusCallback(buttonElm, ...elmIDs){
+export function clientDataCheck(buttonElm, ...elmIDs){
     let inputElms = [],
         selectElms = [];
     buttonElm.setAttribute("disabled", "");
@@ -47,10 +48,35 @@ export function dataStatusCallback(buttonElm, ...elmIDs){
     });
 }
 
+let localContent = document.getElementById("local-content");
+
+export function nextCheck(button, callback, action){
+    // Disable the button to prevent duplicate requests
+    button.setAttribute("disabled", "");
+    localContent.dataset.processing = true;
+
+    let error = false, calledDone = false, done = function(){
+        if(!calledDone){
+            calledDone = true;
+            button.removeAttribute("disabled");
+            localContent.dataset.processing = false;
+            if(!error){
+                action();
+            }
+        }
+    };
+
+    callback(function(){
+        error = true;
+        done();
+    }, done);
+}
+
 export default function Register(props){
-    let nextButton;
+    let navigate = useNavigate(),
+        nextButton, firstName, lastName;
     onMount(() => {
-        dataStatusCallback(nextButton, "first_name", "last_name");
+        clientDataCheck(nextButton, "first_name", "last_name");
     });
     props.report();
     return <>
@@ -60,15 +86,32 @@ export default function Register(props){
         <h3>Enter your <Mark>first name</Mark> and <Mark>last name</Mark>!</h3>
         <FlexContainer space={"around"} style={{width: "400px"}}>
             <InputFieldsContainer>
-                <Input id={"first_name"} type={"text"} label={"First name"} autocomplete={"given-name"}
+                <Input ref={firstName} id={"first_name"} type={"text"} label={"First name"} autocomplete={"given-name"}
                         style={{width: "calc(100% - 8px)"}}/>
-                <Input id={"last_name"} type={"text"} label={"Last name"} autocomplete={"family-name"}
+                <Input ref={lastName} id={"last_name"} type={"text"} label={"Last name"} autocomplete={"family-name"}
                         style={{width: "calc(100% - 8px)"}}/>
             </InputFieldsContainer>
             <Notice>It's recommended to use a device that you own and use frequently to create your Ciel account!</Notice>
             <FlexContainer space={"between"} horozontal no-grow>
                 <Button type={"link"} href={"/user/login"}>Sign in instead</Button>
-                <Button ref={nextButton} type={"link"} href={"/user/register/username"} primary>Next</Button>
+                <Button ref={nextButton} type={"action"} function={function(){
+                        nextCheck(nextButton, function(setError, isDone){
+                            let firstNameInput = firstName.children[0].children[0],
+                                lastNameInput = lastName.children[0].children[0];
+                            [
+                                [firstNameInput, firstName],
+                                [lastNameInput, lastName]
+                            ].forEach(function(elms){
+                                if(!/^[a-zA-Z]+$/.test(elms[0].value)){
+                                    setInputState(elms[1], false, "Can only contain letters!");
+                                    setError();
+                                }
+                            });
+                            isDone();
+                        }, function(){
+                            navigate("/user/register/username");
+                        });
+                    }} primary>Next</Button>
             </FlexContainer>
         </FlexContainer>
     </>;

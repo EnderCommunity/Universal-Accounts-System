@@ -42,16 +42,21 @@
     background-color: transparent;
 }
 
+.button.primarybutton[disabled],
+.button[disabled] {
+    transition: all 0.0s linear!important;
+    color: var(--background-bold) !important;
+    box-shadow: none !important;
+    border-color: transparent !important;
+    pointer-events: none;
+}
+
 .button.primarybutton[disabled] {
-    transition: background-color 0.08s, color 0.08s;
-    background-color: var(--background-blend);
-    color: var(--background-bold);
+    background-color: var(--background-blend) !important;
 }
 
 .button[disabled] {
-    transition: background-color 0.08s, color 0.08s;
-    background-color: transparent;
-    color: var(--background-bold);
+    background-color: transparent !important;
 }
 
 .button.primarybutton:hover,
@@ -195,13 +200,6 @@
     opacity: 0.8;
 }
 
-
-/*.inputFieldContainer .inputFieldHint.hintAction text {
-    font-weight: bold;
-    color: var(--accent-color);
-    cursor: pointer;
-}*/
-
 .selectContainer .selectDataContainer:focus-within .selectLabel,
 .selectField:valid~.selectLabel,
 .inputFieldContainer .inputFieldDataContainer:focus-within .inputFieldLabel,
@@ -228,6 +226,7 @@
     width: calc(100% - 4px - 16px - 16px);
 }
 
+.inputFieldContainer .inputFieldDataContainer,
 .selectContainer .selectDataContainer {
     position: relative;
 }
@@ -263,16 +262,6 @@ input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
 }
 
-
-/*.inputField::placeholder {
-    color: var(--background-bold);
-    opacity: 1;
-}
-
-.inputField:focus::placeholder {
-    color: var(--accent-color-lighter);
-}*/
-
 .selectContainer .selectDataContainer .selectField:focus,
 .selectContainer .selectDataContainer .selectField:valid,
 .inputField:focus,
@@ -287,6 +276,42 @@ input[type=number]::-webkit-outer-spin-button {
 .selectContainer .selectDataContainer .selectField:valid:not(:focus),
 .inputField:not(:placeholder-shown):not(:focus) {
     border-color: var(--background-bold);
+}
+
+.inputFieldContainer .inputFieldDataContainer .inputErrorIcon {
+    width: 22px;
+    height: 22px;
+    --svg-color: var(--error-color);
+    position: absolute;
+    right: 16px;
+    top: calc((53px - 22px) / 2);
+    display: none;
+}
+
+.inputFieldContainer.invalidData .inputFieldDataContainer .inputErrorIcon {
+    display: block;
+}
+
+.invalidData .inputFieldDataContainer:not(:focus-within) .inputField {
+    border-bottom: solid 2px var(--error-color);
+}
+
+.invalidData .inputFieldLabel {
+    color: var(--error-color);
+}
+
+.invalidData .inputField:not(:placeholder-shown):not(:focus) {
+    border-color: var(--error-color);
+}
+
+.invalidData .inputField:not(:placeholder-shown):not(:focus)+.inputFieldLabel {
+    color: var(--error-color);
+}
+
+.inputFieldContainer.invalidData .inputFieldHint {
+    color: var(--error-color);
+    font-weight: 600;
+    opacity: 1;
 }
 
 

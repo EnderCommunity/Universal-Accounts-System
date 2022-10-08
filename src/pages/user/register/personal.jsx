@@ -6,7 +6,7 @@
 
 import { Title } from './../../../assets/components/Title.jsx';
 import { Input, Select, Button, Notice, Mark, FlexContainer } from './../../../assets/components/CustomElements.jsx';
-import { InputFieldsContainer, dataStatusCallback } from './../register.jsx';
+import { InputFieldsContainer, clientDataCheck } from './../register.jsx';
 import { onMount } from "solid-js";
 
 export default function RegisterPersonalInfo(props){
@@ -14,7 +14,7 @@ export default function RegisterPersonalInfo(props){
         customGenderPronouns,
         nextButton;
     onMount(() => {
-        dataStatusCallback(nextButton, "birthday_month", "birthday_day", "birthday_year",
+        clientDataCheck(nextButton, "birthday_month", "birthday_day", "birthday_year",
                             "gender", "custom-gender-name", "custom-gender-pronouns");
     });
     props.report();

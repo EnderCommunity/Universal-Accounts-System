@@ -32,13 +32,9 @@ export default defineConfig({
         })
     ],
     server: {
-        port: 4000,
-    },
-    dev: {
-        hot: true
+        port: 80,
     },
     build: {
-        minify: true,
         target: 'esnext',
     },
 });
