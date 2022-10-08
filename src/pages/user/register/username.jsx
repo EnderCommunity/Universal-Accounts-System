@@ -40,14 +40,15 @@ export default function RegisterUsername(props){
                 <Button type={"action"} function={function(){history.back()}}>Go back</Button>
                 <Button ref={nextButton} type={"action"} function={function(){
                     nextCheck(nextButton, function(setError, isDone){
-                        let usernameInput = username.children[0].children[0];
-                        if(!/^[A-Za-z0-9_]*$/.test(usernameInput.value)){
+                        let usernameInput = username.children[0].children[0],
+                            userValue = usernameInput.value.toLowerCase();
+                        if(!/^[A-Za-z0-9_]*$/.test(userValue)){
                             setInputState(username, false, "Can only contain letters, numbers, and underscores!");
                             setError();
-                        }else if(!/[a-zA-Z]/.test(usernameInput.value)){
+                        }else if(!/[a-zA-Z]/.test(userValue)){
                             setInputState(username, false, "Must at least contain one letter!");
                             setError();
-                        }else if(usernameInput.value.length < 3 || usernameInput.value.length > 20){
+                        }else if(userValue.length < 3 || userValue.length > 20){
                             setInputState(username, false, "Must be at least 3 characters long, and cannot exceed 20 characters!");
                             setError();
                         }else{
@@ -58,7 +59,7 @@ export default function RegisterUsername(props){
                             request.onloadend = function(){
                                 if(request.status === 200){
                                     let reservedUsernames = request.responseText;
-                                    if(reservedUsernames.includes(usernameInput.value)){
+                                    if(reservedUsernames.includes(userValue)){
                                         setInputState(username, false, "Username is reserved by the system!");
                                         setError();
                                     }
