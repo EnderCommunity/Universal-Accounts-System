@@ -18,6 +18,7 @@ export default function RegisterPassword(props){
         emptyPassword = () => {
             password.children[0].children[0].value = "";
             passwordConfirm.children[0].children[0].value = "";
+            usernameHiddenInput.value = "";
         };
     onMount(() => {
         updateButton = clientDataCheck(nextButton, "password", "password_confirm");
