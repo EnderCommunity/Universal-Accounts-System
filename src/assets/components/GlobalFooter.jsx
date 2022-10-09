@@ -12,7 +12,7 @@ function FooterLink(props){
 
 function GlobalFooter(props){
     return (
-        <div class={styles.globalfooter} data-show-content={props.showContent}>
+        <div id="global-footer" class={styles.globalfooter} data-show-content={props.showContent}>
             {/* Note to myself: You could use https://www.privacypolicies.com/ as a starting point */}
             <FooterLink href={"/legal/"}>Terms and Conditions</FooterLink> | 
             <FooterLink href={"/legal/"}>Privacy Policy</FooterLink> | 

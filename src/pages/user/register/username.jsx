@@ -6,9 +6,10 @@
 
 import { Title } from './../../../assets/components/Title.jsx';
 import { Input, Button, Notice, Mark, FlexContainer, setInputState } from './../../../assets/components/CustomElements.jsx';
-import { InputFieldsContainer, nextCheck } from './../register.jsx';
+import { InputFieldsContainer, nextCheck, redoRegister } from './../register.jsx';
 import { onMount } from "solid-js";
 import { useNavigate } from '@solidjs/router';
+import { registerData, checkDataByOrder } from './../../../assets/scripts/pages/registerData.jsx';
 
 export default function RegisterUsername(props){
     let navigate = useNavigate(),
@@ -71,7 +72,14 @@ export default function RegisterUsername(props){
                             };
                         }
                     }, function(){
-                        navigate("/user/register/password");
+                        registerData.username = username.children[0].children[0].value;
+                        checkDataByOrder(2, function(error){
+                            if(error){
+                                redoRegister(navigate);
+                            }else{
+                                navigate("/user/register/password");
+                            }
+                        });
                     });
                 }} primary>Next</Button>
             </FlexContainer>

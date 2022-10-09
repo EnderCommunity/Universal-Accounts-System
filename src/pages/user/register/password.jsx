@@ -6,9 +6,10 @@
 
 import { Title } from './../../../assets/components/Title.jsx';
 import { Input, Button, Notice, Mark, FlexContainer, CheckBox, setInputState } from './../../../assets/components/CustomElements.jsx';
-import { InputFieldsContainer, clientDataCheck, nextCheck } from './../register.jsx';
+import { InputFieldsContainer, clientDataCheck, nextCheck, redoRegister } from './../register.jsx';
 import { onMount } from "solid-js";
 import { useNavigate } from '@solidjs/router';
+import { registerData, checkDataByOrder, hash, loadAES } from './../../../assets/scripts/pages/registerData.jsx';
 
 export default function RegisterPassword(props){
     let navigate = useNavigate(),
@@ -88,7 +89,16 @@ export default function RegisterPassword(props){
 
                         isDone();
                     }, function(){
-                        navigate("/user/register/personal");
+                        loadAES(function(){
+                            registerData.passwordHash = hash(password.children[0].children[0].value);
+                            checkDataByOrder(3, function(error){
+                                if(error){
+                                    redoRegister(navigate);
+                                }else{
+                                    navigate("/user/register/personal");
+                                }
+                            });
+                        });
                     });
                 }} primary>Next</Button>
             </FlexContainer>

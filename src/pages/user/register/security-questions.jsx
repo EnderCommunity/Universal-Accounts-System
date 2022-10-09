@@ -5,9 +5,11 @@
  **/
 
 import { Title } from './../../../assets/components/Title.jsx';
-import { Input, Select, Button, Notice, Mark, FlexContainer } from './../../../assets/components/CustomElements.jsx';
-import { InputFieldsContainer, clientDataCheck } from './../register.jsx';
+import { Input, Select, Button, Notice, Mark, FlexContainer, setInputState } from './../../../assets/components/CustomElements.jsx';
+import { InputFieldsContainer, clientDataCheck, nextCheck, redoRegister } from './../register.jsx';
 import { onMount } from "solid-js";
+import { useNavigate } from '@solidjs/router';
+import { registerData, checkDataByOrder } from './../../../assets/scripts/pages/registerData.jsx';
 
 function checkQuestionStatus(number, answerElm){
     let question = document.getElementById("security-q" + number),
@@ -24,10 +26,8 @@ function checkQuestionStatus(number, answerElm){
 }
 
 export default function RegisterSecurityQuestions(props){
-    let ansElm1,
-        ansElm2,
-        ansElm3,
-        nextButton;
+    let navigate = useNavigate(),
+        nextButton, qusElm1, qusElm2, qusElm3, ansElm1, ansElm2, ansElm3;
     onMount(() => {
         clientDataCheck(nextButton, "security-q1", "security-q2", "security-q3",
                             "security-a1", "security-a2", "security-a3");
@@ -40,7 +40,7 @@ export default function RegisterSecurityQuestions(props){
         <h3>Choose your <Mark>security questions</Mark> and answer them!</h3>
         <FlexContainer space={"around"} style={{width: "400px"}}>
             <InputFieldsContainer>
-                <Select id={"security-q1"} label={"Question 1"} style={{width: "calc(100% - 8px)"}}
+                <Select ref={qusElm1} id={"security-q1"} label={"Question 1"} style={{width: "calc(100% - 8px)"}}
                         onChange={function(){
                             checkQuestionStatus(1, ansElm1);
                         }}>
@@ -55,7 +55,7 @@ export default function RegisterSecurityQuestions(props){
                         style={{width: "calc(100% - 8px)", display: "none"}}/>
                 </InputFieldsContainer>
                 <InputFieldsContainer>
-                <Select id={"security-q2"} label={"Question 2"} style={{width: "calc(100% - 8px)"}}
+                <Select ref={qusElm2} id={"security-q2"} label={"Question 2"} style={{width: "calc(100% - 8px)"}}
                         onChange={function(){
                             checkQuestionStatus(2, ansElm2);
                         }}>
@@ -70,7 +70,7 @@ export default function RegisterSecurityQuestions(props){
                         style={{width: "calc(100% - 8px)", display: "none"}}/>
                 </InputFieldsContainer>
                 <InputFieldsContainer>
-                <Select id={"security-q3"} label={"Question 3"} style={{width: "calc(100% - 8px)"}}
+                <Select ref={qusElm3} id={"security-q3"} label={"Question 3"} style={{width: "calc(100% - 8px)"}}
                         onChange={function(){
                             checkQuestionStatus(3, ansElm3);
                         }}>
@@ -87,7 +87,42 @@ export default function RegisterSecurityQuestions(props){
             <Notice>Security questions are important. They can help you regain access to your account when you get locked out - so don't share them with anyone!</Notice>
             <FlexContainer space={"between"} horozontal no-grow>
                 <Button type={"action"} function={function(){history.back()}}>Go back</Button>
-                <Button ref={nextButton} type={"link"} href={"/user/register/email"} primary>Next</Button>
+                <Button ref={nextButton} type={"action"} function={function(){
+                    nextCheck(nextButton, function(setError, isDone){
+                        [
+                            ansElm1,
+                            ansElm2,
+                            ansElm3
+                        ].forEach(function(elm){
+                            let input = elm.children[0].children[0];
+                            if(input.value[0] == " " || input.value[input.value.length - 1] == " "){
+                                setInputState(elm, false, "Can't start or end with whitespace!");
+                                setError();
+                            }else if(input.value.indexOf("  ") != -1){
+                                setInputState(elm, false, "Can't contain consecutive whitespaces!");
+                                setError();
+                            }else if(input.value.length < 5){
+                                setInputState(elm, false, "Too short!");
+                                setError();
+                            }
+                        });
+                        isDone();
+                    }, function(){
+                        registerData.securityQuestions.q1 = Number(qusElm1.children[0].children[0].value);
+                        registerData.securityQuestions.q2 = Number(qusElm2.children[0].children[0].value);
+                        registerData.securityQuestions.q3 = Number(qusElm3.children[0].children[0].value);
+                        registerData.securityQuestions.a1 = ansElm1.children[0].children[0].value;
+                        registerData.securityQuestions.a2 = ansElm2.children[0].children[0].value;
+                        registerData.securityQuestions.a3 = ansElm3.children[0].children[0].value;
+                        checkDataByOrder(5, function(error){
+                            if(error){
+                                redoRegister(navigate);
+                            }else{
+                                navigate("/user/register/quick-settings");
+                            }
+                        });
+                    });
+                }} primary>Next</Button>
             </FlexContainer>
         </FlexContainer>
     </>;

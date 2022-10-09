@@ -286,10 +286,15 @@ input[type=number]::-webkit-outer-spin-button {
     right: 16px;
     top: calc((53px - 22px) / 2);
     display: none;
+    pointer-events: none;
 }
 
 .inputFieldContainer.invalidData .inputFieldDataContainer .inputErrorIcon {
     display: block;
+}
+
+.inputFieldContainer.invalidData .inputFieldDataContainer:focus-within .inputErrorIcon {
+    display: none;
 }
 
 .invalidData .inputFieldDataContainer:not(:focus-within) .inputField {
@@ -550,4 +555,97 @@ input[type=number]::-webkit-outer-spin-button {
     border-bottom: solid 2px var(--background-bold);
     margin: 18px 0px;
     opacity: 0.3;
+}
+
+
+/* <Dialog> */
+
+.dialogContainer {
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--dialog-container-background);
+    animation-name: fadeInDialog;
+    animation-timing-function: ease-in;
+    animation-duration: 0.1s;
+}
+
+@keyframes fadeInDialog {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.dialogContainer .dialogBox {
+    width: 360px;
+    max-width: calc(100% - 2 * var(--page-margin) - 3 * 24px);
+    max-height: 80%;
+    min-height: 50px;
+    height: fit-content;
+    background-color: var(--dialog-background);
+    box-shadow: 0px 2px 4px var(--dialog-shadow);
+    border-radius: 18px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    transform: scale(0.98);
+    animation-name: fadeInDialogBox;
+    animation-timing-function: ease-in;
+    animation-delay: 0.02s;
+    animation-duration: 0.08s;
+    animation-fill-mode: forwards;
+    overflow: hidden;
+}
+
+@keyframes fadeInDialogBox {
+    from {
+        transform: scale(0.98);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+.dialogContainer .dialogBox .dialogText {
+    flex-grow: 1;
+    text-align: left;
+    opacity: 0.9;
+}
+
+.dialogContainer .dialogBox .dialogText .dialogTitle {
+    display: block;
+    font-size: 18px;
+    font-weight: 500;
+    margin: 12px 0px;
+}
+
+.dialogContainer .dialogBox .dialogText .dialogDescription {
+    display: block;
+    font-size: 15px;
+    font-weight: 200;
+    margin: 8px 0px;
+}
+
+.dialogContainer .dialogBox .dialogContent {
+    margin-top: 12px;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: right;
+    align-items: center;
+    height: fit-content;
+}
+
+.dialogContainer .dialogBox .dialogContent .actionButton {
+    font-size: 14px;
+    font-weight: 600;
+    padding: 4px 12px
 }

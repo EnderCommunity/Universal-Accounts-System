@@ -5,9 +5,10 @@
  **/
 
 import { Title } from './../../assets/components/Title.jsx';
-import { Input, setInputState, Button, Notice, Mark, FlexContainer } from './../../assets/components/CustomElements.jsx';
+import { Input, setInputState, Button, Notice, Mark, FlexContainer, showDialog } from './../../assets/components/CustomElements.jsx';
 import { onMount } from "solid-js";
 import { useNavigate } from '@solidjs/router';
+import { registerData, resetRegisterData } from './../../assets/scripts/pages/registerData.jsx';
 
 export function InputFieldsContainer(props){
     return (<div style={{width: "100%", position: "relative", overflow: "hidden"}}>{props.children}</div>);
@@ -56,21 +57,31 @@ export function nextCheck(button, callback, action){
     button.setAttribute("disabled", "");
     localContent.dataset.processing = true;
 
-    let error = false, calledDone = false, done = function(){
+    let error = [false], calledDone = false, done = function(){
         if(!calledDone){
             calledDone = true;
             button.removeAttribute("disabled");
             localContent.dataset.processing = false;
-            if(!error){
+            if(!error[0]){
                 action();
             }
         }
     };
 
     callback(function(){
-        error = true;
+        error[0] = true;
         done();
-    }, done);
+    }, done, error);
+}
+
+export function redoRegister(navigate){
+    showDialog("Something went wrong!", "It looks like some of your registration data is missing!", [
+        ["Refill info", function(dialog, remove){
+            resetRegisterData();
+            navigate("/user/register");
+            remove();
+        }]
+    ]);
 }
 
 export default function Register(props){
@@ -110,6 +121,8 @@ export default function Register(props){
                             });
                             isDone();
                         }, function(){
+                            registerData.name.first = firstName.children[0].children[0].value;
+                            registerData.name.last = lastName.children[0].children[0].value;
                             navigate("/user/register/username");
                         });
                     }} primary>Next</Button>

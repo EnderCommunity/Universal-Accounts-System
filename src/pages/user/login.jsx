@@ -5,7 +5,7 @@
  **/
 
 import { Title } from './../../assets/components/Title.jsx';
-import { Input, Button, Notice, Mark, FlexContainer, Link } from '../../assets/components/CustomElements.jsx';
+import { Input, Button, Notice, Mark, FlexContainer } from '../../assets/components/CustomElements.jsx';
 import { onMount } from 'solid-js';
 
 export function InputFieldsContainer(props){
@@ -16,7 +16,7 @@ export default function Login(props){
     let nextButton;
     onMount(() => {
         let usernameInput = document.getElementById("username"), check = () => {
-            if(usernameInput.value.length < 3 || usernameInput.value.length > 32){
+            if(usernameInput.value.length < 3 || usernameInput.value.length > 20){
                 nextButton.setAttribute("disabled", "");
             }else{
                 nextButton.removeAttribute("disabled");
@@ -34,8 +34,7 @@ export default function Login(props){
         <FlexContainer space={"around"} style={{width: "400px"}}>
             <InputFieldsContainer>
                 <Input id={"username"} type={"text"} label={"Username"} autocomplete={"username"}
-                        hint={<Link href={"/user/recovery/username"}>Forgot username?</Link>}
-                        style={{width: "calc(100% - 8px)"}} maxlength={32}/>
+                        style={{width: "calc(100% - 8px)"}} maxlength={20}/>
             </InputFieldsContainer>
             <Notice>Not using your own device? Use Guest mode or Incognito mode to sign in privately.</Notice>
             <FlexContainer space={"between"} horozontal no-grow>

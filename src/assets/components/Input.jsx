@@ -52,17 +52,19 @@ export function setInputState(Input, isValid, msg){
         Input.children[0].children[0].onchange = undefined;
         let hint = Input.children[1];
         hint.textContent = Input.dataset.hint;
-        hint.style.display = (hint.textContent != "") ? null : "none";
+        hint.style.display = Input.dataset.hintDisplay;
         Input.removeAttribute("data-hint");
+        Input.removeAttribute("data-hint-display");
     }else{
         Input.classList.add(generalStyles.invalidData);
         if(typeof msg == "string"){
             let hintElm = Input.children[1];
             if(!Input.hasAttribute("data-hint")){
                 Input.dataset.hint = hintElm.textContent;
+                Input.dataset.hintDisplay = hintElm.style.display;
             }
             hintElm.textContent = msg;
-            hintElm.style.display = null;
+            hintElm.style.display = (msg.replace(/\s/gi, "") != "") ? null : "none";
         }else {
             throw new Error("Must attach an error message!");
         }

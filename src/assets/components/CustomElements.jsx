@@ -15,18 +15,22 @@ import { Mark } from './Mark.jsx';
 import { FlexContainer } from './FlexContainer.jsx';
 import { CheckBox } from './CheckBox.jsx';
 import { Radio } from './Radio.jsx';
+import { Dialog, setDialogState, showDialog } from './Dialog.jsx';
 
 export function Divider(){
     return <hr class={generalStyles.divider}/>
 }
 
 export {
-    Link,
-    Button,
-
     Input,
     setInputState,
 
+    Dialog,
+    setDialogState,
+    showDialog,
+
+    Link,
+    Button,
     Select,
     Notice,
     Mark,
