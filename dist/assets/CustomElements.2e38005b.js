@@ -1,1 +1,0 @@
-import{a as r,b as t,t as a}from"./index.04f79ee0.js";import{g as o}from"./FlexContainer.056dc28d.js";const s=a("<hr>");function i(){return(()=>{const e=s.cloneNode(!0);return r(()=>t(e,o.divider)),e})()}export{i as D};

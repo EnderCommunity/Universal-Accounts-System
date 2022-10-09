@@ -14,9 +14,10 @@ import { registerData, checkDataByOrder, hash, loadAES } from './../../../assets
 export default function RegisterPassword(props){
     let navigate = useNavigate(),
         updateButton,
-        nextButton, password, passwordConfirm;
+        nextButton, password, passwordConfirm, usernameHiddenInput;
     onMount(() => {
         updateButton = clientDataCheck(nextButton, "password", "password_confirm");
+        usernameHiddenInput.value = registerData.username;
     });
     props.report();
     return <>
@@ -25,7 +26,7 @@ export default function RegisterPassword(props){
         <br/>
         <h3>Choose a <Mark>secure password</Mark> for your account!</h3>
         <FlexContainer space={"around"} style={{width: "400px"}}>
-            <input id={"username-hidden"} type={"username"} style={"display: none;"} value={"TestUsername"}/>
+            <input red={usernameHiddenInput} id={"username-hidden"} type={"username"} style={"display: none;"} value={"TestUsername"}/>
             <InputFieldsContainer>
                 <Input ref={password} id={"password"} type={"password"} label={"Password"} autocomplete={"off"}
                         style={{width: "calc(100% - 8px)"}}/>
