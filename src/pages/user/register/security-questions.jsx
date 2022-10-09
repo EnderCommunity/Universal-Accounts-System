@@ -29,6 +29,30 @@ export default function RegisterSecurityQuestions(props){
     let navigate = useNavigate(),
         nextButton, qusElm1, qusElm2, qusElm3, ansElm1, ansElm2, ansElm3;
     onMount(() => {
+        if(registerData.securityQuestions.q1 != undefined){
+            qusElm1.children[0].children[0].value = registerData.securityQuestions.q1;
+        }
+        if(registerData.securityQuestions.q2 != undefined){
+            qusElm2.children[0].children[0].value = registerData.securityQuestions.q2;
+        }
+        if(registerData.securityQuestions.q3 != undefined){
+            qusElm3.children[0].children[0].value = registerData.securityQuestions.q3;
+        }
+        checkQuestionStatus(1, ansElm1);
+        checkQuestionStatus(2, ansElm2);
+        checkQuestionStatus(3, ansElm3);
+        ansElm1.children[0].children[0].blur();
+        ansElm2.children[0].children[0].blur();
+        ansElm3.children[0].children[0].blur();
+        if(registerData.securityQuestions.a1 != undefined){
+            ansElm1.children[0].children[0].value = registerData.securityQuestions.a1;
+        }
+        if(registerData.securityQuestions.a2 != undefined){
+            ansElm2.children[0].children[0].value = registerData.securityQuestions.a2;
+        }
+        if(registerData.securityQuestions.a3 != undefined){
+            ansElm3.children[0].children[0].value = registerData.securityQuestions.a3;
+        }
         clientDataCheck(nextButton, "security-q1", "security-q2", "security-q3",
                             "security-a1", "security-a2", "security-a3");
     });
@@ -52,7 +76,7 @@ export default function RegisterSecurityQuestions(props){
                     <option value={6}>What was the last name of your third-grade teacher?</option>
                 </Select>
                 <Input ref={ansElm1} id={"security-a1"} type={"text"} label={"Answer 1"}
-                        style={{width: "calc(100% - 8px)", display: "none"}}/>
+                        style={{width: "calc(100% - 8px)"}}/>
                 </InputFieldsContainer>
                 <InputFieldsContainer>
                 <Select ref={qusElm2} id={"security-q2"} label={"Question 2"} style={{width: "calc(100% - 8px)"}}
@@ -67,7 +91,7 @@ export default function RegisterSecurityQuestions(props){
                     <option value={6}>What is your maternal grandmother's maiden name?</option>
                 </Select>
                 <Input ref={ansElm2} id={"security-a2"} type={"text"} label={"Answer 2"}
-                        style={{width: "calc(100% - 8px)", display: "none"}}/>
+                        style={{width: "calc(100% - 8px)"}}/>
                 </InputFieldsContainer>
                 <InputFieldsContainer>
                 <Select ref={qusElm3} id={"security-q3"} label={"Question 3"} style={{width: "calc(100% - 8px)"}}
@@ -82,7 +106,7 @@ export default function RegisterSecurityQuestions(props){
                     <option value={6}>What was the name of your elementary/primary school?</option>
                 </Select>
                 <Input ref={ansElm3} id={"security-a3"} type={"text"} label={"Answer 3"}
-                        style={{width: "calc(100% - 8px)", display: "none"}}/>
+                        style={{width: "calc(100% - 8px)"}}/>
             </InputFieldsContainer>
             <Notice>Security questions are important. They can help you regain access to your account when you get locked out - so don't share them with anyone!</Notice>
             <FlexContainer space={"between"} horozontal no-grow>

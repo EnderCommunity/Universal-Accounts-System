@@ -37,22 +37,21 @@ export function clientDataCheck(buttonElm, ...elmIDs){
         let elm = document.getElementById(elmID);
         if(elm.tagName == "INPUT"){
             inputElms.push(elm);
-            elm.hasValue = (elm.value.replace(/\s/gi, "") != "");
             elm.oninput = updateButton;
         }else if(elm.tagName == "SELECT"){
             selectElms.push(elm);
-            elm.hasValue = (elm.selectedIndex > 0);
             elm.addEventListener('change', updateButton);
         }else{
             throw new Error("Unexpected element!");
         }
     });
+    updateButton();
     return updateButton;
 }
 
-let localContent = document.getElementById("local-content");
-
 export function nextCheck(button, callback, action){
+    let localContent = document.getElementById("local-content");
+
     // Disable the button to prevent duplicate requests
     button.setAttribute("disabled", "");
     localContent.dataset.processing = true;
@@ -88,6 +87,12 @@ export default function Register(props){
     let navigate = useNavigate(),
         nextButton, firstName, lastName;
     onMount(() => {
+        if(registerData.name.first != undefined){
+            firstName.children[0].children[0].value = registerData.name.first;
+        }
+        if(registerData.name.last != undefined){
+            lastName.children[0].children[0].value = registerData.name.last;
+        }
         clientDataCheck(nextButton, "first_name", "last_name");
     });
     props.report();

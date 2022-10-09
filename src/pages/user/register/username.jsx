@@ -15,7 +15,11 @@ export default function RegisterUsername(props){
     let navigate = useNavigate(),
         nextButton, username;
     onMount(() => {
-        let usernameInput = username.children[0].children[0], check = () => {
+        let usernameInput = username.children[0].children[0];
+        if(registerData.username != undefined){
+            usernameInput.value = registerData.username;
+        }
+        let check = () => {
             if(usernameInput.value.length < 3 || usernameInput.value.length > 20){
                 nextButton.setAttribute("disabled", "");
             }else{

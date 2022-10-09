@@ -13,8 +13,45 @@ import { registerData, checkDataByOrder } from './../../../assets/scripts/pages/
 
 export default function RegisterPersonalInfo(props){
     let navigate = useNavigate(),
-        nextButton, bDay, bMonth, bYear, gender, customGenderName, customGenderPronouns;
+        nextButton, bDay, bMonth, bYear, gender, customGenderName, customGenderPronouns,
+        genderChangeFunc = function(){
+            let value = document.getElementById("gender").value;
+            if(value != "custom"){
+                if(customGenderPronouns.style.display != "none"){
+                    customGenderPronouns.style.display = "none";
+                    customGenderName.style.display = "none";
+                    document.getElementById("custom-gender-pronouns").selectedIndex  = 1;
+                    document.getElementById("custom-gender-name").value = "FILL";
+                }
+            }else{
+                document.getElementById("custom-gender-pronouns").selectedIndex  = 0;
+                document.getElementById("custom-gender-name").value = "";
+                customGenderPronouns.style.display = null;
+                customGenderName.style.display = null;
+            }
+        };
     onMount(() => {
+        if(registerData.birthdate.day != undefined){
+            bDay.children[0].children[0].value = registerData.birthdate.day;
+        }
+        if(registerData.birthdate.month != undefined){
+            bMonth.children[0].children[0].value = registerData.birthdate.month;
+        }
+        if(registerData.birthdate.year != undefined){
+            bYear.children[0].children[0].value = registerData.birthdate.year;
+        }
+        if(registerData.gender != undefined){
+            if(registerData.gender == "male" || registerData.gender == "female" || registerData.gender == "unknown"){
+                gender.children[0].children[0].value = registerData.gender;
+            }else{
+                gender.children[0].children[0].value = "custom";
+                genderChangeFunc();
+                customGenderName.children[0].children[0].value = registerData.gender;
+            }
+        }
+        if(registerData.pronounce != undefined){
+            customGenderPronouns.children[0].children[0].value = registerData.pronounce;
+        }
         clientDataCheck(nextButton, "birthday_month", "birthday_day", "birthday_year",
                             "gender", "custom-gender-name", "custom-gender-pronouns");
     });
@@ -49,22 +86,7 @@ export default function RegisterPersonalInfo(props){
                 </FlexContainer>
                 <Notice smaller>Enter your birthday</Notice>
                 <Select ref={gender} id={"gender"} label={"Gender"} style={{width: "calc(100% - 8px)"}}
-                        onChange={function(){
-                            let value = document.getElementById("gender").value;
-                            if(value != "custom"){
-                                if(customGenderPronouns.style.display != "none"){
-                                    customGenderPronouns.style.display = "none";
-                                    customGenderName.style.display = "none";
-                                    document.getElementById("custom-gender-pronouns").selectedIndex  = 1;
-                                    document.getElementById("custom-gender-name").value = "FILL";
-                                }
-                            }else{
-                                document.getElementById("custom-gender-pronouns").selectedIndex  = 0;
-                                document.getElementById("custom-gender-name").value = "";
-                                customGenderPronouns.style.display = null;
-                                customGenderName.style.display = null;
-                            }
-                        }}>
+                        onChange={genderChangeFunc}>
                     <option value={"male"}>Male</option>
                     <option value={"female"}>Female</option>
                     <option value={"unknown"}>Prefer not to say</option>
