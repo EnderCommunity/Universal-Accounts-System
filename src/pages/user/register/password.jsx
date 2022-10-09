@@ -26,7 +26,7 @@ export default function RegisterPassword(props){
         <br/>
         <h3>Choose a <Mark>secure password</Mark> for your account!</h3>
         <FlexContainer space={"around"} style={{width: "400px"}}>
-            <input red={usernameHiddenInput} id={"username-hidden"} type={"username"} style={"display: none;"} value={"TestUsername"}/>
+            <input ref={usernameHiddenInput} id={"username-hidden"} type={"username"} style={"display: none;"} value={"TestUsername"}/>
             <InputFieldsContainer>
                 <Input ref={password} id={"password"} type={"password"} label={"Password"} autocomplete={"off"}
                         style={{width: "calc(100% - 8px)"}}/>
