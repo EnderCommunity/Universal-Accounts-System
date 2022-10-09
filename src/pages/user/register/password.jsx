@@ -33,9 +33,9 @@ export default function RegisterPassword(props){
         <FlexContainer space={"around"} style={{width: "400px"}}>
             <input ref={usernameHiddenInput} id={"username-hidden"} type={"username"} style={"display: none;"} value={"TestUsername"}/>
             <InputFieldsContainer>
-                <Input ref={password} id={"password"} type={"password"} label={"Password"} autocomplete={"off"}
+                <Input ref={password} id={"password"} type={"password"} label={"Password"} autocomplete={"new-password"}
                         style={{width: "calc(100% - 8px)"}}/>
-                <Input ref={passwordConfirm} id={"password_confirm"} type={"password"} label={"Confirmation"} autocomplete={"off"}
+                <Input ref={passwordConfirm} id={"password_confirm"} type={"password"} label={"Confirmation"} autocomplete={"new-password"}
                         style={{width: "calc(100% - 8px)"}}/>
                 <CheckBox id={"showPassword"} label={"Show password"}
                             style={{"margin": "8px", "margin-right": "auto"}}
@@ -52,7 +52,7 @@ export default function RegisterPassword(props){
             </InputFieldsContainer>
             <Notice>The password must be at least 10 characters long, with a mix of letters and numbers! (Note that it's recommended to mix in a few special characters)</Notice>
             <FlexContainer space={"between"} horozontal no-grow>
-                <Button type={"action"} function={function(){emptyPassword(); history.back()}}>Go back</Button>
+                <Button type={"action"} function={function(){emptyPassword(); setTimeout(function(){history.back()}, 1);}}>Go back</Button>
                 <Button ref={nextButton} type={"action"} function={function(){
                     nextCheck(nextButton, function(setError, isDone){
                         let passwordInput = password.children[0].children[0],
@@ -100,7 +100,7 @@ export default function RegisterPassword(props){
                             checkDataByOrder(3, function(error){
                                 if(error){
                                     emptyPassword();
-                                    redoRegister(navigate);
+                                    setTimeout(function(){redoRegister(navigate)}, 1);
                                 }else{
                                     navigate("/user/register/personal");
                                 }
