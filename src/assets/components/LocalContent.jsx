@@ -8,7 +8,7 @@ import styles from './../styles/localContent.module.css';
 import LoadingSpinner from './LoadingSpinner.jsx';
 
 // import { Routes, Route, useLocation } from "@solidjs/router"; /*Link*/
-import { createSignal } from "solid-js";
+import { createSignal, onMount } from "solid-js";
 
 import { landingCheck, afterURLChange } from './../scripts/traffic.jsx';
 import { WebRoutes } from './../scripts/routes.jsx';
@@ -63,11 +63,28 @@ function LocalContent(props){
     let container = (<div class={styles.container} onEmptied={function(){alert(0);}}>
         <WebRoutes ping={updateLoadPing}/>
     </div>
-    );
+    ), localContent;
+
+    onMount(()=>{
+        var observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.type === "attributes") {
+                    if(localContent.dataset.processing == "true" && !localContent.hasAttribute("inert")){
+                        localContent.setAttribute("inert", "");
+                    }else if(localContent.dataset.processing == "false" && localContent.hasAttribute("inert")){
+                        localContent.removeAttribute("inert");
+                    }
+                }
+            });
+        });
+        observer.observe(localContent, {
+            attributes: true //configure it to listen to attribute changes
+        });
+    });
 
     // Check https://github.com/solidjs/solid-router for more info on how the navigation system works
     return (
-        <div id={"local-content"} class={styles.localcontent} data-show-content={props.showContent} data-processing={false}>
+        <div ref={localContent} id={"local-content"} class={styles.localcontent} data-show-content={props.showContent} data-processing={false}>
             {/*<Link href={"/"}>/</Link>
             <br/>
             <Link href={"/new"}>/new/</Link>

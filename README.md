@@ -44,11 +44,10 @@ This is a project that aims to provide developers with an easy-to-use third-part
 > 3. User must choose a password
 > 4. User must enter their date of birth and gender
 > 5. User must choose their security quesitons
-> 6. User will be prompted with the option to attach an email address to their account
-> 7. User must choose their prefered privacy settings
-> 8. User will be prompted to read the privacy policy and terms of service, and agree to them
-> 9. User will be promted to review their account creation settings (this data can be exported)
-> 10. User will be prompted to set up two-factor authentication, or go to the home page!
+> 6. User must choose their prefered privacy settings
+> 7. User will be prompted to read the privacy policy and terms of service, and agree to them
+> 8. User will be promted to review their account creation settings (this data can be exported)
+> 9. User will be prompted to set up two-factor authentication, or go to the home page!
 >
 > The sign in process (trusted device - with device auth):
 >
@@ -83,10 +82,6 @@ This is a project that aims to provide developers with an easy-to-use third-part
 > Settings change confirmation prompt (untrusted device):
 >
 > 1. User will be asked to enter their password
->
-> The username recovery process:
->
-> 1. The user will be prompted to enter the email address that was attached to their account
 >
 > The password reset process:
 >

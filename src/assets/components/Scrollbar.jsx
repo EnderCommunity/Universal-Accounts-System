@@ -35,8 +35,8 @@ function setupScrollStart(){
     handle.onmousedown = function(e){
         if(!mouseDown){
             mouseDown = true;
-            console.log(e);
             lastPosition = e.clientY;
+            document.documentElement.setAttribute("unselectable", "");
         }
     };
 }
@@ -52,11 +52,10 @@ function setupScrollEnd(){
     let f = function(){
         if(mouseDown){
             mouseDown = false;
+            document.documentElement.removeAttribute("unselectable");
         }
     };
-    window.onmouseup = f;
-    // window.onblur = f;
-    // window.onmouseleave = f;
+    document.onmouseup = f;
 }
 
 export default function Scrollbar(){

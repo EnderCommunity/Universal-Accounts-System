@@ -5,9 +5,10 @@
  **/
 
 import { Title } from './../../assets/components/Title.jsx';
-import { Input, setInputState, Button, Notice, Mark, FlexContainer } from './../../assets/components/CustomElements.jsx';
+import { Input, setInputState, Button, Notice, Mark, FlexContainer, showDialog } from './../../assets/components/CustomElements.jsx';
 import { onMount } from "solid-js";
 import { useNavigate } from '@solidjs/router';
+import { registerData, resetRegisterData } from './../../assets/scripts/pages/registerData.jsx';
 
 export function InputFieldsContainer(props){
     return (<div style={{width: "100%", position: "relative", overflow: "hidden"}}>{props.children}</div>);
@@ -36,47 +37,62 @@ export function clientDataCheck(buttonElm, ...elmIDs){
         let elm = document.getElementById(elmID);
         if(elm.tagName == "INPUT"){
             inputElms.push(elm);
-            elm.hasValue = (elm.value.replace(/\s/gi, "") != "");
             elm.oninput = updateButton;
         }else if(elm.tagName == "SELECT"){
             selectElms.push(elm);
-            elm.hasValue = (elm.selectedIndex > 0);
             elm.addEventListener('change', updateButton);
         }else{
             throw new Error("Unexpected element!");
         }
     });
+    updateButton();
     return updateButton;
 }
 
-let localContent = document.getElementById("local-content");
-
 export function nextCheck(button, callback, action){
+    let localContent = document.getElementById("local-content");
+
     // Disable the button to prevent duplicate requests
     button.setAttribute("disabled", "");
     localContent.dataset.processing = true;
 
-    let error = false, calledDone = false, done = function(){
+    let error = [false], calledDone = false, done = function(){
         if(!calledDone){
             calledDone = true;
             button.removeAttribute("disabled");
             localContent.dataset.processing = false;
-            if(!error){
+            if(!error[0]){
                 action();
             }
         }
     };
 
     callback(function(){
-        error = true;
+        error[0] = true;
         done();
-    }, done);
+    }, done, error);
+}
+
+export function redoRegister(navigate){
+    showDialog("Something went wrong!", "It looks like some of your registration data is missing!", [
+        ["Refill info", function(dialog, remove){
+            resetRegisterData();
+            navigate("/user/register");
+            remove();
+        }]
+    ]);
 }
 
 export default function Register(props){
     let navigate = useNavigate(),
         nextButton, firstName, lastName;
     onMount(() => {
+        if(registerData.name.first != undefined){
+            firstName.children[0].children[0].value = registerData.name.first;
+        }
+        if(registerData.name.last != undefined){
+            lastName.children[0].children[0].value = registerData.name.last;
+        }
         clientDataCheck(nextButton, "first_name", "last_name");
     });
     props.report();
@@ -110,6 +126,8 @@ export default function Register(props){
                             });
                             isDone();
                         }, function(){
+                            registerData.name.first = firstName.children[0].children[0].value;
+                            registerData.name.last = lastName.children[0].children[0].value;
                             navigate("/user/register/username");
                         });
                     }} primary>Next</Button>

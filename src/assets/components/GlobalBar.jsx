@@ -20,7 +20,7 @@ function UserProfile(props){
 
 function GlobalBar(props){
     return (
-        <div class={styles.globalbar} data-show-content={props.showContent}>
+        <div id="global-bar" class={styles.globalbar} data-show-content={props.showContent}>
             <UserProfile picture={props.userProfile} report={props.report}/>
         </div>
     );

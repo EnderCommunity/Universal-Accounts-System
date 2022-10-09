@@ -6,16 +6,23 @@
 
 import { Title } from './../../../assets/components/Title.jsx';
 import { Input, Button, Notice, Mark, FlexContainer, CheckBox, setInputState } from './../../../assets/components/CustomElements.jsx';
-import { InputFieldsContainer, clientDataCheck, nextCheck } from './../register.jsx';
+import { InputFieldsContainer, clientDataCheck, nextCheck, redoRegister } from './../register.jsx';
 import { onMount } from "solid-js";
 import { useNavigate } from '@solidjs/router';
+import { registerData, checkDataByOrder, hash, loadAES } from './../../../assets/scripts/pages/registerData.jsx';
 
 export default function RegisterPassword(props){
     let navigate = useNavigate(),
         updateButton,
-        nextButton, password, passwordConfirm;
+        nextButton, password, passwordConfirm, usernameHiddenInput,
+        emptyPassword = () => {
+            password.children[0].children[0].value = "";
+            passwordConfirm.children[0].children[0].value = "";
+            usernameHiddenInput.value = "";
+        };
     onMount(() => {
         updateButton = clientDataCheck(nextButton, "password", "password_confirm");
+        usernameHiddenInput.value = registerData.username;
     });
     props.report();
     return <>
@@ -24,11 +31,11 @@ export default function RegisterPassword(props){
         <br/>
         <h3>Choose a <Mark>secure password</Mark> for your account!</h3>
         <FlexContainer space={"around"} style={{width: "400px"}}>
-            <input id={"username-hidden"} type={"username"} style={"display: none;"} value={"TestUsername"}/>
+            <input ref={usernameHiddenInput} id={"username-hidden"} type={"username"} style={"display: none;"} value={"TestUsername"}/>
             <InputFieldsContainer>
-                <Input ref={password} id={"password"} type={"password"} label={"Password"} autocomplete={"off"}
+                <Input ref={password} id={"password"} type={"password"} label={"Password"} autocomplete={"new-password"}
                         style={{width: "calc(100% - 8px)"}}/>
-                <Input ref={passwordConfirm} id={"password_confirm"} type={"password"} label={"Confirmation"} autocomplete={"off"}
+                <Input ref={passwordConfirm} id={"password_confirm"} type={"password"} label={"Confirmation"} autocomplete={"new-password"}
                         style={{width: "calc(100% - 8px)"}}/>
                 <CheckBox id={"showPassword"} label={"Show password"}
                             style={{"margin": "8px", "margin-right": "auto"}}
@@ -45,7 +52,7 @@ export default function RegisterPassword(props){
             </InputFieldsContainer>
             <Notice>The password must be at least 10 characters long, with a mix of letters and numbers! (Note that it's recommended to mix in a few special characters)</Notice>
             <FlexContainer space={"between"} horozontal no-grow>
-                <Button type={"action"} function={function(){history.back()}}>Go back</Button>
+                <Button type={"action"} function={function(){emptyPassword(); setTimeout(function(){history.back()}, 1);}}>Go back</Button>
                 <Button ref={nextButton} type={"action"} function={function(){
                     nextCheck(nextButton, function(setError, isDone){
                         let passwordInput = password.children[0].children[0],
@@ -88,7 +95,17 @@ export default function RegisterPassword(props){
 
                         isDone();
                     }, function(){
-                        navigate("/user/register/personal");
+                        loadAES(function(){
+                            registerData.passwordHash = hash(password.children[0].children[0].value);
+                            checkDataByOrder(3, function(error){
+                                if(error){
+                                    emptyPassword();
+                                    setTimeout(function(){redoRegister(navigate)}, 1);
+                                }else{
+                                    navigate("/user/register/personal");
+                                }
+                            });
+                        });
                     });
                 }} primary>Next</Button>
             </FlexContainer>
