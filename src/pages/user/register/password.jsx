@@ -14,7 +14,11 @@ import { registerData, checkDataByOrder, hash, loadAES } from './../../../assets
 export default function RegisterPassword(props){
     let navigate = useNavigate(),
         updateButton,
-        nextButton, password, passwordConfirm, usernameHiddenInput;
+        nextButton, password, passwordConfirm, usernameHiddenInput,
+        emptyPassword = () => {
+            password.children[0].children[0].value = "";
+            passwordConfirm.children[0].children[0].value = "";
+        };
     onMount(() => {
         updateButton = clientDataCheck(nextButton, "password", "password_confirm");
         usernameHiddenInput.value = registerData.username;
@@ -47,7 +51,7 @@ export default function RegisterPassword(props){
             </InputFieldsContainer>
             <Notice>The password must be at least 10 characters long, with a mix of letters and numbers! (Note that it's recommended to mix in a few special characters)</Notice>
             <FlexContainer space={"between"} horozontal no-grow>
-                <Button type={"action"} function={function(){history.back()}}>Go back</Button>
+                <Button type={"action"} function={function(){emptyPassword(); history.back()}}>Go back</Button>
                 <Button ref={nextButton} type={"action"} function={function(){
                     nextCheck(nextButton, function(setError, isDone){
                         let passwordInput = password.children[0].children[0],
@@ -94,6 +98,7 @@ export default function RegisterPassword(props){
                             registerData.passwordHash = hash(password.children[0].children[0].value);
                             checkDataByOrder(3, function(error){
                                 if(error){
+                                    emptyPassword();
                                     redoRegister(navigate);
                                 }else{
                                     navigate("/user/register/personal");
