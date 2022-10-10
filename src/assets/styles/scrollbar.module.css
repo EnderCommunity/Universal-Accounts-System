@@ -14,6 +14,7 @@
     display: none;
     align-items: center;
     justify-content: right;
+    z-index: 100;
 }
 
 .scrollbarContainer:not(:hover),
@@ -77,11 +78,7 @@
     background: var(--accent-color-lighter);
 }
 
-@media (pointer: fine),
-(hover: hover),
-(any-hover: hover),
-(any-hover: on-demand),
-(any-pointer: fine) {
+@media (pointer: fine) {
     body {
         -ms-overflow-style: none;
         /* for Internet Explorer, Edge */

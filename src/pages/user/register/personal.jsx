@@ -6,7 +6,7 @@
 
 import { Title } from './../../../assets/components/Title.jsx';
 import { Input, Select, Button, Notice, Mark, FlexContainer, setInputState, showDialog } from './../../../assets/components/CustomElements.jsx';
-import { InputFieldsContainer, clientDataCheck, nextCheck, redoRegister } from './../register.jsx';
+import { InputFieldsContainer, clientDataCheck, nextCheck, redoRegister, ButtonsContainer } from './../register.jsx';
 import { onMount } from "solid-js";
 import { useNavigate } from '@solidjs/router';
 import { registerData, checkDataByOrder } from './../../../assets/scripts/pages/registerData.jsx';
@@ -104,7 +104,7 @@ export default function RegisterPersonalInfo(props){
                 </Select>
             </InputFieldsContainer>
             <Notice>Make sure to use your real date of birth. You can create a Ciel account as long as you are 13+ years old! (access to external services will be limited depending on your age)</Notice>
-            <FlexContainer space={"between"} horozontal no-grow>
+            <ButtonsContainer>
                 <Button type={"action"} function={function(){history.back()}}>Go back</Button>
                 <Button ref={nextButton} type={"action"} function={function(){
                     nextCheck(nextButton, function(setError, isDone, error){
@@ -171,6 +171,7 @@ export default function RegisterPersonalInfo(props){
                                 setError();
                             }
                         }
+                        showDialog("Caution!", "No profanity check for 'custom_gender_name'");
                         isDone();
                     }, function(){
                         registerData.birthdate.day = Number(bDay.children[0].children[0].value);
@@ -199,7 +200,7 @@ export default function RegisterPersonalInfo(props){
                         });
                     });
                 }} primary>Next</Button>
-            </FlexContainer>
+            </ButtonsContainer>
         </FlexContainer>
     </>;
 }

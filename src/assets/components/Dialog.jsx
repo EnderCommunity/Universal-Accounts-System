@@ -35,7 +35,7 @@ export function setDialogState(dialog, show, remove = false){
     }
 }
 
-export function showDialog(title, description, actions){
+export function showDialog(title, description, actions = [["Ok",function(d,r){r()}]]){
     render(() => (<Dialog title={title} description={description} actions={actions} show></Dialog>), document.body);
 }
 
@@ -48,7 +48,6 @@ export function Dialog(props){
             </div>
             <div class={generalStyles.dialogContent}>
                 <For each={props.actions}>{(action) => {
-                    console.log(action);
                     return <Button class={generalStyles.actionButton} type={"action"} function={function(){
                         action[1](dialog, function(){
                             setDialogState(dialog, false, true);

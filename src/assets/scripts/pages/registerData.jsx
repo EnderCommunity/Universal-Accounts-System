@@ -43,7 +43,10 @@ function cleanRegisterDataObject () {
             a3: undefined
         },
         quickSettings: {
-            //
+            profile: undefined, // 1 - rich, 2 - limited, 3 - hidden
+            activity: undefined, // 1 - Ciel.affiliated.third-party, 2 - Ciel.affiliated, 3 - Ciel            
+            location: undefined, // 1 - approximate, 2 - precise
+            colorScheme: undefined, // 0 - auto, 1 - light, 2 - dark
         }
     };
 }
@@ -55,18 +58,21 @@ export function resetRegisterData(){
 }
 
 export var dataOrder = {
-    // 1
+    // /register
     1: ["name.first", "name.last"],
-    // 2
+    // /register/username
     2: ["username"],
-    // 3
+    // /register/password
     3: ["passwordHash"],
-    // 4
+    // /register/personal
     4: ["birthdate.day", "birthdate.month", "birthdate.year",
     "gender", "pronounce"],
-    // 5
+    // /register/security-questions
     5: ["securityQuestions.q1", "securityQuestions.q2", "securityQuestions.q3",
-    "securityQuestions.a1", "securityQuestions.a2", "securityQuestions.a3"]
+    "securityQuestions.a1", "securityQuestions.a2", "securityQuestions.a3",],
+    // /register/quick-settings
+    6: ["quickSettings.profile", "quickSettings.activity", "quickSettings.location",
+        "quickSettings.colorScheme"]
 }, dataSectionsN = Object.keys(dataOrder).length;
 
 export function checkDataByOrder(section, callback){

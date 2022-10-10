@@ -7,7 +7,7 @@
 // Step 1: Ready the render function
 /* @refresh reload */
 import { render } from 'solid-js/web';
-import { createSignal } from "solid-js";
+import { createSignal, onMount } from "solid-js";
 
 // Step 2: Ready the router
 import { Router } from "@solidjs/router";
@@ -33,9 +33,11 @@ import GlobalBar from './assets/components/GlobalBar.jsx';
 import GlobalFooter from './assets/components/GlobalFooter.jsx';
 import LocalContent from './assets/components/LocalContent.jsx';
 import Scrollbar from './assets/components/ScrollBar.jsx';
+import { showDialog } from './assets/components/CustomElements.jsx';
+import { isForcedDarkMode } from './assets/scripts/colourScheme.jsx';
+import { checkConnection } from './assets/scripts/internetConnection.jsx';
 
 render(() =>{
-
     // Wait for the page's content to finish loading
     const [showContent, setShowContent] = createSignal(false);
 
@@ -50,6 +52,14 @@ render(() =>{
             }
         };
 
+    onMount(() => {
+        if(isForcedDarkMode()){
+            showDialog("Clarification!", "This website supports dark mode. Your browser's 'forced dark mode' could result in theme abnormalities!", [["Ok", function(dialog, remove){remove()}]]);
+        }
+        // showDialog("Demo", "No backend!", [["Ok", function(dialog, remove){remove()}]]);
+        checkConnection();
+    });
+    
     // Return the global page content
     return <Router>
         <GlobalBar userProfile={userData().personal.profilePicture} showContent={showContent()} report={() => { contentLoadReport("GlobalBar"); }}/>

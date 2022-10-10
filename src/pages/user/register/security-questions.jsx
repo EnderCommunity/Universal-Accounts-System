@@ -6,7 +6,7 @@
 
 import { Title } from './../../../assets/components/Title.jsx';
 import { Input, Select, Button, Notice, Mark, FlexContainer, setInputState } from './../../../assets/components/CustomElements.jsx';
-import { InputFieldsContainer, clientDataCheck, nextCheck, redoRegister } from './../register.jsx';
+import { InputFieldsContainer, clientDataCheck, nextCheck, redoRegister, ButtonsContainer } from './../register.jsx';
 import { onMount } from "solid-js";
 import { useNavigate } from '@solidjs/router';
 import { registerData, checkDataByOrder } from './../../../assets/scripts/pages/registerData.jsx';
@@ -19,6 +19,7 @@ function checkQuestionStatus(number, answerElm){
         if(answerElm.style.display == "none"){
             answerElm.style.display = null;
             answerElm.children[0].children[0].focus();
+            answerElm.children[0].children[0].onclick();
         }
     }else{
         answerElm.style.display = "none";
@@ -109,7 +110,7 @@ export default function RegisterSecurityQuestions(props){
                         style={{width: "calc(100% - 8px)"}}/>
             </InputFieldsContainer>
             <Notice>Security questions are important. They can help you regain access to your account when you get locked out - so don't share them with anyone!</Notice>
-            <FlexContainer space={"between"} horozontal no-grow>
+            <ButtonsContainer>
                 <Button type={"action"} function={function(){history.back()}}>Go back</Button>
                 <Button ref={nextButton} type={"action"} function={function(){
                     nextCheck(nextButton, function(setError, isDone){
@@ -147,7 +148,7 @@ export default function RegisterSecurityQuestions(props){
                         });
                     });
                 }} primary>Next</Button>
-            </FlexContainer>
+            </ButtonsContainer>
         </FlexContainer>
     </>;
 }

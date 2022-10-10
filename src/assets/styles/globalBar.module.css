@@ -14,6 +14,10 @@
     justify-content: center;
 }
 
+.globalbar[disabled] {
+    opacity: 1;
+}
+
 .globalbar[data-show-content=true] {
     /*animation: fadeInMainFull 2s cubic-bezier(0.87, 0.02, 0.01, 1) forwards;*/
     animation: fadeInMainFull 1.5s cubic-bezier(0.8, 0.05, 0, 1) forwards;

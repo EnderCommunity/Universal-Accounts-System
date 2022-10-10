@@ -7,8 +7,6 @@
 .localcontent {
     /*background-color: #fafafa;*/
     flex-grow: 1;
-    overflow-x: hidden;
-    overflow-y: scroll;
     /*box-shadow: 0px 0px 4px #cacaca;
     border-radius: 12px;*/
     max-width: 86%;
@@ -70,9 +68,11 @@
     }
     99% {
         max-height: calc(100 * var(--vh) - var(--page-margin) - var(--globalbar--height));
+        overflow: hidden;
     }
     100% {
         max-height: unset;
+        overflow: visible;
     }
 }
 
@@ -102,9 +102,12 @@
 
 .localcontent .loadingContainer {
     justify-content: center;
-    align-items: center;
     height: 100%;
-    position: absolute;
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
     pointer-events: none;
     z-index: 2;
     animation-name: loadingIn;
