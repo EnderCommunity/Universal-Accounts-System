@@ -6,7 +6,7 @@
 
 import { Title } from './../../../assets/components/Title.jsx';
 import { Input, Button, Notice, Mark, FlexContainer, setInputState } from './../../../assets/components/CustomElements.jsx';
-import { InputFieldsContainer, nextCheck, redoRegister } from './../register.jsx';
+import { InputFieldsContainer, nextCheck, redoRegister, ButtonsContainer } from './../register.jsx';
 import { onMount } from "solid-js";
 import { useNavigate } from '@solidjs/router';
 import { registerData, checkDataByOrder } from './../../../assets/scripts/pages/registerData.jsx';
@@ -41,7 +41,7 @@ export default function RegisterUsername(props){
                         style={{width: "calc(100% - 8px)"}} maxlength={20}/>
             </InputFieldsContainer>
             <Notice>Your username is public, make sure it does not contain any sensitive or personal information!</Notice>
-            <FlexContainer space={"between"} horozontal no-grow>
+            <ButtonsContainer>
                 <Button type={"action"} function={function(){history.back()}}>Go back</Button>
                 <Button ref={nextButton} type={"action"} function={function(){
                     nextCheck(nextButton, function(setError, isDone){
@@ -88,7 +88,7 @@ export default function RegisterUsername(props){
                         });
                     });
                 }} primary>Next</Button>
-            </FlexContainer>
+            </ButtonsContainer>
         </FlexContainer>
     </>;
 }

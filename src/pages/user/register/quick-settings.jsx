@@ -8,7 +8,7 @@ import style from './../../../assets/styles/pages/user.quick-settings.module.css
  
 import { Title } from './../../../assets/components/Title.jsx';
 import { Button, Notice, Mark, FlexContainer, Radio, Divider, onRadioGroupChange, getRadioValueByNameGroup, showDialog } from './../../../assets/components/CustomElements.jsx';
-import { InputFieldsContainer, nextCheck, redoRegister } from './../register.jsx';
+import { InputFieldsContainer, nextCheck, redoRegister, ButtonsContainer } from './../register.jsx';
 import { onMount } from 'solid-js';
 import { updateColorScheme } from './../../../assets/scripts/colourScheme.jsx';
 import { registerData, checkDataByOrder } from './../../../assets/scripts/pages/registerData.jsx';
@@ -113,7 +113,7 @@ export default function RegisterQuickSettings(props){
                 </QuickSetting>
             </InputFieldsContainer>
             <Notice>You can always change your account's settings and privacy preferences using your account's control panel!</Notice>
-            <FlexContainer space={"between"} horozontal no-grow>
+            <ButtonsContainer>
                 <Button type={"action"} function={function(){ if(registerData.quickSettings.colorScheme == undefined) updateColorScheme(0); history.back()}}>Go back</Button>
                 <Button ref={nextButton} type={"action"} function={function(){
                     nextCheck(nextButton, function(setError, isDone){
@@ -145,7 +145,7 @@ export default function RegisterQuickSettings(props){
                         });
                     });
                 }} primary>Next</Button>
-            </FlexContainer>
+            </ButtonsContainer>
         </FlexContainer>
     </>;
 }

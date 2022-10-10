@@ -6,7 +6,7 @@
 
 import { Title } from './../../../assets/components/Title.jsx';
 import { Input, Button, Notice, Mark, FlexContainer, CheckBox, setInputState } from './../../../assets/components/CustomElements.jsx';
-import { InputFieldsContainer, clientDataCheck, nextCheck, redoRegister } from './../register.jsx';
+import { InputFieldsContainer, clientDataCheck, nextCheck, redoRegister, ButtonsContainer } from './../register.jsx';
 import { onMount } from "solid-js";
 import { useNavigate } from '@solidjs/router';
 import { registerData, checkDataByOrder, hash, loadAES } from './../../../assets/scripts/pages/registerData.jsx';
@@ -51,7 +51,7 @@ export default function RegisterPassword(props){
                         />
             </InputFieldsContainer>
             <Notice>The password must be at least 10 characters long, with a mix of letters and numbers! (Note that it's recommended to mix in a few special characters)</Notice>
-            <FlexContainer space={"between"} horozontal no-grow>
+            <ButtonsContainer>
                 <Button type={"action"} function={function(){emptyPassword(); setTimeout(function(){history.back()}, 1);}}>Go back</Button>
                 <Button ref={nextButton} type={"action"} function={function(){
                     nextCheck(nextButton, function(setError, isDone){
@@ -108,7 +108,7 @@ export default function RegisterPassword(props){
                         });
                     });
                 }} primary>Next</Button>
-            </FlexContainer>
+            </ButtonsContainer>
         </FlexContainer>
     </>;
 }

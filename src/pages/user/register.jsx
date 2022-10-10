@@ -4,6 +4,8 @@
  * 
  **/
 
+import style from './../../assets/styles/pages/user.register.module.css';
+
 import { Title } from './../../assets/components/Title.jsx';
 import { Input, setInputState, Button, Notice, Mark, FlexContainer, showDialog } from './../../assets/components/CustomElements.jsx';
 import { onMount } from "solid-js";
@@ -83,6 +85,24 @@ export function redoRegister(navigate){
     ]);
 }
 
+export function ButtonsContainer(props){
+    let flexContainer;
+    onMount(() => {
+        var observer = new IntersectionObserver(function(entries) {
+            if(entries[0].intersectionRatio === 0)
+                flexContainer.dataset.sticky = true;
+            else if(entries[0].intersectionRatio === 1)
+                flexContainer.dataset.sticky = false;
+        }, { threshold: [0,1] });
+        observer.observe(flexContainer);
+        var observer = new IntersectionObserver( 
+            ([e]) => flexContainer.dataset.sticky = e.intersectionRatio < 1,
+        {threshold: [1]});
+        observer.observe(flexContainer)
+    });
+    return (<FlexContainer ref={flexContainer} class={style.buttonsStickyContainer} space={"between"} horozontal no-grow>{props.children}</FlexContainer>);
+}
+
 export default function Register(props){
     let navigate = useNavigate(),
         nextButton, firstName, lastName;
@@ -109,7 +129,7 @@ export default function Register(props){
                         style={{width: "calc(100% - 8px)"}}/>
             </InputFieldsContainer>
             <Notice>It's recommended to use a device that you own and use frequently to create your Ciel account!</Notice>
-            <FlexContainer space={"between"} horozontal no-grow>
+            <ButtonsContainer>
                 <Button type={"link"} href={"/user/login"}>Sign in instead</Button>
                 <Button ref={nextButton} type={"action"} function={function(){
                         nextCheck(nextButton, function(setError, isDone){
@@ -131,7 +151,7 @@ export default function Register(props){
                             navigate("/user/register/username");
                         });
                     }} primary>Next</Button>
-            </FlexContainer>
+            </ButtonsContainer>
         </FlexContainer>
     </>;
 }

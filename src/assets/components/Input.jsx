@@ -9,6 +9,7 @@ import generalStyles from './../styles/general.module.css';
 import { processProps } from './_custom.jsx';
 
 import ErrorIcon from './../icons/input_error.svg';
+import { onCleanup, onMount } from 'solid-js';
 
 // Check "https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input" if you wish to support
 // a new input type!
@@ -16,12 +17,41 @@ import ErrorIcon from './../icons/input_error.svg';
 // for info on the diffrent types of autocomplete
 export function Input(props){
     let basicProps = processProps(props, generalStyles.inputFieldContainer),
+        inputElm,
         hint = (props.hint != undefined) ? (
             <div class={`${generalStyles.inputFieldHint} text`}>{props.hint}</div>
         ) : <div class={`${generalStyles.inputFieldHint} text`} style={{display: "none"}}></div>,
-        input = (<input id={props.id} type={props.type} placeholder={" "}
+        input = (<input ref={inputElm} id={props.id} type={props.type} placeholder={" "}
                         autocomplete={(props.autocomplete) ? props.autocomplete : "off"}
-                        class={generalStyles.inputField} maxlength={props.maxlength}/>);
+                        class={generalStyles.inputField} maxlength={props.maxlength}/>),
+        allowScrollToElmFunc = false,
+        scrollToElm = () => {
+            if(allowScrollToElmFunc){
+                allowScrollToElmFunc = false;
+                setTimeout(function(){
+                    let y = inputElm.getBoundingClientRect().y,
+                        height = inputElm.clientHeight;
+                        //alert(window.innerHeight - y - height);
+                    if(window.innerHeight - y - height < 175){
+                        try {
+                            let s = inputElm.getBoundingClientRect().y - ((window.innerHeight)/2 + height);
+                            window.scrollTo(0, (window.scrollY - document.body.clientTop) + ((s > 0) ? s : 0) + 120)
+                        }catch{
+                            inputElm.scrollIntoView(true);
+                        }
+                    }
+                }, 20);
+            }
+        };
+    onMount(() => {
+        window.addEventListener("resize", scrollToElm)
+        inputElm.onclick = function(){
+            allowScrollToElmFunc = true;
+        };
+    });
+    onCleanup(() => {
+        window.removeEventListener("resize", scrollToElm);
+    });
     if(props.value){
         input.value = props.value;
     }
