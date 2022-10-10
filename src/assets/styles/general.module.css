@@ -495,7 +495,7 @@ input[type=number]::-webkit-outer-spin-button {
     height: fit-content;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: left;
     font-weight: inherit;
     margin: 10px 6px;
 }
@@ -510,7 +510,7 @@ input[type=number]::-webkit-outer-spin-button {
     position: relative;
     transition: border 0.1s;
     background-color: transparent;
-    margin-right: 8px;
+    margin-right: 10px;
 }
 
 .radioContainer .radio:before {
@@ -543,6 +543,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .radioContainer .radioLabel {
     font-size: inherit;
+    line-height: 24px;
 }
 
 

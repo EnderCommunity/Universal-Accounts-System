@@ -67,6 +67,8 @@ export default function RegisterUsername(props){
                                     if(reservedUsernames.includes(userValue)){
                                         setInputState(username, false, "Username is reserved by the system!");
                                         setError();
+                                    }else{
+                                        // Check if the username is taken!
                                     }
                                 }else{
                                     setInputState(username, false, "An error occured, please try again later!");

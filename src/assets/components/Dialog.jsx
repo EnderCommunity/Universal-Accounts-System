@@ -48,7 +48,6 @@ export function Dialog(props){
             </div>
             <div class={generalStyles.dialogContent}>
                 <For each={props.actions}>{(action) => {
-                    console.log(action);
                     return <Button class={generalStyles.actionButton} type={"action"} function={function(){
                         action[1](dialog, function(){
                             setDialogState(dialog, false, true);

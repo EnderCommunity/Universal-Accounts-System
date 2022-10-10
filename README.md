@@ -101,6 +101,13 @@ This is a project that aims to provide developers with an easy-to-use third-part
 
 > Note 2: Add page transitions
 
+> Collected data (not provided by the user manually):
+>
+> 1. IP address, user aproximate location, and user agent. (For user login history, and active devices list)
+> 2. Services usage (time of login/connection approval)\
+> 3. Services action history (full history of your actions in connected services)
+> 4. Precise location history
+
 ## Available Scripts
 
 In the project directory, you can run:
