@@ -10,7 +10,7 @@
     background: var(--main-background);
     padding-top: var(--page-margin);
     padding-bottom: calc(var(--page-margin) + 1px);
-    box-shadow: 0px -18px 18px var(--main-background), 0px -24px 30px var(--main-background), 0px -38px 40px var(--main-background), 0px -38px 60px var(--main-background), var(--page-margin) -18px 18px var(--main-background), var(--page-margin) -18px 18px var(--main-background);
+    box-shadow: 0px -18px 18px var(--main-background), 0px -24px 30px var(--main-background), var(--page-margin) -18px 18px var(--main-background), var(--page-margin) -18px 18px var(--main-background);
 }
 
 .buttonsStickyContainer[data-sticky=false] {

@@ -144,6 +144,8 @@ export default function Register(props){
                                     setError();
                                 }
                             });
+                            showDialog("Caution!", "No profanity check for 'first_name'");
+                            showDialog("Caution!", "No profanity check for 'last_name'");
                             isDone();
                         }, function(){
                             registerData.name.first = firstName.children[0].children[0].value;

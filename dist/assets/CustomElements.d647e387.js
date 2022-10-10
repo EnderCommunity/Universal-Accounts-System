@@ -1,1 +1,0 @@
-import{p as o,g as c,a as l,b as v,s as d,t as i}from"./index.16105fbf.js";const u=i("<hr>");function _(a){let t=o(a,c.divider);return(()=>{const s=u.cloneNode(!0);return l(e=>{const r=t.class,n=t.style;return r!==e._v$&&v(s,e._v$=r),e._v$2=d(s,n,e._v$2),e},{_v$:void 0,_v$2:void 0}),s})()}export{_ as D};

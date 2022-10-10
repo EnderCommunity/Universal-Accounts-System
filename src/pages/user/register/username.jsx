@@ -5,7 +5,7 @@
  **/
 
 import { Title } from './../../../assets/components/Title.jsx';
-import { Input, Button, Notice, Mark, FlexContainer, setInputState } from './../../../assets/components/CustomElements.jsx';
+import { Input, Button, Notice, Mark, FlexContainer, setInputState, showDialog } from './../../../assets/components/CustomElements.jsx';
 import { InputFieldsContainer, nextCheck, redoRegister, ButtonsContainer } from './../register.jsx';
 import { onMount } from "solid-js";
 import { useNavigate } from '@solidjs/router';
@@ -69,6 +69,8 @@ export default function RegisterUsername(props){
                                         setError();
                                     }else{
                                         // Check if the username is taken!
+                                        showDialog("Caution!", "No profanity check for 'username'");
+                                        showDialog("Caution!", "No availability check for 'username'");
                                     }
                                 }else{
                                     setInputState(username, false, "An error occured, please try again later!");

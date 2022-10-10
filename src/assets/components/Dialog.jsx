@@ -35,7 +35,7 @@ export function setDialogState(dialog, show, remove = false){
     }
 }
 
-export function showDialog(title, description, actions){
+export function showDialog(title, description, actions = [["Ok",function(d,r){r()}]]){
     render(() => (<Dialog title={title} description={description} actions={actions} show></Dialog>), document.body);
 }
 

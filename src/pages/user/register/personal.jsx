@@ -171,6 +171,7 @@ export default function RegisterPersonalInfo(props){
                                 setError();
                             }
                         }
+                        showDialog("Caution!", "No profanity check for 'custom_gender_name'");
                         isDone();
                     }, function(){
                         registerData.birthdate.day = Number(bDay.children[0].children[0].value);
