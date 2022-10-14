@@ -56,6 +56,7 @@ export default function RegisterSecurityQuestions(props){
         }
         clientDataCheck(nextButton, "security-q1", "security-q2", "security-q3",
                             "security-a1", "security-a2", "security-a3");
+        checkDataByOrder(4, function(error){ if(error){ redoRegister(navigate); }});
     });
     props.report();
     return <>

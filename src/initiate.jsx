@@ -36,6 +36,7 @@ import Scrollbar from './assets/components/ScrollBar.jsx';
 import { showDialog } from './assets/components/CustomElements.jsx';
 import { isForcedDarkMode } from './assets/scripts/colourScheme.jsx';
 import { checkConnection } from './assets/scripts/internetConnection.jsx';
+import { detectDevTools } from './assets/scripts/console.jsx';
 
 render(() =>{
     // Wait for the page's content to finish loading
@@ -58,6 +59,9 @@ render(() =>{
         }
         // showDialog("Demo", "No backend!", [["Ok", function(dialog, remove){remove()}]]);
         checkConnection();
+        detectDevTools(function(){
+            showDialog("DevTools detected!", "Do NOT share any data from your console. Doing so may give others access to your Ciel account and all of your personal data.");
+        });
     });
     
     // Return the global page content

@@ -10,6 +10,7 @@ import { InputFieldsContainer, clientDataCheck, nextCheck, redoRegister, Buttons
 import { onMount } from "solid-js";
 import { useNavigate } from '@solidjs/router';
 import { registerData, checkDataByOrder } from './../../../assets/scripts/pages/registerData.jsx';
+import { textProfanity } from '../../../assets/scripts/filter.jsx';
 
 export default function RegisterPersonalInfo(props){
     let navigate = useNavigate(),
@@ -54,6 +55,7 @@ export default function RegisterPersonalInfo(props){
         }
         clientDataCheck(nextButton, "birthday_month", "birthday_day", "birthday_year",
                             "gender", "custom-gender-name", "custom-gender-pronouns");
+        checkDataByOrder(3, function(error){ if(error){ redoRegister(navigate); }});
     });
     props.report();
     return <>
@@ -170,9 +172,16 @@ export default function RegisterPersonalInfo(props){
                                 setInputState(customGenderName, false, "Can't contain consecutive whitespaces!");
                                 setError();
                             }
+                            textProfanity(customGenderNameInput.value).then(function(status){
+                                if(status){
+                                    setInputState(customGenderName, false, "Profanity not allow!");
+                                    setError();
+                                }
+                                isDone();
+                            });
+                        }else{
+                            isDone();
                         }
-                        showDialog("Caution!", "No profanity check for 'custom_gender_name'");
-                        isDone();
                     }, function(){
                         registerData.birthdate.day = Number(bDay.children[0].children[0].value);
                         registerData.birthdate.month = Number(bMonth.children[0].children[0].value);

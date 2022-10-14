@@ -23,6 +23,7 @@ export default function RegisterPassword(props){
     onMount(() => {
         updateButton = clientDataCheck(nextButton, "password", "password_confirm");
         usernameHiddenInput.value = registerData.username;
+        checkDataByOrder(2, function(error){ if(error){ redoRegister(navigate); }});
     });
     props.report();
     return <>

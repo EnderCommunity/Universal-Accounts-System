@@ -4,6 +4,8 @@
  * 
  **/
 
+import { log } from './../console.jsx';
+
 export function loadAES(callback){
     if(typeof CryptoJS != "object"){
         let script = document.createElement('script');
@@ -47,7 +49,8 @@ function cleanRegisterDataObject () {
             activity: undefined, // 1 - Ciel.affiliated.third-party, 2 - Ciel.affiliated, 3 - Ciel            
             location: undefined, // 1 - approximate, 2 - precise
             colorScheme: undefined, // 0 - auto, 1 - light, 2 - dark
-        }
+        },
+        agreement: undefined
     };
 }
 
@@ -72,11 +75,13 @@ export var dataOrder = {
     "securityQuestions.a1", "securityQuestions.a2", "securityQuestions.a3",],
     // /register/quick-settings
     6: ["quickSettings.profile", "quickSettings.activity", "quickSettings.location",
-        "quickSettings.colorScheme"]
+        "quickSettings.colorScheme"],
+    // /register/agreement
+    7: ["agreement"]
 }, dataSectionsN = Object.keys(dataOrder).length;
 
 export function checkDataByOrder(section, callback){
-    console.log(registerData);
+    log(registerData);
     if(section < 1 || section > dataSectionsN){
         throw new Error("Incorrect section ID!");
     }
