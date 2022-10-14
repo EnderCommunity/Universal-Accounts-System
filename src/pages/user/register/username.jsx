@@ -92,6 +92,7 @@ export default function RegisterUsername(props){
                                 checkStatus();
                             });
                             // Check if the username is taken!
+                            // Note: add a server-side system to temp-reserve usernames for 5 minutes (with reserve time extensions for the user depending on the page)
                             showDialog("Caution!", "No availability check for 'username'");
                         }
                     }, function(){
