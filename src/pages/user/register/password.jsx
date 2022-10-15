@@ -94,18 +94,18 @@ export default function RegisterPassword(props){
                             setInputState(username, false, "Must at least contain one letter!");
                             setError();*/
 
-                        isDone();
-                    }, function(){
                         loadAES(function(){
-                            registerData.passwordHash = hash(password.children[0].children[0].value);
-                            checkDataByOrder(3, function(error){
-                                if(error){
-                                    emptyPassword();
-                                    setTimeout(function(){redoRegister(navigate)}, 1);
-                                }else{
-                                    navigate("/user/register/personal");
-                                }
-                            });
+                            isDone();
+                        });
+                    }, function(){
+                        registerData.passwordHash = hash(password.children[0].children[0].value);
+                        checkDataByOrder(3, function(error){
+                            if(error){
+                                emptyPassword();
+                                setTimeout(function(){redoRegister(navigate)}, 1);
+                            }else{
+                                navigate("/user/register/personal");
+                            }
                         });
                     });
                 }} primary>Next</Button>

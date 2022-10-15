@@ -20,7 +20,8 @@ const Pages = {
     RegisterPersonalInfo: lazy(() => import("./../../pages/user/register/personal.jsx")),
     RegisterSecurityQuestions: lazy(() => import("./../../pages/user/register/security-questions.jsx")),
     RegisterQuickSettings: lazy(() => import("./../../pages/user/register/quick-settings.jsx")),
-    RegisterAgreement: lazy(() => import("./../../pages/user/register/agreement.jsx"))
+    RegisterAgreement: lazy(() => import("./../../pages/user/register/agreement.jsx")),
+    RegisterReview: lazy(() => import("./../../pages/user/register/review.jsx"))
 }, Error = {
     NotFound: lazy(() => import("./../../pages/error/404.jsx"))
 };
@@ -48,6 +49,7 @@ export function WebRoutes(props){
         <Route path={"/user/register/security-questions"} element={<Pages.RegisterSecurityQuestions report={props.ping}></Pages.RegisterSecurityQuestions>} />
         <Route path={"/user/register/quick-settings"} element={<Pages.RegisterQuickSettings report={props.ping}></Pages.RegisterQuickSettings>} />
         <Route path={"/user/register/agreement"} element={<Pages.RegisterAgreement report={props.ping}></Pages.RegisterAgreement>} />
+        <Route path={"/user/register/review"} element={<Pages.RegisterReview report={props.ping}></Pages.RegisterReview>} />
     </Routes>
     );
 }

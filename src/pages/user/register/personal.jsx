@@ -42,8 +42,11 @@ export default function RegisterPersonalInfo(props){
             bYear.children[0].children[0].value = registerData.birthdate.year;
         }
         if(registerData.gender != undefined){
-            if(registerData.gender == "male" || registerData.gender == "female" || registerData.gender == "unknown"){
-                gender.children[0].children[0].value = registerData.gender;
+            if(
+                (registerData.gender == "Male" && registerData.pronounce == 1) ||
+                (registerData.gender == "Female" && registerData.pronounce == 2) ||
+                (registerData.gender == "Unknown" && registerData.pronounce == 0)){
+                gender.children[0].children[0].value = registerData.gender.toLowerCase();
             }else{
                 gender.children[0].children[0].value = "custom";
                 genderChangeFunc();
@@ -186,15 +189,18 @@ export default function RegisterPersonalInfo(props){
                         registerData.birthdate.day = Number(bDay.children[0].children[0].value);
                         registerData.birthdate.month = Number(bMonth.children[0].children[0].value);
                         registerData.birthdate.year = Number(bYear.children[0].children[0].value);
-                        let genderValue = gender.children[0].children[0].value;
+                        let genderValue = gender.children[0].children[0].value,
+                            processGenderName = (gender) => {
+                                return gender.charAt(0).toUpperCase() + gender.slice(1).toLowerCase();
+                            };
                         if(genderValue == "custom"){
-                            registerData.gender = customGenderName.children[0].children[0].value;
+                            registerData.gender = processGenderName(customGenderName.children[0].children[0].value);
                             registerData.pronounce = Number(customGenderPronouns.children[0].children[0].value);
                         }else{
-                            registerData.gender = genderValue;
-                            if(genderValue == "male"){
+                            registerData.gender = processGenderName(genderValue);
+                            if(registerData.gender == "Male"){
                                 registerData.pronounce = 1; // He/Him
-                            }else if(genderValue == "female"){
+                            }else if(registerData.gender == "Female"){
                                 registerData.pronounce = 2; // She/Her
                             }else{
                                 registerData.pronounce = 0; // They/Them

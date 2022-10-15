@@ -7,9 +7,10 @@
 import { Title } from './../../../assets/components/Title.jsx';
 import { Input, Select, Button, Notice, Mark, FlexContainer, setInputState } from './../../../assets/components/CustomElements.jsx';
 import { InputFieldsContainer, clientDataCheck, nextCheck, redoRegister, ButtonsContainer } from './../register.jsx';
-import { onMount } from "solid-js";
+import { createSignal, onMount } from "solid-js";
 import { useNavigate } from '@solidjs/router';
 import { registerData, checkDataByOrder } from './../../../assets/scripts/pages/registerData.jsx';
+import { getSecurityQuestions } from './../../../assets/scripts/securityQuestions.jsx';
 
 function checkQuestionStatus(number, answerElm){
     let question = document.getElementById("security-q" + number),
@@ -29,6 +30,11 @@ function checkQuestionStatus(number, answerElm){
 export default function RegisterSecurityQuestions(props){
     let navigate = useNavigate(),
         nextButton, qusElm1, qusElm2, qusElm3, ansElm1, ansElm2, ansElm3;
+    const [securityQuestions, setSecurityQuestions] = createSignal({
+        1: [undefined, undefined, undefined, undefined, undefined, undefined],
+        2: [undefined, undefined, undefined, undefined, undefined, undefined],
+        3: [undefined, undefined, undefined, undefined, undefined, undefined]
+    });
     onMount(() => {
         if(registerData.securityQuestions.q1 != undefined){
             qusElm1.children[0].children[0].value = registerData.securityQuestions.q1;
@@ -58,7 +64,10 @@ export default function RegisterSecurityQuestions(props){
                             "security-a1", "security-a2", "security-a3");
         checkDataByOrder(4, function(error){ if(error){ redoRegister(navigate); }});
     });
-    props.report();
+    getSecurityQuestions().then(function(data){
+        setSecurityQuestions(data);
+        props.report();
+    });
     return <>
         <Title>Sign Up</Title>
         <h1>Security is key!</h1>
@@ -70,12 +79,12 @@ export default function RegisterSecurityQuestions(props){
                         onChange={function(){
                             checkQuestionStatus(1, ansElm1);
                         }}>
-                    <option value={1}>What was your childhood nickname?</option>
-                    <option value={2}>What was the name of your first stuffed animal?</option>
-                    <option value={3}>What is the name of your favourite childhood friend?</option>
-                    <option value={4}>What school did you attend for sixth grade?</option>
-                    <option value={5}>What street did you live on in third grade?</option>
-                    <option value={6}>What was the last name of your third-grade teacher?</option>
+                    <option value={1}>{securityQuestions()[1][0]}</option>
+                    <option value={2}>{securityQuestions()[1][1]}</option>
+                    <option value={3}>{securityQuestions()[1][2]}</option>
+                    <option value={4}>{securityQuestions()[1][3]}</option>
+                    <option value={5}>{securityQuestions()[1][4]}</option>
+                    <option value={6}>{securityQuestions()[1][5]}</option>
                 </Select>
                 <Input ref={ansElm1} id={"security-a1"} type={"text"} label={"Answer 1"}
                         style={{width: "calc(100% - 8px)"}}/>
@@ -85,12 +94,12 @@ export default function RegisterSecurityQuestions(props){
                         onChange={function(){
                             checkQuestionStatus(2, ansElm2);
                         }}>
-                    <option value={1}>In what city or town did your mother and father meet?</option>
-                    <option value={2}>Where were you when you had your first kiss?</option>
-                    <option value={3}>What is the first name of the boy or girl that you first kissed?</option>
-                    <option value={4}>In what city did you meet your spouse/significant other?</option>
-                    <option value={5}>What is the name of the place your wedding reception was held?</option>
-                    <option value={6}>What is your maternal grandmother's maiden name?</option>
+                    <option value={1}>{securityQuestions()[2][0]}</option>
+                    <option value={2}>{securityQuestions()[2][1]}</option>
+                    <option value={3}>{securityQuestions()[2][2]}</option>
+                    <option value={4}>{securityQuestions()[2][3]}</option>
+                    <option value={5}>{securityQuestions()[2][4]}</option>
+                    <option value={6}>{securityQuestions()[2][5]}</option>
                 </Select>
                 <Input ref={ansElm2} id={"security-a2"} type={"text"} label={"Answer 2"}
                         style={{width: "calc(100% - 8px)"}}/>
@@ -100,17 +109,18 @@ export default function RegisterSecurityQuestions(props){
                         onChange={function(){
                             checkQuestionStatus(3, ansElm3);
                         }}>
-                    <option value={1}>What's your dream job?</option>
-                    <option value={2}>In what city or town was your first job?</option>
-                    <option value={3}>In what city does your nearest sibling live?</option>
-                    <option value={4}>What is the country of your ultimate dream vacation?</option>
-                    <option value={5}>What is the name of your favourite teacher?</option>
-                    <option value={6}>What was the name of your elementary/primary school?</option>
+                    <option value={1}>{securityQuestions()[3][0]}</option>
+                    <option value={2}>{securityQuestions()[3][1]}</option>
+                    <option value={3}>{securityQuestions()[3][2]}</option>
+                    <option value={4}>{securityQuestions()[3][3]}</option>
+                    <option value={5}>{securityQuestions()[3][4]}</option>
+                    <option value={6}>{securityQuestions()[3][5]}</option>
                 </Select>
                 <Input ref={ansElm3} id={"security-a3"} type={"text"} label={"Answer 3"}
                         style={{width: "calc(100% - 8px)"}}/>
             </InputFieldsContainer>
             <Notice>Security questions are important. They can help you regain access to your account when you get locked out - so don't share them with anyone!</Notice>
+            <Notice>When you answer your security questions, the answer needs to be in the format you first entered them. So try to write them down somewhere!</Notice>
             <ButtonsContainer>
                 <Button type={"action"} function={function(){history.back()}}>Go back</Button>
                 <Button ref={nextButton} type={"action"} function={function(){

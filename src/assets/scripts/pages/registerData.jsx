@@ -46,7 +46,7 @@ function cleanRegisterDataObject () {
         },
         quickSettings: {
             profile: undefined, // 1 - rich, 2 - limited, 3 - hidden
-            activity: undefined, // 1 - Ciel.affiliated.third-party, 2 - Ciel.affiliated, 3 - Ciel            
+            activity: undefined, // 1 - Ciel.affiliated.third-party, 2 - Ciel.affiliated, 3 - Ciel
             location: undefined, // 1 - approximate, 2 - precise
             colorScheme: undefined, // 0 - auto, 1 - light, 2 - dark
         },
