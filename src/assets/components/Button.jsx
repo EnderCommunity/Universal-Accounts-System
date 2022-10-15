@@ -8,7 +8,7 @@ import generalStyles from './../styles/general.module.css';
 
 import { Link } from "@solidjs/router";
 import { processProps } from './_custom.jsx';
-import { createEffect, createSignal } from 'solid-js';
+import { createEffect, createSignal, onMount } from 'solid-js';
 
 // <Button type="link" href="/"></Button>
 // <Button type="action" function={<function>}></Button>
@@ -17,11 +17,16 @@ export function Button(props){
     let basicProps = processProps(props, generalStyles.button,
                                         (props.primary) ? generalStyles.primarybutton : undefined,
                                         (props.light) ? generalStyles.lightButton : undefined,
-                                        (props.icon) ? generalStyles.iconButton : undefined),
+                                        (props.icon) ? generalStyles.iconButton : undefined,
+                                        (props.small) ? generalStyles.smallButton : undefined),
         icon = (props.icon) ? (<div class={generalStyles.buttonIcon}>{props.icon}</div>) : "";
     const [content, setContent] = createSignal((props.icon) ? (<div class={generalStyles.iconButtonText}>{props.children}</div>) : props.children);
     createEffect(() => {
         setContent((props.icon) ? (<div class={generalStyles.iconButtonText}>{props.children}</div>) : props.children);
+    });
+    onMount((...a) => {
+        if(props.ref != undefined && props.disabled)
+            props.ref.setAttribute("disabled", "");
     });
     if(props.type == "link"){
         return (<Link ref={props.ref} href={props.href} class={basicProps.class} id={props.id} style={basicProps.style}>{icon}{content()}</Link>);

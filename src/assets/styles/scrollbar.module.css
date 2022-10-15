@@ -14,7 +14,7 @@
     display: none;
     align-items: center;
     justify-content: right;
-    z-index: 100;
+    z-index: 50;
 }
 
 .scrollbarContainer:not(:hover),
@@ -55,9 +55,10 @@
 }
 
 .scrollbarContainer .scrollbar {
-    width: 10px;
+    width: 12px;
     height: calc(100% - 16px);
     margin: 8px 4px;
+    margin-right: 0px;
     background: transparent;
     border-radius: 100px;
     overflow: hidden;

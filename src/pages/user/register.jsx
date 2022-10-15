@@ -11,6 +11,9 @@ import { Input, setInputState, Button, Notice, Mark, FlexContainer, showDialog }
 import { onMount } from "solid-js";
 import { useNavigate } from '@solidjs/router';
 import { registerData, resetRegisterData } from './../../assets/scripts/pages/registerData.jsx';
+import { textProfanity } from '../../assets/scripts/filter.jsx';
+
+import ExpandDownIcon from './../../assets/icons/expand_down.svg';
 
 export function InputFieldsContainer(props){
     return (<div style={{width: "100%", position: "relative", overflow: "hidden"}}>{props.children}</div>);
@@ -100,7 +103,10 @@ export function ButtonsContainer(props){
         {threshold: [1]});
         observer.observe(flexContainer)
     });
-    return (<FlexContainer ref={flexContainer} class={style.buttonsStickyContainer} space={"between"} horozontal no-grow>{props.children}</FlexContainer>);
+    return (<FlexContainer ref={flexContainer} class={style.buttonsStickyContainer} space={"between"} horozontal no-grow>
+            <ExpandDownIcon tabindex={0} onClick={function(){window.scrollTo(0, window.scrollY + window.innerHeight/2)}}/>
+            {props.children}
+        </FlexContainer>);
 }
 
 export default function Register(props){
@@ -134,7 +140,13 @@ export default function Register(props){
                 <Button ref={nextButton} type={"action"} function={function(){
                         nextCheck(nextButton, function(setError, isDone){
                             let firstNameInput = firstName.children[0].children[0],
-                                lastNameInput = lastName.children[0].children[0];
+                                lastNameInput = lastName.children[0].children[0],
+                                calls = 0, // [MAX, Cur]
+                                checkRStatus = function(){
+                                    calls++;
+                                    if(calls == 2)
+                                        isDone();
+                                };
                             [
                                 [firstNameInput, firstName],
                                 [lastNameInput, lastName]
@@ -142,11 +154,16 @@ export default function Register(props){
                                 if(!/^[a-zA-Z]+$/.test(elms[0].value)){
                                     setInputState(elms[1], false, "Can only contain letters!");
                                     setError();
+                                }else{
+                                    textProfanity(elms[0].value).then(function(status){
+                                        if(status){
+                                            setInputState(elms[1], false, "Profanity not allow!");
+                                            setError();
+                                        }
+                                        checkRStatus();
+                                    });
                                 }
                             });
-                            showDialog("Caution!", "No profanity check for 'first_name'");
-                            showDialog("Caution!", "No profanity check for 'last_name'");
-                            isDone();
                         }, function(){
                             registerData.name.first = firstName.children[0].children[0].value;
                             registerData.name.last = lastName.children[0].children[0].value;

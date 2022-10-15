@@ -7,7 +7,7 @@
 // Step 1: Ready the render function
 /* @refresh reload */
 import { render } from 'solid-js/web';
-import { createSignal, onMount } from "solid-js";
+import { createEffect, createSignal, onMount } from "solid-js";
 
 // Step 2: Ready the router
 import { Router } from "@solidjs/router";
@@ -36,6 +36,7 @@ import Scrollbar from './assets/components/ScrollBar.jsx';
 import { showDialog } from './assets/components/CustomElements.jsx';
 import { isForcedDarkMode } from './assets/scripts/colourScheme.jsx';
 import { checkConnection } from './assets/scripts/internetConnection.jsx';
+import { detectDevTools } from './assets/scripts/console.jsx';
 
 render(() =>{
     // Wait for the page's content to finish loading
@@ -52,12 +53,21 @@ render(() =>{
             }
         };
 
-    onMount(() => {
-        if(isForcedDarkMode()){
-            showDialog("Clarification!", "This website supports dark mode. Your browser's 'forced dark mode' could result in theme abnormalities!", [["Ok", function(dialog, remove){remove()}]]);
+    let stopEffect = false;
+    createEffect(() => {
+        if(!stopEffect && showContent()){
+            stopEffect = true;
+            setTimeout(function(){
+                if(isForcedDarkMode()){
+                    showDialog("Clarification!", "This website supports dark mode. Your browser's 'forced dark mode' could result in theme abnormalities!", [["Ok", function(dialog, remove){remove()}]]);
+                }
+                // showDialog("Demo", "No backend!");
+                checkConnection();
+                detectDevTools(function(){
+                    showDialog("Caution!", "Do NOT paste anything into your console, and don't show your console to anyone you don't trust. Your data could be stolen by attackers should you proceed without knowing what you're doing!");
+                });
+            }, 1800);
         }
-        // showDialog("Demo", "No backend!", [["Ok", function(dialog, remove){remove()}]]);
-        checkConnection();
     });
     
     // Return the global page content

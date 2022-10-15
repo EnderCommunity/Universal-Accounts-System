@@ -10,6 +10,7 @@ import { InputFieldsContainer, nextCheck, redoRegister, ButtonsContainer } from 
 import { onMount } from "solid-js";
 import { useNavigate } from '@solidjs/router';
 import { registerData, checkDataByOrder } from './../../../assets/scripts/pages/registerData.jsx';
+import { textProfanity } from '../../../assets/scripts/filter.jsx';
 
 export default function RegisterUsername(props){
     let navigate = useNavigate(),
@@ -28,6 +29,7 @@ export default function RegisterUsername(props){
         };
         check();
         usernameInput.oninput = check;
+        checkDataByOrder(1, function(error){ if(error){ redoRegister(navigate); }});
     });
     props.report();
     return <>
@@ -46,7 +48,14 @@ export default function RegisterUsername(props){
                 <Button ref={nextButton} type={"action"} function={function(){
                     nextCheck(nextButton, function(setError, isDone){
                         let usernameInput = username.children[0].children[0],
-                            userValue = usernameInput.value.toLowerCase();
+                            userValue = usernameInput.value.toLowerCase(),
+                            calls = 0,
+                            checkStatus = function(){
+                                calls++;
+                                if(calls == 2){
+                                    isDone();
+                                }
+                            };
                         if(!/^[A-Za-z0-9_]*$/.test(userValue)){
                             setInputState(username, false, "Can only contain letters, numbers, and underscores!");
                             setError();
@@ -67,17 +76,24 @@ export default function RegisterUsername(props){
                                     if(reservedUsernames.includes(userValue)){
                                         setInputState(username, false, "Username is reserved by the system!");
                                         setError();
-                                    }else{
-                                        // Check if the username is taken!
-                                        showDialog("Caution!", "No profanity check for 'username'");
-                                        showDialog("Caution!", "No availability check for 'username'");
                                     }
                                 }else{
                                     setInputState(username, false, "An error occured, please try again later!");
                                     setError();
                                 }
-                                isDone();
+                                checkStatus();
                             };
+                            // Profanity Check
+                            textProfanity(usernameInput.value).then(function(status){
+                                if(status){
+                                    setInputState(username, false, "Profanity not allow!");
+                                    setError();
+                                }
+                                checkStatus();
+                            });
+                            // Check if the username is taken!
+                            // Note: add a server-side system to temp-reserve usernames for 5 minutes (with reserve time extensions for the user depending on the page)
+                            showDialog("Caution!", "No availability check for 'username'");
                         }
                     }, function(){
                         registerData.username = username.children[0].children[0].value;

@@ -17,7 +17,7 @@ function LocalContent(props){
 
     // Check the landing request
     landingCheck(props.isSignedIn);
-    //console.log(props.userData);
+    //log(props.userData);
 
     // props.userData;
 

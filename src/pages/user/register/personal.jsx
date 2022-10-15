@@ -10,6 +10,7 @@ import { InputFieldsContainer, clientDataCheck, nextCheck, redoRegister, Buttons
 import { onMount } from "solid-js";
 import { useNavigate } from '@solidjs/router';
 import { registerData, checkDataByOrder } from './../../../assets/scripts/pages/registerData.jsx';
+import { textProfanity } from '../../../assets/scripts/filter.jsx';
 
 export default function RegisterPersonalInfo(props){
     let navigate = useNavigate(),
@@ -41,8 +42,11 @@ export default function RegisterPersonalInfo(props){
             bYear.children[0].children[0].value = registerData.birthdate.year;
         }
         if(registerData.gender != undefined){
-            if(registerData.gender == "male" || registerData.gender == "female" || registerData.gender == "unknown"){
-                gender.children[0].children[0].value = registerData.gender;
+            if(
+                (registerData.gender == "Male" && registerData.pronounce == 1) ||
+                (registerData.gender == "Female" && registerData.pronounce == 2) ||
+                (registerData.gender == "Unknown" && registerData.pronounce == 0)){
+                gender.children[0].children[0].value = registerData.gender.toLowerCase();
             }else{
                 gender.children[0].children[0].value = "custom";
                 genderChangeFunc();
@@ -54,6 +58,7 @@ export default function RegisterPersonalInfo(props){
         }
         clientDataCheck(nextButton, "birthday_month", "birthday_day", "birthday_year",
                             "gender", "custom-gender-name", "custom-gender-pronouns");
+        checkDataByOrder(3, function(error){ if(error){ redoRegister(navigate); }});
     });
     props.report();
     return <>
@@ -170,22 +175,32 @@ export default function RegisterPersonalInfo(props){
                                 setInputState(customGenderName, false, "Can't contain consecutive whitespaces!");
                                 setError();
                             }
+                            textProfanity(customGenderNameInput.value).then(function(status){
+                                if(status){
+                                    setInputState(customGenderName, false, "Profanity not allow!");
+                                    setError();
+                                }
+                                isDone();
+                            });
+                        }else{
+                            isDone();
                         }
-                        showDialog("Caution!", "No profanity check for 'custom_gender_name'");
-                        isDone();
                     }, function(){
                         registerData.birthdate.day = Number(bDay.children[0].children[0].value);
                         registerData.birthdate.month = Number(bMonth.children[0].children[0].value);
                         registerData.birthdate.year = Number(bYear.children[0].children[0].value);
-                        let genderValue = gender.children[0].children[0].value;
+                        let genderValue = gender.children[0].children[0].value,
+                            processGenderName = (gender) => {
+                                return gender.charAt(0).toUpperCase() + gender.slice(1).toLowerCase();
+                            };
                         if(genderValue == "custom"){
-                            registerData.gender = customGenderName.children[0].children[0].value;
+                            registerData.gender = processGenderName(customGenderName.children[0].children[0].value);
                             registerData.pronounce = Number(customGenderPronouns.children[0].children[0].value);
                         }else{
-                            registerData.gender = genderValue;
-                            if(genderValue == "male"){
+                            registerData.gender = processGenderName(genderValue);
+                            if(registerData.gender == "Male"){
                                 registerData.pronounce = 1; // He/Him
-                            }else if(genderValue == "female"){
+                            }else if(registerData.gender == "Female"){
                                 registerData.pronounce = 2; // She/Her
                             }else{
                                 registerData.pronounce = 0; // They/Them

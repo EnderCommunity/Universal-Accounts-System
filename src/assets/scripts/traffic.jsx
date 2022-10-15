@@ -6,6 +6,7 @@
 
 import { createEffect } from 'solid-js';
 import { useLocation, useNavigate } from "@solidjs/router";
+import { log } from './console.jsx';
 
 export function afterURLChange(callback){
     let location = useLocation();
@@ -38,7 +39,7 @@ export function landingCheck(signedIn){
             }
         }
 
-        console.log(location.pathname);
+        log(location.pathname);
 
     });
 

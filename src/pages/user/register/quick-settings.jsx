@@ -65,6 +65,7 @@ export default function RegisterQuickSettings(props){
             updateColorScheme(Number(getRadioValueByNameGroup("color-scheme")));
         });
         updateColorScheme(Number(getRadioValueByNameGroup("color-scheme")));
+        checkDataByOrder(5, function(error){ if(error){ redoRegister(navigate); }});
     });
     props.report();
     return <>
