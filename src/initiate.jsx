@@ -60,7 +60,7 @@ render(() =>{
         // showDialog("Demo", "No backend!", [["Ok", function(dialog, remove){remove()}]]);
         checkConnection();
         detectDevTools(function(){
-            showDialog("DevTools detected!", "Do NOT share any data from your console. Doing so may give others access to your Ciel account and all of your personal data.");
+            showDialog("Caution!", "Do NOT paste anything into your console or show it to anyone you don't trust. Your data could be stolen by attackers should you proceed without knowing what you're doing!");
         });
     });
     

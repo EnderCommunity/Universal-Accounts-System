@@ -12,7 +12,7 @@ export function log() {
 }
 
 export function detectDevTools(callback) {
-    if (import.meta.env.MODE == "development") {
+    if (import.meta.env.MODE != "development") {
         let userWarned = false,
             dDevTool = (allow) => {
                 if(!userWarned){
