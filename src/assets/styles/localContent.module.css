@@ -34,7 +34,7 @@
 }
 
 .localcontent:not([data-show-content=true]) {
-    opacity: 0;
+    opacity: 0 !important;
     overflow: hidden;
 }
 
@@ -91,11 +91,12 @@
     width: 100%;
 }
 
-.container:empty {
+.container:empty,
+.container:not([data-show=true]) {
     display: none;
 }
 
-.localcontent>.loadingContainer[data-show=false]+.container {
+.loadingContainer[data-show=false]+.container {
     animation: fadeContainer;
     animation-duration: 0.1s;
     animation-timing-function: ease-in-out;

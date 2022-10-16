@@ -6,7 +6,8 @@
         "start": "vite",
         "dev": "vite --host",
         "build": "vite build",
-        "serve": "vite preview"
+        "serve": "vite preview",
+        "php": "vite build --mode development && cd dist/ && \"../php_server_folder/php.exe\" -S localhost:80"
     },
     "license": "MIT",
     "devDependencies": {

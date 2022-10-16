@@ -8,7 +8,7 @@ import style from './../../../assets/styles/pages/user.agreement.module.css';
 
 import { Title } from './../../../assets/components/Title.jsx';
 import { Button, Notice, Mark, FlexContainer, showDialog } from './../../../assets/components/CustomElements.jsx';
-import { onMount } from "solid-js";
+import { onCleanup, onMount } from 'solid-js';
 import { useNavigate } from '@solidjs/router';
 import { registerData, checkDataByOrder } from './../../../assets/scripts/pages/registerData.jsx';
 import { ButtonsContainer, InputFieldsContainer, nextCheck, redoRegister } from './../register.jsx';
@@ -42,9 +42,17 @@ export default function RegisterAgreement(props){
     let navigate = useNavigate(),
         nextButton;
     onMount(() => {
-        checkDataByOrder(6, function(error){ if(error){ redoRegister(navigate); }});
+        checkDataByOrder(6, function(error){
+            if(error){
+                redoRegister(navigate);
+            }else{
+                props.pageLoaded();
+            }
+        });
     });
-    props.report();
+    onCleanup(() => {
+        props.pageUnloading();
+    });
     return <>
         <Title>Sign Up</Title>
         <h1>User agreement</h1>

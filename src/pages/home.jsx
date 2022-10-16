@@ -5,9 +5,15 @@
  **/
 
 import { Title } from './../assets/components/Title.jsx';
+import { onCleanup, onMount } from 'solid-js';
 
 export default function Home(props){
-    props.report();
+    onCleanup(() => {
+        props.pageUnloading();
+    });
+    onMount(() => {
+        props.pageLoaded();
+    });
     return <>
         <Title>Home</Title>
         "/"!

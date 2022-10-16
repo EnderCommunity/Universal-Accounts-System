@@ -6,7 +6,7 @@
 
 import { Title } from './../../assets/components/Title.jsx';
 import { Input, Button, Notice, Mark, FlexContainer } from '../../assets/components/CustomElements.jsx';
-import { onMount } from 'solid-js';
+import { onCleanup, onMount } from 'solid-js';
 
 export function InputFieldsContainer(props){
     return (<div style={{width: "100%", position: "relative", overflow: "hidden"}}>{props.children}</div>);
@@ -24,8 +24,11 @@ export default function Login(props){
         };
         check();
         usernameInput.oninput = check;
+        props.pageLoaded();
     });
-    props.report();
+    onCleanup(() => {
+        props.pageUnloading();
+    });
     return <>
         <Title>Sign In</Title>
         <h1>Sign in</h1>

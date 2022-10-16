@@ -7,7 +7,7 @@
 import { Title } from './../../../assets/components/Title.jsx';
 import { Input, Button, Notice, Mark, FlexContainer, CheckBox, setInputState } from './../../../assets/components/CustomElements.jsx';
 import { InputFieldsContainer, clientDataCheck, nextCheck, redoRegister, ButtonsContainer } from './../register.jsx';
-import { onMount } from "solid-js";
+import { onCleanup, onMount } from 'solid-js';
 import { useNavigate } from '@solidjs/router';
 import { registerData, checkDataByOrder, hash, loadAES } from './../../../assets/scripts/pages/registerData.jsx';
 
@@ -23,9 +23,17 @@ export default function RegisterPassword(props){
     onMount(() => {
         updateButton = clientDataCheck(nextButton, "password", "password_confirm");
         usernameHiddenInput.value = registerData.username;
-        checkDataByOrder(2, function(error){ if(error){ redoRegister(navigate); }});
+        checkDataByOrder(2, function(error){
+            if(error){
+                redoRegister(navigate);
+            }else{
+                props.pageLoaded();
+            }
+        });
     });
-    props.report();
+    onCleanup(() => {
+        props.pageUnloading();
+    });
     return <>
         <Title>Sign Up</Title>
         <h1>Choose a password!</h1>

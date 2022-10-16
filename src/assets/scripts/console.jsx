@@ -4,6 +4,12 @@
  * 
  **/
 
+export function throwError(error){
+    if(import.meta.env.MODE == "development"){
+        throw error;
+    }
+}
+
 export function log() {
     // Check 'https://vitejs.dev/guide/env-and-mode.html#modes'
     if (import.meta.env.MODE == "development") {

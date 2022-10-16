@@ -1,0 +1,1 @@
+import{T as e}from"./Title.a581f7e6.js";import{o as a,a as n,c as t}from"./index.7d913f48.js";function i(o){return a(()=>{o.pageUnloading()}),n(()=>{o.pageLoaded()}),[t(e,{children:"Home"}),'"/"!']}export{i as default};

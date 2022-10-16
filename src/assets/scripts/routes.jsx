@@ -27,29 +27,30 @@ const Pages = {
 };
 
 export function WebRoutes(props){
+    let reports = {pageLoaded: props.pageLoad, pageUnloading: props.pageUnload}
     return (
     <Routes>
         {/* The error page */}
-        <Route path={"*"} element={<Error.NotFound report={props.ping}></Error.NotFound>} />
+        <Route path={"*"} element={<Error.NotFound {...reports}></Error.NotFound>} />
 
         {/* Pages that require the user to be signed in, and can be used when signed in */}
-        <Route path={"/"} element={<Pages.Home report={props.ping}></Pages.Home>} />
+        <Route path={"/"} element={<Pages.Home {...reports}></Pages.Home>} />
 
         {/* Pages that DON'T require the user to be signed in, and the user can't use while signed in */}
-        <Route path={"/new"} element={<Pages.New report={props.ping}></Pages.New>} />
+        <Route path={"/new"} element={<Pages.New {...reports}></Pages.New>} />
 
-        <Route path={"/user/login"} element={<Pages.Login report={props.ping}></Pages.Login>} />
-        <Route path={"/user/login/password"} element={<Pages.LoginPassword report={props.ping}></Pages.LoginPassword>} />
+        <Route path={"/user/login"} element={<Pages.Login {...reports}></Pages.Login>} />
+        <Route path={"/user/login/password"} element={<Pages.LoginPassword {...reports}></Pages.LoginPassword>} />
 
-        <Route path={"/user/challenge"} element={<Pages.LoginChallenge report={props.ping}></Pages.LoginChallenge>} />
-        <Route path={"/user/register"} element={<Pages.Register report={props.ping}></Pages.Register>} />
-        <Route path={"/user/register/username"} element={<Pages.RegisterUsername report={props.ping}></Pages.RegisterUsername>} />
-        <Route path={"/user/register/password"} element={<Pages.RegisterPassword report={props.ping}></Pages.RegisterPassword>} />
-        <Route path={"/user/register/personal"} element={<Pages.RegisterPersonalInfo report={props.ping}></Pages.RegisterPersonalInfo>} />
-        <Route path={"/user/register/security-questions"} element={<Pages.RegisterSecurityQuestions report={props.ping}></Pages.RegisterSecurityQuestions>} />
-        <Route path={"/user/register/quick-settings"} element={<Pages.RegisterQuickSettings report={props.ping}></Pages.RegisterQuickSettings>} />
-        <Route path={"/user/register/agreement"} element={<Pages.RegisterAgreement report={props.ping}></Pages.RegisterAgreement>} />
-        <Route path={"/user/register/review"} element={<Pages.RegisterReview report={props.ping}></Pages.RegisterReview>} />
+        <Route path={"/user/challenge"} element={<Pages.LoginChallenge {...reports}></Pages.LoginChallenge>} />
+        <Route path={"/user/register"} element={<Pages.Register {...reports}></Pages.Register>} />
+        <Route path={"/user/register/username"} element={<Pages.RegisterUsername {...reports}></Pages.RegisterUsername>} />
+        <Route path={"/user/register/password"} element={<Pages.RegisterPassword {...reports}></Pages.RegisterPassword>} />
+        <Route path={"/user/register/personal"} element={<Pages.RegisterPersonalInfo {...reports}></Pages.RegisterPersonalInfo>} />
+        <Route path={"/user/register/security-questions"} element={<Pages.RegisterSecurityQuestions {...reports}></Pages.RegisterSecurityQuestions>} />
+        <Route path={"/user/register/quick-settings"} element={<Pages.RegisterQuickSettings {...reports}></Pages.RegisterQuickSettings>} />
+        <Route path={"/user/register/agreement"} element={<Pages.RegisterAgreement {...reports}></Pages.RegisterAgreement>} />
+        <Route path={"/user/register/review"} element={<Pages.RegisterReview {...reports}></Pages.RegisterReview>} />
     </Routes>
     );
 }

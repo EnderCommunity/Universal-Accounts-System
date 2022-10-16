@@ -7,7 +7,7 @@
 import { Title } from './../../../assets/components/Title.jsx';
 import { Input, Select, Button, Notice, Mark, FlexContainer, setInputState } from './../../../assets/components/CustomElements.jsx';
 import { InputFieldsContainer, clientDataCheck, nextCheck, redoRegister, ButtonsContainer } from './../register.jsx';
-import { createSignal, onMount } from "solid-js";
+import { createSignal, onMount, onCleanup } from "solid-js";
 import { useNavigate } from '@solidjs/router';
 import { registerData, checkDataByOrder } from './../../../assets/scripts/pages/registerData.jsx';
 import { getSecurityQuestions } from './../../../assets/scripts/securityQuestions.jsx';
@@ -62,11 +62,19 @@ export default function RegisterSecurityQuestions(props){
         }
         clientDataCheck(nextButton, "security-q1", "security-q2", "security-q3",
                             "security-a1", "security-a2", "security-a3");
-        checkDataByOrder(4, function(error){ if(error){ redoRegister(navigate); }});
+        checkDataByOrder(4, function(error){
+            if(error){
+                redoRegister(navigate);
+            }else{
+                getSecurityQuestions().then(function(data){
+                    setSecurityQuestions(data);
+                    props.pageLoaded();
+                });
+            }
+        });
     });
-    getSecurityQuestions().then(function(data){
-        setSecurityQuestions(data);
-        props.report();
+    onCleanup(() => {
+        props.pageUnloading();
     });
     return <>
         <Title>Sign Up</Title>
