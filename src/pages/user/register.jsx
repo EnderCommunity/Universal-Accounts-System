@@ -8,7 +8,7 @@ import style from './../../assets/styles/pages/user.register.module.css';
 
 import { Title } from './../../assets/components/Title.jsx';
 import { Input, setInputState, Button, Notice, Mark, FlexContainer, showDialog } from './../../assets/components/CustomElements.jsx';
-import { onMount } from "solid-js";
+import { onCleanup, onMount } from 'solid-js';
 import { useNavigate } from '@solidjs/router';
 import { registerData, resetRegisterData } from './../../assets/scripts/pages/registerData.jsx';
 import { textProfanity } from '../../assets/scripts/filter.jsx';
@@ -120,8 +120,11 @@ export default function Register(props){
             lastName.children[0].children[0].value = registerData.name.last;
         }
         clientDataCheck(nextButton, "first_name", "last_name");
+        props.pageLoaded();
     });
-    props.report();
+    onCleanup(() => {
+        props.pageUnloading();
+    });
     return <>
         <Title>Sign Up</Title>
         <h1>Create a Ciel account</h1>

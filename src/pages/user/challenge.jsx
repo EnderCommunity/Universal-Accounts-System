@@ -8,6 +8,7 @@ import style from './../../assets/styles/pages/user.challenge.module.css';
 
 import { Title } from './../../assets/components/Title.jsx';
 import { Mark, Button, FlexContainer, Link, Divider } from './../../assets/components/CustomElements.jsx';
+import { onCleanup, onMount } from 'solid-js';
 
 // Import SVG icons
 import SecurityKeyIcon from './../../assets/icons/security_key.svg';
@@ -18,37 +19,49 @@ import WidgetIcon from './../../assets/icons/widget.svg';
 
 function ChallengeOption(props){
     return (
-        <Button light class={style.challengeOptionButton} icon={props.icon}>
+        <Button light class={style.challengeOptionButton} type={"action"}
+                icon={props.icon} {...props}
+                function={props.action}>
             {props.children}
         </Button>
     );
 }
 
-function SecurityKey(){
-    return (<ChallengeOption icon={<SecurityKeyIcon/>}>Use your security key</ChallengeOption>);
+function SecurityKey(props){
+    return (<ChallengeOption icon={<SecurityKeyIcon/>} {...props}
+                                action={function(){}}>Use your security key</ChallengeOption>);
 }
-function AppPrompt(){
-    return (<ChallengeOption icon={<MobileDeviceIcon/>}>Tap <strong>Yes</strong> on your mobile device</ChallengeOption>);
+function AppPrompt(props){
+    return (<ChallengeOption icon={<MobileDeviceIcon/>} {...props}
+                                action={function(){}}>Tap <strong>Yes</strong> on your mobile device</ChallengeOption>);
 }
-function OfflineAppCode(){
-    return (<ChallengeOption icon={<SettingsAltIcon/>}>Use a security code from your mobile device</ChallengeOption>);
+function OfflineAppCode(props){
+    return (<ChallengeOption icon={<SettingsAltIcon/>} {...props}
+                                action={function(){}}>Use a security code from your mobile device</ChallengeOption>);
 }
-function BackupCodes(){
-    return (<ChallengeOption icon={<LockIcon/>}>Enter one of your <strong>emergency</strong> backup codes</ChallengeOption>);
+function BackupCodes(props){
+    return (<ChallengeOption icon={<LockIcon/>} {...props}
+                                action={function(){}}>Enter one of your <strong>emergency</strong> backup codes</ChallengeOption>);
 }
 function AuthApp(props){
-    return (<ChallengeOption icon={<WidgetIcon/>}>Get a verification code from <strong>{props.name}</strong></ChallengeOption>);
+    return (<ChallengeOption icon={<WidgetIcon/>} {...props}
+                                action={function(){}}>Get a verification code from <strong>{props.name}</strong></ChallengeOption>);
 }
 
 export default function Challenge(props){
-    props.report();
+    onCleanup(() => {
+        props.pageUnloading();
+    });
+    onMount(() => {
+        props.pageLoaded();
+    });
     return <>
         <Title>Sign In</Title>
         <h1>2-Step Verification</h1>
         <br/>
         <h3>For your safety please <Mark>verify your identity</Mark> further using one of the following methods:</h3>
         <FlexContainer style={{width: "400px"}}>
-            <SecurityKey/>
+            <SecurityKey disabled/>
             <AppPrompt/>
             <OfflineAppCode/>
             <BackupCodes/>

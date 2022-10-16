@@ -132,8 +132,12 @@
     --svg-color: var(--accent-color);
 }
 
-.button.primarybutton .buttonIcon svg {
+.button.iconButton.primarybutton .buttonIcon svg {
     --svg-color: white;
+}
+
+.button.iconButton[disabled] .buttonIcon svg {
+    --svg-color: var(--background-bold);
 }
 
 .button.iconButton .iconButtonText {
@@ -577,19 +581,7 @@ input[type=number]::-webkit-outer-spin-button {
     display: flex;
     justify-content: center;
     align-items: center;
-    animation-name: fadeInDialog;
-    animation-timing-function: ease;
-    animation-fill-mode: forwards;
-    animation-duration: 0.08s;
-}
-
-@keyframes fadeInDialog {
-    from {
-        background-color: transparent;
-    }
-    to {
-        background-color: var(--dialog-container-background);
-    }
+    background-color: var(--dialog-container-background);
 }
 
 .dialogContainer .dialogBox {

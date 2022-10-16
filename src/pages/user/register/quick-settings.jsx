@@ -9,7 +9,7 @@ import style from './../../../assets/styles/pages/user.quick-settings.module.css
 import { Title } from './../../../assets/components/Title.jsx';
 import { Button, Notice, Mark, FlexContainer, Radio, Divider, onRadioGroupChange, getRadioValueByNameGroup, showDialog } from './../../../assets/components/CustomElements.jsx';
 import { InputFieldsContainer, nextCheck, redoRegister, ButtonsContainer } from './../register.jsx';
-import { onMount } from 'solid-js';
+import { onCleanup, onMount } from 'solid-js';
 import { updateColorScheme } from './../../../assets/scripts/colourScheme.jsx';
 import { registerData, checkDataByOrder } from './../../../assets/scripts/pages/registerData.jsx';
 import { useNavigate } from '@solidjs/router';
@@ -65,9 +65,17 @@ export default function RegisterQuickSettings(props){
             updateColorScheme(Number(getRadioValueByNameGroup("color-scheme")));
         });
         updateColorScheme(Number(getRadioValueByNameGroup("color-scheme")));
-        checkDataByOrder(5, function(error){ if(error){ redoRegister(navigate); }});
+        checkDataByOrder(5, function(error){
+            if(error){
+                redoRegister(navigate);
+            }else{
+                props.pageLoaded();
+            }
+        });
     });
-    props.report();
+    onCleanup(() => {
+        props.pageUnloading();
+    });
     return <>
         <Title>Sign Up</Title>
         <h1>Quick Settings</h1>

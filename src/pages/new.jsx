@@ -8,9 +8,15 @@ import styles from './../assets/styles/pages/new.module.css';
 
 import { Title } from './../assets/components/Title.jsx';
 import { Button, Mark, FlexContainer } from './../assets/components/CustomElements.jsx';
+import { onCleanup, onMount } from 'solid-js';
 
 export default function New(props){
-    props.report();
+    onCleanup(() => {
+        props.pageUnloading();
+    });
+    onMount(() => {
+        props.pageLoaded();
+    });
     return (<>
         <Title>Welcome</Title>
         <h1>Track your internets,<br/>with a <Mark>Ciel account</Mark>!</h1>

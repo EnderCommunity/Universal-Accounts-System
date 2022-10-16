@@ -6,7 +6,7 @@
 
 import { Title } from './../../../assets/components/Title.jsx';
 import { Input, Button, Mark, FlexContainer, CheckBox } from './../../../assets/components/CustomElements.jsx';
-import { onMount } from 'solid-js';
+import { onCleanup, onMount } from 'solid-js';
 import { InputFieldsContainer } from './../login.jsx';
 
 export default function LoginPassword(props){
@@ -21,8 +21,11 @@ export default function LoginPassword(props){
         };
         check();
         passwordInput.oninput = check;
+        props.pageLoaded();
     });
-    props.report();
+    onCleanup(() => {
+        props.pageUnloading();
+    });
     return <>
         <Title>Sign In</Title>
         <h1>Welcome back, [FirstName]!</h1>

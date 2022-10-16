@@ -7,7 +7,7 @@
 import { Title } from './../../../assets/components/Title.jsx';
 import { Input, Select, Button, Notice, Mark, FlexContainer, setInputState, showDialog } from './../../../assets/components/CustomElements.jsx';
 import { InputFieldsContainer, clientDataCheck, nextCheck, redoRegister, ButtonsContainer } from './../register.jsx';
-import { onMount } from "solid-js";
+import { onCleanup, onMount } from 'solid-js';
 import { useNavigate } from '@solidjs/router';
 import { registerData, checkDataByOrder } from './../../../assets/scripts/pages/registerData.jsx';
 import { textProfanity } from '../../../assets/scripts/filter.jsx';
@@ -58,9 +58,17 @@ export default function RegisterPersonalInfo(props){
         }
         clientDataCheck(nextButton, "birthday_month", "birthday_day", "birthday_year",
                             "gender", "custom-gender-name", "custom-gender-pronouns");
-        checkDataByOrder(3, function(error){ if(error){ redoRegister(navigate); }});
+        checkDataByOrder(3, function(error){
+            if(error){
+                redoRegister(navigate);
+            }else{
+                props.pageLoaded();
+            }
+        });
     });
-    props.report();
+    onCleanup(() => {
+        props.pageUnloading();
+    });
     return <>
         <Title>Sign Up</Title>
         <h1>Let's get personal!</h1>

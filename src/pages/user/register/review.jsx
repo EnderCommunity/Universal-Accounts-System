@@ -8,11 +8,12 @@ import style from './../../../assets/styles/pages/user.review.module.css';
 
 import { Title } from './../../../assets/components/Title.jsx';
 import { Button, Notice, Mark, FlexContainer, showDialog } from './../../../assets/components/CustomElements.jsx';
-import { createEffect, createSignal, onMount } from "solid-js";
+import { createSignal, onMount, onCleanup } from "solid-js";
 import { useNavigate } from '@solidjs/router';
 import { registerData, checkDataByOrder } from './../../../assets/scripts/pages/registerData.jsx';
 import { ButtonsContainer, nextCheck, redoRegister } from './../register.jsx';
 import { getSecurityQuestions } from './../../../assets/scripts/securityQuestions.jsx';
+import { signUpPOST } from './../../../assets/scripts/communication/accounts.jsx';
 
 function ReviewTable(props){
     return (<table class={style.table} {...props}></table>);
@@ -44,12 +45,19 @@ export default function RegisterReview(props){
         nextButton;
     const [securityQuestions, setSecurityQuestions] = createSignal(undefined);
     onMount(() => {
-        checkDataByOrder(7, function(error){ if(error){ redoRegister(navigate); }});
+        checkDataByOrder(7, function(error){
+            if(error){
+                redoRegister(navigate);
+            }else{
+                getSecurityQuestions().then(function(data){
+                    setSecurityQuestions(data);
+                    props.pageLoaded();
+                });
+            }
+        });
     });
-    getSecurityQuestions().then(function(data){
-        setSecurityQuestions(data);
-        console.log(window.a = data);
-        props.report();
+    onCleanup(() => {
+        props.pageUnloading();
     });
     return <>
         <Title>Sign Up</Title>
@@ -119,17 +127,24 @@ export default function RegisterReview(props){
                 <Button type={"action"} function={function(){history.back()}}>Go back</Button>
                 <Button ref={nextButton} type={"action"} function={function(){
                         nextCheck(nextButton, function(setError, isDone){
-                            isDone();
-                        }, function(){
                             registerData.agreement = true;
                             checkDataByOrder(7, function(error){
                                 if(error){
+                                    isDone();
                                     redoRegister(navigate);
                                 }else{
-                                    showDialog("Unavailable!", "The accounts system infrastructure is not ready yet!");
+                                    signUpPOST(registerData, function(isSuccessful, response){
+                                        isDone();
+                                        if(isSuccessful){
+                                            alert(":)");
+                                        }else{
+                                            showDialog("Error!", "We couldn't create your Ciel account! Please try again at a later time.");
+                                        }
+                                    });
+                                    //showDialog("Unavailable!", "The accounts system infrastructure is not ready yet!");
                                 }
                             });
-                        });
+                        }, function(){});
                     }} primary>Create account</Button>
             </ButtonsContainer>
         </FlexContainer>

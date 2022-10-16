@@ -5,9 +5,15 @@
  **/
 
 import { Title } from './../../assets/components/Title.jsx';
+import { onCleanup, onMount } from 'solid-js';
 
 export default function Error(props){
-    props.report();
+    onCleanup(() => {
+        props.pageUnloading();
+    });
+    onMount(() => {
+        props.pageLoaded();
+    });
     return <>
         <Title>Not Found</Title>
         Page Not Found!
