@@ -1,0 +1,1 @@
+import{p as o,g as c,b as l,d,s as v,t as i}from"./index.f85b29b8.js";const u=i("<hr>");function _(n){let t=o(n,c.divider);return(()=>{const s=u.cloneNode(!0);return l(e=>{const r=t.class,a=t.style;return r!==e._v$&&d(s,e._v$=r),e._v$2=v(s,a,e._v$2),e},{_v$:void 0,_v$2:void 0}),s})()}export{_ as D};

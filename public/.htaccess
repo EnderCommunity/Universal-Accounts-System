@@ -20,3 +20,14 @@ RewriteCond %{REQUEST_URI} !^(/libraries)
 RewriteCond %{REQUEST_URI} !^(/lists)
 RewriteCond %{REQUEST_URI} !^(/APIs)
 RewriteRule .* /index.html [L,NC]
+
+<IfModule mod_headers.c>
+    # X-XSS-Protection
+	Header set X-XSS-Protection "1; mode=block"
+    # X-Frame-Options
+	Header set X-Frame-Options "SAMEORIGIN"
+    # Strict-Transport-Security
+	Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains"
+    # Content-Security-Policy
+	Header set Content-Security-Policy "default-src 'self' 'unsafe-inline'; worker-src 'self'; child-src 'none'; object-src 'none'"
+</IfModule>

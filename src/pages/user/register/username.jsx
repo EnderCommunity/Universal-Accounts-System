@@ -10,7 +10,8 @@ import { InputFieldsContainer, nextCheck, redoRegister, ButtonsContainer } from 
 import { onCleanup, onMount } from 'solid-js';
 import { useNavigate } from '@solidjs/router';
 import { registerData, checkDataByOrder } from './../../../assets/scripts/pages/registerData.jsx';
-import { textProfanity } from '../../../assets/scripts/filter.jsx';
+import { textProfanity } from './../../../assets/scripts/filter.jsx';
+import { usernameCheckPOST } from './../../../assets/scripts/communication/accounts.jsx';
 
 export default function RegisterUsername(props){
     let navigate = useNavigate(),
@@ -60,7 +61,7 @@ export default function RegisterUsername(props){
                             calls = 0,
                             checkStatus = function(){
                                 calls++;
-                                if(calls == 2){
+                                if(calls == 3){
                                     isDone();
                                 }
                             };
@@ -99,9 +100,24 @@ export default function RegisterUsername(props){
                                 }
                                 checkStatus();
                             });
-                            // Check if the username is taken!
-                            // Note: add a server-side system to temp-reserve usernames for 5 minutes (with reserve time extensions for the user depending on the page)
-                            showDialog("Caution!", "No availability check for 'username'");
+                            // Username status (taken or not)
+                            usernameCheckPOST(usernameInput.value, function(isSuccessful, response){
+                                if(isSuccessful){
+                                    if(response.usernameExists){
+                                        setInputState(username, false, "Username already in-use!");
+                                        setError();
+                                    }
+                                }else{
+                                    showDialog("Error!", "We couldn't get a valid response from the server!", [
+                                        ["Ok", function(dialog, remove){
+                                            remove();
+                                            setError();
+                                        }]
+                                    ]);
+                                }
+                                checkStatus();
+                            }, false, true);
+                            // Note to self: add a server-side system to temp-reserve usernames for 5 minutes (with reserve time extensions for the user depending on the page)
                         }
                     }, function(){
                         registerData.username = username.children[0].children[0].value;
