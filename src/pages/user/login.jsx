@@ -69,9 +69,9 @@ export default function Login(props){
                                 showDialog("Error!", "We couldn't get a valid response from the server!", [
                                     ["Ok", function(dialog, remove){
                                         remove();
-                                        setError();
                                     }]
                                 ]);
+                                setError();
                             }
                         });
                     }, function(){

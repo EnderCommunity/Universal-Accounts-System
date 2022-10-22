@@ -111,9 +111,9 @@ export default function RegisterUsername(props){
                                     showDialog("Error!", "We couldn't get a valid response from the server!", [
                                         ["Ok", function(dialog, remove){
                                             remove();
-                                            setError();
                                         }]
                                     ]);
+                                    setError();
                                 }
                                 checkStatus();
                             }, false, true);

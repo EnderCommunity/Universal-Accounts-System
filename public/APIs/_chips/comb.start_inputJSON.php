@@ -9,4 +9,7 @@ include 'JSON_response.php';
 // The response header
 include 'header.php';
 
+// Get all response-related code
+include 'JSON_response_checkInput.php';
+
 ?>
