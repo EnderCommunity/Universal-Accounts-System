@@ -22,6 +22,7 @@ export async function textProfanity(text){
                     if(
                         ((i + bWord.length) < text.length && (
                                 (/^[a-z]*$/g.test(text[i + bWord.length - 1]) && /^[A-Z]*$/g.test(text[i + bWord.length])) || // .aA
+                                (/^[A-Z]*$/g.test(text[i + bWord.length - 1]) && /^[a-z]*$/g.test(text[i + bWord.length])) || // .Az
                                 (!(/^[a-z]*$/g.test(lcText[i + bWord.length]))) // .a# ,.A#
                             )) ||
                         (text.length == (i + bWord.length))

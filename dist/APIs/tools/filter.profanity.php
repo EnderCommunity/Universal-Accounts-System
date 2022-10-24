@@ -33,6 +33,7 @@ function checkProfanity($text){
                 if(
                     (($wIndex + $wordLength) < strlen($text) && (
                             (ctype_lower($text[$wIndex + $wordLength - 1]) && ctype_upper($text[$wIndex + $wordLength])) || // .aA
+                            (ctype_upper($text[$wIndex + $wordLength - 1]) && ctype_lower($text[$wIndex + $wordLength])) || // .aA
                             (!(ctype_alpha($text_lowerCase[$wIndex + $wordLength]))) // .a#, .A#
                         )) ||
                     (strlen($text) == ($wIndex + $wordLength))

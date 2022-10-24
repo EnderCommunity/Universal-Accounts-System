@@ -19,6 +19,7 @@ RewriteCond %{REQUEST_URI} !^(/images)
 RewriteCond %{REQUEST_URI} !^(/libraries)
 RewriteCond %{REQUEST_URI} !^(/lists)
 RewriteCond %{REQUEST_URI} !^(/APIs)
+RewriteCond %{REQUEST_URI} !^(/cdn-cgi)
 RewriteRule .* /index.html [L,NC]
 
 <IfModule mod_headers.c>

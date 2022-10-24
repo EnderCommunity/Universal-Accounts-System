@@ -26,6 +26,7 @@ $INPUT_DATA->quickSettings->profile; // Check for validity
 $INPUT_DATA->quickSettings->activity; // Check for validity
 $INPUT_DATA->quickSettings->location; // Check for validity
 $INPUT_DATA->quickSettings->colorScheme; // Check for validity
+$INPUT_DATA->extraData->registrationDisplayLanguage; // Check for validity
 $INPUT_DATA->agreement; // X) Done
 // NOTE: ADD A CHIP FUNCTION TO CHECK FOR ALL REQUIRED DATA!
 

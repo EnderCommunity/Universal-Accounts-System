@@ -1,1 +1,0 @@
-import{T as a}from"./Title.a581f7e6.js";import{o as n,a as e,c as t}from"./index.ae87e990.js";function u(o){return n(()=>{o.pageUnloading()}),e(()=>{o.pageLoaded()}),[t(a,{children:"Not Found"}),"Page Not Found!"]}export{u as default};

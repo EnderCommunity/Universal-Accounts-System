@@ -37,6 +37,7 @@ import { showDialog } from './assets/components/CustomElements.jsx';
 import { isForcedDarkMode } from './assets/scripts/colourScheme.jsx';
 import { checkConnection } from './assets/scripts/internetConnection.jsx';
 import { detectDevTools } from './assets/scripts/console.jsx';
+import { initiate_i18n } from './assets/scripts/localisation.jsx';
 
 render(() =>{
     // Wait for the page's content to finish loading
@@ -69,7 +70,11 @@ render(() =>{
             }, 1800);
         }
     });
-    
+
+    initiate_i18n(window.navigator.language, function(){
+        //
+    });
+
     // Return the global page content
     return <Router>
         <GlobalBar userProfile={userData().personal.profilePicture} showContent={showContent()} report={() => { contentLoadReport("GlobalBar"); }}/>

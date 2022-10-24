@@ -50,6 +50,9 @@ function cleanRegisterDataObject () {
             location: undefined, // 1 - approximate, 2 - precise
             colorScheme: undefined, // 0 - auto, 1 - light, 2 - dark
         },
+        extraData: {
+            registrationDisplayLanguage: undefined
+        },
         agreement: undefined
     };
 }
@@ -77,7 +80,7 @@ export var dataOrder = {
     6: ["quickSettings.profile", "quickSettings.activity", "quickSettings.location",
         "quickSettings.colorScheme"],
     // /register/agreement
-    7: ["agreement"]
+    7: ["agreement", "extraData.registrationDisplayLanguage"]
 }, dataSectionsN = Object.keys(dataOrder).length;
 
 export function checkDataByOrder(section, callback){
