@@ -4,7 +4,7 @@
 require './../../_chips/comb.start_inputJSON.php';
 
 // Input data
-$INPUT_DATA->mode;
+$INPUT_DATA->devMode;
 // Check data for SQL injections
 checkInputData(); // [data, expected_type], [], [], ...
 $INPUT_DATA->name->first; // Check for profanity

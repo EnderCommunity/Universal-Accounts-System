@@ -4,7 +4,7 @@
 require './../../_chips/comb.start_inputJSON.php';
 
 // Data
-$INPUT_DATA->mode;
+$INPUT_DATA->devMode;
 
 ?>
 {

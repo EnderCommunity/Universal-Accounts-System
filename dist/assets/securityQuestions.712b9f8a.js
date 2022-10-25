@@ -1,0 +1,1 @@
+import{m as t}from"./index.9baaabd4.js";async function r(){return new Promise((i,c)=>{t("/lists/security_questions.txt",function(s,e){if(s)throw s;e=e.replace(/\r/g,"").split(/\n/g),i({1:e.slice(0,6),2:e.slice(6,12),3:e.slice(12,18)})})})}export{r as g};

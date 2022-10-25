@@ -4,7 +4,7 @@
  * 
  **/
 
-import { log, throwError } from './../console.jsx';
+import { log, throwError, isDevMode } from './../console.jsx';
 
 async function jsonPOST(url, json){
     return new Promise((resolve,reject)=>{
@@ -15,7 +15,7 @@ async function jsonPOST(url, json){
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                mode: import.meta.env.MODE,
+                devMode: isDevMode,
                 ...json
             })
         })
