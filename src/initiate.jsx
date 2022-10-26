@@ -43,10 +43,10 @@ render(() =>{
     // Wait for the page's content to finish loading
     const [showContent, setShowContent] = createSignal(false);
 
-    let contentLoadData = {GlobalBar: false, LocalContent: false},
+    let contentLoadData = {GlobalBar: false, LocalContent: false, language: false},
         contentLoadReport = (context) => { // context - "GlobalBar", "LocalContent"
             contentLoadData[context] = true;
-            if(contentLoadData.GlobalBar && contentLoadData.LocalContent){
+            if(contentLoadData.GlobalBar && contentLoadData.LocalContent && contentLoadData.language){
                 // Must run this when the user's basic info are aquired from the server and fully loaded!
                 // setTimeout(() => setShowContent(true), 1500); // TMP
                 setShowContent(true);
@@ -74,8 +74,8 @@ render(() =>{
         showDialog("Caution!", "Do NOT paste anything into your console, and don't show your console to anyone you don't trust. Your data could be stolen by attackers should you proceed without knowing what you're doing!");
     });
 
-    initiate_i18n(window.navigator.language, function(){
-        //
+    initiate_i18n(navigator.language, function(){
+        contentLoadReport("language");
     });
 
     // Return the global page content
