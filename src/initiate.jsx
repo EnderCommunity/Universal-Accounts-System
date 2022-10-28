@@ -36,7 +36,7 @@ import Scrollbar from './assets/components/ScrollBar.jsx';
 import { showDialog } from './assets/components/CustomElements.jsx';
 import { isForcedDarkMode } from './assets/scripts/colourScheme.jsx';
 import { checkConnection } from './assets/scripts/internetConnection.jsx';
-import { detectDevTools } from './assets/scripts/console.jsx';
+import { detectDevTools, alertDevMode } from './assets/scripts/console.jsx';
 
 render(() =>{
     // Wait for the page's content to finish loading
@@ -63,13 +63,17 @@ render(() =>{
                 }
                 // showDialog("Demo", "No backend!");
                 checkConnection();
-                detectDevTools(function(){
-                    showDialog("Caution!", "Do NOT paste anything into your console, and don't show your console to anyone you don't trust. Your data could be stolen by attackers should you proceed without knowing what you're doing!");
-                });
             }, 1800);
         }
     });
-    
+
+    // Console-related warnings
+    alertDevMode();
+    detectDevTools(function(){
+        showDialog("Caution!", "Do NOT paste anything into your console, and don't show your console to anyone you don't trust. Your data could be stolen by attackers should you proceed without knowing what you're doing!");
+    });
+
+
     // Return the global page content
     return <Router>
         <GlobalBar userProfile={userData().personal.profilePicture} showContent={showContent()} report={() => { contentLoadReport("GlobalBar"); }}/>

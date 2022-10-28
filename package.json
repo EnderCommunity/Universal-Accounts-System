@@ -1,11 +1,11 @@
 {
-    "name": "universal-accounts-system",
+    "name": "accounts-system",
     "version": "0.0.0",
     "description": "",
     "scripts": {
         "start": "vite",
         "dev": "vite --host",
-        "build": "vite build",
+        "build": "vite build && npm audit",
         "serve": "vite preview",
         "php": "vite build --mode development && cd dist/ && \"../php_server_folder/php.exe\" -S localhost:80"
     },
@@ -18,6 +18,7 @@
     },
     "dependencies": {
         "@solidjs/router": "^0.4.3",
+        "rosetta": "^1.1.0",
         "solid-js": "^1.4.7"
     }
 }

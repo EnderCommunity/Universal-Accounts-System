@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-color-scheme="light">
 
 <head>
     <meta charset="utf-8">
@@ -16,6 +16,11 @@
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0D0F11">
 
     <script type="text/javascript">
+        /* Quick colour scheme detection */
+        let matchMedia = window.matchMedia('(prefers-color-scheme: dark)');
+        document.documentElement.dataset.colorScheme = matchMedia.matches ? "dark" : "light";
+        delete matchMedia;
+        /* Quick CSS tweaking */
         function updateVHUnit() {
             let vh = window.innerHeight * 0.01;
             document.documentElement.style.setProperty('--vhu', `${vh}px`);

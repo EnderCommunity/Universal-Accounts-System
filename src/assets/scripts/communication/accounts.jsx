@@ -4,7 +4,7 @@
  * 
  **/
 
-import { log, throwError } from './../console.jsx';
+import { log, throwError, isDevMode } from './../console.jsx';
 
 async function jsonPOST(url, json){
     return new Promise((resolve,reject)=>{
@@ -15,7 +15,7 @@ async function jsonPOST(url, json){
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                mode: import.meta.env.MODE,
+                devMode: isDevMode,
                 ...json
             })
         })
@@ -26,8 +26,6 @@ async function jsonPOST(url, json){
         }).catch(error => {
             reject(error);
         });
-    }).catch(error => {
-        reject(error);
     });
 }
 
@@ -58,6 +56,19 @@ export function signUpPOST(data, callback){
     jsonPOST("/APIs/accounts/core/register.json.php",
         data
     ).then(function(data){
+        callback(data.responseInfo.successful, data);
+    }).catch(function(error){
+        callback(false, undefined);
+        throwError(error);
+    });
+}
+
+export function usernameCheckPOST(username, callback, getDisplayUsername = true, reserveUsername = false){
+    jsonPOST("/APIs/accounts/core/username.check.json.php",{
+        username: username,
+        getDisplayUsername: getDisplayUsername,
+        reserveUsername: reserveUsername
+    }).then(function(data){
         callback(data.responseInfo.successful, data);
     }).catch(function(error){
         callback(false, undefined);

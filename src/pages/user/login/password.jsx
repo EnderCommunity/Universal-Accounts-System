@@ -8,6 +8,7 @@ import { Title } from './../../../assets/components/Title.jsx';
 import { Input, Button, Mark, FlexContainer, CheckBox } from './../../../assets/components/CustomElements.jsx';
 import { onCleanup, onMount } from 'solid-js';
 import { InputFieldsContainer } from './../login.jsx';
+import { loginData } from './../../../assets/scripts/pages/loginData.jsx';
 
 export default function LoginPassword(props){
     let nextButton;
@@ -28,11 +29,11 @@ export default function LoginPassword(props){
     });
     return <>
         <Title>Sign In</Title>
-        <h1>Welcome back, [FirstName]!</h1>
+        <h1>Welcome back, {loginData.username}!</h1>
         <br/>
         <h3>Please enter <Mark>your password</Mark> to verify your identity!</h3>
         <FlexContainer space={"around"} style={{width: "400px"}}>
-            <input id={"username-hidden"} type={"username"} style={"display: none;"} value={"TestUsername"}/>
+            <input type={"username"} style={"display: none;"} value={loginData.username}/>
             <InputFieldsContainer>
                 <Input id={"password"} type={"password"} label={"Password"}
                         autocomplete={"current-password"}
