@@ -127,7 +127,7 @@ export default function RegisterReview(props){
                 <Button type={"action"} function={function(){history.back()}}>Go back</Button>
                 <Button ref={nextButton} type={"action"} function={function(){
                         nextCheck(nextButton, function(setError, isDone){
-                            registerData.extraData.registrationDisplayLanguage = 0;
+                            registerData.extraData.registrationDisplayLanguage = "en-GB";
                             checkDataByOrder(8, function(error){
                                 if(error){
                                     isDone();

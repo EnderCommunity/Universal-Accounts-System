@@ -3,12 +3,13 @@
 // Initiate the page
 require './../../_chips/comb.start_inputJSON.php';
 
-// Data
-$INPUT_DATA->devMode;
-$INPUT_DATA->getDisplayUsername;
-$INPUT_DATA->reserveUsername;
-// Check data for SQL injections
-$INPUT_DATA->username;
+// Do a basic check for the input data!
+checkInputData(
+    [$INPUT_DATA->getDisplayUsername, "boolean"],
+    [$INPUT_DATA->reserveUsername, "boolean"],
+    [$INPUT_DATA->username, "string"]
+);
+
 $USERNAME_EXISTS = false;
 $USERNAME_DISPLAY = "";
 

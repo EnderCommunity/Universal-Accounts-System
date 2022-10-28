@@ -3,11 +3,11 @@
 // Initiate the page
 require './../../_chips/comb.start_inputJSON.php';
 
-// Data
-$INPUT_DATA->devMode;
-// Check data for SQL injections
-$INPUT_DATA->username;
-$INPUT_DATA->password;
+// Do a basic check for the input data!
+checkInputData(
+    [$INPUT_DATA->username, "string"],
+    [$INPUT_DATA->password, "string"]
+);
 
 ?>
 {
