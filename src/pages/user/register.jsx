@@ -61,13 +61,13 @@ export function nextCheck(button, callback, action){
     button.setAttribute("disabled", "");
     localContent.dataset.processing = true;
 
-    let error = [false], calledDone = false, done = function(){
+    let error = [false], calledDone = false, done = function(...args){
         if(!calledDone){
             calledDone = true;
             button.removeAttribute("disabled");
             localContent.dataset.processing = false;
             if(!error[0]){
-                action();
+                action(...args);
             }
         }
     };

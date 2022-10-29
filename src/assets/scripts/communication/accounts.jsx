@@ -4,6 +4,7 @@
  * 
  **/
 
+import { makeRequest } from './../loader.jsx';
 import { log, throwError, isDevMode } from './../console.jsx';
 
 async function jsonPOST(url, json){
@@ -73,5 +74,13 @@ export function usernameCheckPOST(username, callback, getDisplayUsername = true,
     }).catch(function(error){
         callback(false, undefined);
         throwError(error);
+    });
+}
+
+export function getSalts(callback){
+    makeRequest("/const/password_salt.txt", function(error, data){
+        // Note: The password salt will only prevent leaked password hashes from being used
+        // to gain access to the user's password using already-existing hash lists
+        callback(error, (error) ? data : data.replace(/\r/g, "").split(/\n/g));
     });
 }
