@@ -10,6 +10,7 @@ import { InputFieldsContainer, clientDataCheck, nextCheck, redoRegister, Buttons
 import { onCleanup, onMount } from 'solid-js';
 import { useNavigate } from '@solidjs/router';
 import { registerData, checkDataByOrder, hash, loadAES } from './../../../assets/scripts/pages/registerData.jsx';
+import { getSalts } from './../../../assets/scripts/communication/accounts.jsx';
 
 export default function RegisterPassword(props){
     let navigate = useNavigate(),
@@ -103,10 +104,16 @@ export default function RegisterPassword(props){
                             setError();*/
 
                         loadAES(function(){
-                            isDone();
+                            getSalts(function(error, data){
+                                if(error){
+                                    setError();
+                                }else{
+                                    isDone(data);
+                                }
+                            });
                         });
-                    }, function(){
-                        registerData.passwordHash = hash(password.children[0].children[0].value);
+                    }, function(salts){
+                        registerData.passwordHash = hash(salts[0] + password.children[0].children[0].value + salts[1]);
                         checkDataByOrder(3, function(error){
                             if(error){
                                 emptyPassword();
